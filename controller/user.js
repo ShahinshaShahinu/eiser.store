@@ -108,7 +108,7 @@ const search = async (req, res) => {
 const signupPage = function (req, res, next) {
     user = req.session.username
     if (user) {
-        res.redirect('/userHome')
+        res.redirect('/')
     } else {
         res.render('user_Signup', { error, username, layout: 'layout' })
 
@@ -164,7 +164,7 @@ const postSignup = async (req, res, next) => {
 
             await userData.insertMany([signupData])
 
-            res.redirect('/userHome')
+            res.redirect('/')
 
         }
 
@@ -238,7 +238,7 @@ const Loginpage = async (req, res, next) => {
 
     if (user) {
 
-        res.redirect('/userHome')
+        res.redirect('/')
     } else {
 
         res.render('user_Login', { errorlogin, errorloginPassword, AccountBlocked, layout: 'layout' })
@@ -285,7 +285,7 @@ const postLogin = (req, res, next) => {
                     let vv = req.session.username
 
                     homeName = userlogin.username
-                    res.redirect('/userHome')
+                    res.redirect('/')
                 }
                 else {
                     errorloginPassword = 'invalid password'
@@ -1617,7 +1617,7 @@ const LoginOTPPost = async (req, res) => {
 
 
 
-        res.redirect('/userHome')
+        res.redirect('/')
     } else {
 
 

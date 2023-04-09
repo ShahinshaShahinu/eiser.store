@@ -12,7 +12,7 @@ const sessions=require('../Middleware/session')
 
 // get user //
 
-router.get('/userHome',nocache(), gethome.getUserHome);
+router.get('/',nocache(), gethome.getUserHome);
 router.get('/userSignup',nocache(), gethome.signupPage)
 router.get('/userLogin',nocache(), gethome.Loginpage)
 router.get('/ErrorPage',sessions.sessioncheck,gethome.ErrorPage)
