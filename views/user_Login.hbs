@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+	<link rel="stylesheet" href="signup/fonts/linearicons/style.css">
+
+	<!-- MATERIAL DESIGN ICONIC FONT -->
+	<link rel="stylesheet" href="signup/fonts/material-design-iconic-font/css/material-design-iconic-font.min.css">
+
+	<!-- DATE-PICKER -->
+	<link rel="stylesheet" href="signup/vendor/date-picker/css/datepicker.min.css">
+
+	<!-- STYLE CSS -->
+	<link rel="stylesheet" href="signup/css/style.css">
+</head>
+
+<body>
+
+
+
+
+
+	<div class="wrapper">
+		<div class="container">
+
+			<img src="img/logo.png" alt="" style="margin-top: 2rem;     width: 12rem;" />
+
+			
+
+
+				<div class="inner"><img src="" alt="" />
+
+
+					<form name="Submission" onsubmit="return Loginvalidateform()" oninput="  clearingerror()"
+						action="/userPostLogin" method="post" role="form">
+
+						<h3>Login</h3>
+						<div class="form-row">
+							<div class="form-wrapper">
+								<label for="">UserName *</label>
+								<input type="text" name="username" id="username" class="form-control"
+									placeholder="Your username">
+								<p style="color: rgb(255, 0, 0);">{{errorlogin}}</p>
+								<p class='text-danger' id="error"></p>
+							</div>
+							<div class="form-wrapper">
+								<label for="">Password *</label>
+								<input type="password" name="password" id="password" class="form-control"
+									placeholder="password">
+								<p style="color:rgb(255, 6, 6); ">{{errorloginPassword}}</p>
+								<p class='text-danger' id="error"></p>
+							</div>
+
+						</div>
+						<div style="display: flex; justify-content: center;">
+							<p style="color:rgb(255, 6, 6); ">{{AccountBlocked}}</p>
+						</div>
+
+
+						<div class="row"> <button type="submit" id="submit" name="submit">
+							  Login
+							</button>
+                           <div class="text-center"><br>
+								<!-- Simple link -->
+								<a style=" font-size: .9rem;" href="/OTPLogin">OTP LOGIN</a>
+							</div>
+							<div class="text-center"><br>
+								<!-- Simple link -->
+								<a href="/Forgotpassword">Forgot password ?</a>
+							</div>
+							<div class="text-center"><br>
+
+								<p style="color: brown;">Don't have an account? <a href="/userSignup"
+										class="link-info">Register here</a></p>
+							</div>
+						</div>
+
+
+
+
+					</form>
+				</div>
+		
+
+		</div>
+	</div>
+	<script src="/FormsjsValidations/loginValidation.js"></script>
+
+
+</body>
+
+</html>

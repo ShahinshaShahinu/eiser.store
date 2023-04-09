@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="author" content="Muhamad Nauval Azhar">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="This is a login page template based on Bootstrap 5">
+  <title>Bootstrap 5 Login Page</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+</head>
+
+<body>
+  <section class="h-100">
+
+    <div class="wrapper container h-100">
+      <div class="row justify-content-sm-center h-100" style="top: 10rem;  ">
+        {{!-- <img class="img-fluid" src="../public/logo.png" /> --}}
+        <h1 style="font-family:'Times New Roman', Times, serif "> <svg width="107" height="27" viewBox="0 0 107 27"
+            fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <path d="M0 0H107V27H0V0Z" fill="url(#pattern0)" />
+            <defs>
+              <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
+                <use xlink:href="#image0_110_1977" transform="matrix(0.00729927 0 0 0.0289267 0 -0.049608)" />
+              </pattern>
+              <image id="image0_110_1977" width="137" height="38"
+                xlink:href="data:image/png;base64,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" />
+            </defs>
+          </svg></h1>
+        <div  class="hello col-xxl-4 col-xl-5 col-lg-5 col-md-7 col-sm-9" >
+          <div class="text-center my-5">
+          </div>
+          <style>
+            @media (min-width: 1496px) {
+              .hello {
+                width: 70%;
+                margin-top: 4 rem; 
+              }
+            }
+          </style>
+
+
+          <div class="card shadow-lg " style="    margin-top: 8rem;">
+            <div class="card-body p-5">
+              <h1 class="fs-4 card-title fw-bold mb-4">Admin Login</h1>
+              <form action="/adminpost" method="post">
+                <div class="mb-3">
+                  <label class="mb-2 text-muted" for="email">E-Mail Address</label>
+                  <input id="email" type="email" class="form-control" name="email" value="" required autofocus>
+
+                </div>
+
+                <div class="mb-3">
+                  <div class="mb-2 w-100">
+                    <label class="text-muted" for="password">Password</label>
+
+                  </div>
+                  <input id="password" type="password" class="form-control" name="password" required>
+                  <div class="invalid-feedback">
+                    Password is required
+                  </div>
+                </div>
+
+                <div class="d-flex align-items-center">
+                  <div class="form-check">
+
+                  </div>
+                  <div class="col-md-12 text-center  " style="margin-left: -2rem;">
+                    <button data-text="Please Login">
+                      <span>Login</span>
+                    </button>
+                    <p style="color: crimson;">{{adminloginerr}}</p>
+                  </div>
+
+
+                </div>
+              </form>
+            </div>
+            <div class="card-footer py-3 border-0">
+
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+  </section>
+
+
+</body>
+
+</html>

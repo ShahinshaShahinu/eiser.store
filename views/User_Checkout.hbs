@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link rel="icon" href="img/favicon.png" type="image/png" />
+    <title>Eiser ecommerce</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.css" />
+    {{!--
+    <link rel="stylesheet" href="vendors/linericon/style.css" /> --}}
+
+    <link rel="stylesheet" href="css/font-awesome.min.css" />
+    <link rel="stylesheet" href="css/themify-icons.css" />
+    {{!--
+    <link rel="stylesheet" href="css/flaticon.css" /> --}}
+    {{!--
+    <link rel="stylesheet" href="vendors/owl-carousel/owl.carousel.min.css" /> --}}
+    {{!--
+    <link rel="stylesheet" href="vendors/lightbox/simpleLightbox.css" /> --}}
+    {{!--
+    <link rel="stylesheet" href="vendors/nice-select/css/nice-select.css" /> --}}
+    {{!--
+    <link rel="stylesheet" href="vendors/animate-css/animate.css" /> --}}
+    {{!--
+    <link rel="stylesheet" href="vendors/jquery-ui/jquery-ui.css" /> --}}
+    <!-- main css -->
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
+</head>
+
+<body>
+    <!--================Header Menu Area =================-->
+    <header class="header_area">
+        <div class="top_menu">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-7">
+                        <div class="float-left">
+                            <p>Phone: +01 256 25 235</p>
+                            <p>email: info@eiser.com</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-5">
+                        <div class="float-right">
+                            <ul class="right_side">
+                                <li>
+                                    <a href="cart.html">
+                                        gift card
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="tracking.html">
+                                        track order
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="contact.html">
+                                        Contact Us
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="main_menu">
+            <div class="container">
+                <nav class="navbar navbar-expand-lg navbar-light w-100">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <a class="navbar-brand logo_h" href="/userHome">
+                        <img src="img/logo.png" alt="" />
+                    </a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse offset w-100" id="navbarSupportedContent">
+                        <div class="row w-100 mr-0">
+                            <div class="col-lg-7 pr-0">
+                                <ul class="nav navbar-nav center_nav pull-right">
+                                    <li class="nav-item ">
+                                        <a class="nav-link" href="/userHome">Home</a>
+                                    </li>
+                                    <li class="nav-item submenu dropdown">
+                                        <a href="/signUpLogInButton" class="nav-link dropdown-toggle">Shop</a>
+                                        <ul class="dropdown-menu">
+                                            <li class="nav-item">
+
+                                            </li>
+
+
+                                        </ul>
+                                    </li>
+                                    <li class="nav-item submenu dropdown">
+                                        {{!-- <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"
+                                            role="button" aria-haspopup="true" aria-expanded="false">Blog</a> --}}
+                                        <ul class="dropdown-menu">
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="blog.html">Blog</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="single-blog.html">Blog Details</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="nav-item submenu dropdown">
+                                        {{!-- <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"
+                                            role="button" aria-haspopup="true" aria-expanded="false">Pages</a> --}}
+                                        <ul class="dropdown-menu">
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="tracking.html">Tracking</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="elements.html">Elements</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="nav-item">
+                                        {{!-- <a class="nav-link" href="contact.html">Contact</a> --}}
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="col-lg-5 pr-0">
+                                <ul class="nav navbar-nav navbar-right right_nav pull-right">
+
+                                    <li class="nav-item">
+                                        <a href="#" class="icons">
+                                            <i class="ti-search" aria-hidden="true"></i>
+                                        </a>
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <a href="/User-CartPage" class="icons">
+                                            <i class="ti-shopping-cart"></i>
+                                        </a>
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <a href="/userProfile" class="icons">
+                                            <i class="ti-user" aria-hidden="true"></i>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="/userwishlist" class="icons">
+                                            <i class="ti-heart " aria-hidden="true"></i>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+
+                                        <div class="dropdown" style="    margin-top: 1.6rem; margin-left: 1rem;">
+                                            <a class=" dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                                data-bs-toggle="dropdown" aria-expanded="false">
+                                                {{#if homeName}} {{homeName}} {{else}} No Account {{/if}}
+                                            </a>
+
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                {{#if homeName}}
+                                                <li style=" border-radius: 100rem;"><a class="dropdown-item"
+                                                        href="/LogoutButton">Logout</a>
+                                                </li>
+                                                {{else}}
+                                                <li style="  border-radius: 100rem;   margin-left: 35px;"><a
+                                                        class="dropdown-item" href="/LogoutButton">Login</a></li>
+                                                {{/if}}
+                                            </ul>
+                                        </div>
+
+
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+
+            </div>
+
+        </div>
+
+    </header>
+    <!--================Header Menu Area =================-->
+
+
+
+    <!--================Checkout Area =================-->
+    <section class="checkout_area section_gap" style="    padding: 58px 0px;">
+        <div class="container" style="
+       max-width: 1416px;
+        margin-left: 3rem;          ">
+
+
+            <div class="billing_details">
+
+                <div class="row">
+
+                    <div class="col-lg-8">
+
+                        <div style="display: flex;
+    justify-content: space-around;">
+                            <button type="button" class="  col-md-5 form-group p_star btn btn-primary"
+                                data-toggle="modal" data-target="#Chooseaddress">
+                                Choose Address
+                            </button>
+                            {{#if addsUser}}
+                            {{!--
+                            <a href="/userProfile" type="button"
+                                class=" col-md-5 form-group p_star btn btn-primary "></a>
+                            please Create Your address
+                            </a> --}}
+                            <a type="button" href="/userProfile" class="  col-md-5 form-group p_star btn btn-primary">
+
+                                please Create Your address
+                            </a>
+
+                            {{else}}
+                            <button type="button" class="  col-md-5 form-group p_star btn btn-primary"
+                                data-toggle="modal" data-target="#AddAddress">
+                                Add new address
+                            </button>
+                            {{/if}}
+
+
+                        </div>
+
+
+                        <!--================ Start  AddAddress Area =================-->
+                        <div class="modal fade" id="AddAddress" tabindex="-1" role="dialog"
+                            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" style="    max-width: 46rem;"
+                                role="document">
+                                <div class="modal-content">
+                                    <form action="/AddNewAddress" method="post">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="AddAddress "> Address </h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+
+
+                                        <div class="modal-body" style="    left: 1rem; width: 52rem;">
+                                            {{!-- {{#getCheckedOneddress}} --}}
+                                            <div class="col-lg-5 form-group p_star">
+                                                <p>First name</p>
+                                                <input type="text" value="{{firstname}}" class="form-control" id="first"
+                                                    name="firstname" />
+
+                                            </div>
+                                            <div class="col-lg-5 form-group p_star">
+                                                <p>Last name</p>
+                                                <input type="text" value="{{lastname}}" class="form-control" id="last"
+                                                    name="lastname" />
+
+                                            </div>
+                                            {{!-- <div class="col-md-12 form-group">
+                                                <input type="text" class="form-control" id="company" name="company"
+                                                    placeholder="Company name" />
+                                            </div> --}}
+                                            <div class="col-lg-5 form-group p_star">
+                                                <p>Phone number</p>
+                                                <input type="text" value="{{phonenumber}}" class="form-control"
+                                                    id="number" name="phonenumber" />
+                                                {{!-- <span class="placeholder" data-placeholder="Phone number"></span>
+                                                --}}
+                                            </div>
+                                            <div class="col-lg-5 form-group p_star">
+                                                <p>Email Address</p>
+                                                <input type="text" value="{{useremail}}" class="form-control" id="email"
+                                                    name="useremail" />
+
+                                            </div>
+                                            <div class="col-lg-5 form-group p_star">
+                                                <p>Your Country</p>
+                                                <input type="text" value="{{country}}" class="form-control" id="country"
+                                                    name="country" />
+                                            </div>
+                                            <div class="col-lg-5 form-group p_star">
+                                                <p>Your State</p>
+                                                <input type="text" value="{{state}}" class="form-control" id="country"
+                                                    name="state" />
+                                            </div>
+                                            <div class="col-lg-5 form-group p_star">
+                                                <p>District</p>
+                                                <input type="text" value="{{district}}" class="form-control" id="city"
+                                                    name="district" />
+
+
+                                            </div>
+                                            <div class="col-lg-5 form-group p_star">
+                                                <p>PinCode</p>
+                                                <input type="text" class="form-control" value="{{pincode}}" id="zip"
+                                                    name="pincode" placeholder="" />
+                                            </div>
+                                            {{!-- {{/getCheckedOneddress}} --}}
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-primary">Add Address</button>
+                                        </div>
+
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <!--================ End  AddAddress Area =================-->
+
+
+
+                        <!-- Button trigger modal -->
+
+                        <!-- Modal -->
+
+                        <div class="modal fade" id="Chooseaddress" tabindex="-1" role="dialog"
+                            aria-labelledby="Chooseaddress" aria-hidden="true">
+
+                            <div class="modal-dialog modal-dialog-centered" role="document"
+                                style="    max-width: 74rem; margin-top: 2rem;  ">
+
+                                <div class="modal-content">
+                                    <div class="container" style="margin-left: 3.2rem;">
+
+                                        <div class="row">
+                                            {{#each AllAddress}}
+
+                                            <div class="card bg-light   w-100 mb-3" style="max-width: 21rem;">
+
+                                                <div style="color: black;" class="  card-header">Address {{@index}}
+                                                </div>
+
+                                                <div class="card-body">
+
+                                                    {{!-- <h5 class="card-title">Light card title</h5> --}}
+                                                    <p style="color: rgb(0, 0, 0);">{{firstname}}
+                                                    </p>
+                                                    <p style="color: rgb(0, 0, 0);">{{lastname}}</p>
+                                                    <p style="color: rgb(0, 0, 0);">{{phonenumber}}</p>
+                                                    <p style="color: rgb(0, 0, 0);">{{useremail}}</p>
+                                                    <p style="color: rgb(0, 0, 0);">{{country}}</p>
+                                                    <p style="color: rgb(0, 0, 0);">{{state}}</p>
+                                                    <p style="color: rgb(0, 0, 0);">{{district}}</p>
+                                                    <p style="color: rgb(0, 0, 0);">{{pincode}}</p>
+
+
+                                                    <div class=" text-right">
+                                                        <a class="btn btn-primary" href="#" role="button">Delete</a>
+                                                        <a class="btn btn-success" type="submit"
+                                                            href="/addressChoosedAddBtn/{{@index}}"
+                                                            role="button">Choose</a>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div style="width:30px"></div>
+                                            {{/each}}
+
+
+
+                                            <div class="modal-footer" style="width: 90%;">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-primary">Save changes</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+ {{!-- id="Checkout-form" --}}
+
+                        {{!-- action="/allorder" --}}
+                        {{!-- --}}
+
+                        <form name="Submission"  id="Checkout-form" oninput="AddressClear()"
+                            onsubmit="return  usercheckoutAddressValidation()" method="post" role="form">
+
+
+
+                            <h3>Billing Details</h3>
+                            <div class="row contact_form" action="#" method="post" novalidate="novalidate">
+
+
+
+                                <div class="col-md-6 form-group p_star">
+                                    <p>First Name</p>
+                                    <input type="text" value="{{findAddress.firstname}}" class="form-control" id="first"
+                                        name="firstname" />
+
+                                </div>
+                                <div class="col-md-6 form-group p_star">
+                                    <p>Last name</p>
+                                    <input type="text" value="{{findAddress.lastname}}" class="form-control" id="last"
+                                        name="lastname" />
+
+                                </div>
+
+                                <div class="col-md-6 form-group p_star">
+                                    <p>Phone number</p>
+                                    <input type="text" value="{{findAddress.phonenumber}}" class="form-control"
+                                        id="number" name="phonenumber" />
+                                    {{!-- <span class="placeholder" data-placeholder="Phone number"></span> --}}
+                                </div>
+                                <div class="col-md-6 form-group p_star">
+                                    <p>Email Address</p>
+                                    <input type="text" value="{{findAddress.useremail}}" class="form-control" id="email"
+                                        name="useremail" />
+
+                                </div>
+                                <div class="col-md-6 form-group p_star">
+                                    <p>Your Country</p>
+                                    <input type="text" value="{{findAddress.country}}" class="form-control" id="country"
+                                        name="country" />
+                                </div>
+                                <div class="col-md-6 form-group p_star">
+                                    <p>Your State</p>
+                                    <input type="text" value="{{findAddress.state}}" class="form-control" id="state"
+                                        name="state" />
+                                </div>
+                                <div class="col-md-6 form-group p_star">
+                                    <p>District</p>
+                                    <input type="text" value="{{findAddress.district}}" class="form-control" id="city"
+                                        name="district" />
+                                    {{!-- <span class="placeholder" data-placeholder="Town/City"></span> --}}
+                                </div>
+                                <div class="col-md-6 form-group p_star">
+                                    <p>PinCode</p>
+                                    <input type="text" class="form-control" value="{{findAddress.pincode}}" id="zip"
+                                        name="pincode" placeholder="" />
+                                </div>
+
+                            </div>
+
+
+
+
+
+
+
+
+
+                            <!-- Button trigger modal -->
+
+
+
+                            <div class="col-md-12 form-group">
+                                <div class="creat_account">
+                                    {{!-- <input type="checkbox" id="f-option2" name="selector" />
+                                    <label for="f-option2">Create an account?</label> --}}
+                                </div>
+                            </div>
+                            <div class="col-md-12 form-group">
+                                <div class="creat_account">
+
+                                </div>
+                                {{!-- <textarea class="form-control" name="message" id="message" rows="1"
+                                    placeholder="Order Notes"></textarea> --}}
+                            </div>
+
+                    </div>
+
+
+
+
+
+                    <div class="col-lg-4 col-sm-8">
+
+                        <div class="card bg-light mb-3" style="max-width: 18rem;">
+                            <div class="card-header" style="display: flex; justify-content: center;">
+
+                                <h5> Your Wallet </h5>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Total wallet Amount :<span style="color: rgb(0, 55, 236);">₹
+                                        {{UserWallet.wallet}}</span> </h5>
+
+
+
+                            </div>
+
+                        </div>
+                        <div id="dtBasicExample" class="order_box">
+                            <h2>Your Order</h2>
+                            <ul class="list">
+                                <li>
+                                    <a href="#">Product
+                                        <span>Total</span>
+                                    </a>
+                                </li>
+                                {{#each usercartAllProducts}}
+                                <li>
+                                    <a href="#">{{Products.ProductName}}
+                                        {{!-- <span class="middle">x 02</span> --}}
+                                        <span class="last">₹{{totalPrice}}</span>
+                                    </a>
+                                </li>
+                                {{/each}}
+                            </ul>
+                            <ul class="list list_2">
+                                <li>
+                                    <a href="#">Subtotal
+                                        <span>₹ {{subTotal}}</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">Shipping
+                                        <span>Flat rate: ₹ 100.00</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">Total
+                                        <span style="color: crimson;"><input name="grandTotal" value="{{grandTotal}}" type="hidden">₹{{grandTotal}}</span>
+                                    </a>
+                                </li>
+
+                            </ul>
+                            <div class="payment_item">
+                                {{!-- <div class="radion_btn">
+                                    <input type="radio" id="f-option5" name="selector" />
+                                    <label for="f-option5">cash on delivery</label>
+                                    <div class="check"></div>
+                                </div> --}}
+
+                            </div>
+                            <div class="payment_item active" style="padding-bottom: 1rem;    padding-top: 1rem;">
+                                <div class="">
+                                    {{!-- <input type="radio" id="f-option6" name="paymentmethod" value="COD" />
+                                    <label for="f-option6">Paypal </label> --}}
+
+
+
+
+
+
+
+
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="paymentmethod" value="COD"
+                                            id="flexRadioDefault2" checked>
+                                        <label style="color: red;" class="form-check-label" for="flexRadioDefault2">
+                                            Cash On Delivery
+                                        </label>
+                                    </div>
+
+                                     {{#if walletPass}}
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="paymentmethod" value="Wallet"
+                                            id="flexRadioDefault2" checked>
+                                        <label style="color: red;" class="form-check-label" for="flexRadioDefault2">
+                                            Wallet
+                                        </label>
+                                    </div>
+                                      {{/if}}
+
+
+
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="paymentmethod" value="Online"
+                                            id="flexRadioDefault1">
+                                        <label class="form-check-label" for="flexRadioDefault1" style="color: red;">
+
+                                            Online payment
+                                        </label>
+                                    </div>
+
+                                    <img src="img/product/single-product/card.jpg" alt="" />
+                                    <div class="check"></div>
+
+
+                                </div>
+
+                            </div>
+                            <button name="Date" class="main_btn" type="submit"> Proceed
+
+                            </button>
+
+                            <p style="color: red;" id="error-message"></p>
+                        </div>
+
+                    </div>
+
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <script src="/FormsjsValidations/usercheckoutAddressValidation.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="jquery-3.6.3.min.js"></script>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
+
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+
+    <script>
+       $("#Checkout-form").submit((e) => {
+            e.preventDefault()
+            if (!usercheckoutAddressValidation()) {
+                return
+            }
+            $.ajax({
+                url: '/allorder',
+                method: 'post',
+                data: $('#Checkout-form').serialize(),
+                success: (response) => {
+
+                    if (response.status == true) {
+
+
+                        razorpayPayment(response.order)
+
+                    } else {
+                        location.href = '/OrderSuccessfull'
+
+                    }
+                },
+
+            })
+        })
+
+        function razorpayPayment(order) {
+            var options = {
+                "key": "rzp_test_pay0vGbvB66HUY", // Enter the Key ID generated from the Dashboard
+                "amount": order.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+                "currency": "INR",
+                "name": "Eiser",
+                "description": "Test Transaction",
+                "image": "https://example.com/your_logo",
+                "order_id": order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+                "handler": function (response) {
+
+
+                    veryfiPayment(response, order)
+                },
+                "prefill": {
+                    "name": "Gaurav Kumar",
+                    "email": "gaurav.kumar@example.com",
+                    "contact": "9000090000"
+                },
+                "notes": {
+                    "address": "Razorpay Corporate Office"
+                },
+                "theme": {
+                    "color": "#3399cc"
+                }
+            };
+            var rzp1 = new Razorpay(options);
+            rzp1.open();
+        }
+
+        function veryfiPayment(payment, order) {
+
+            $.ajax({
+                url: '/verifyPayment',
+                data: {
+                    payment,
+                    order
+                },
+                method: 'post',
+
+                success: (response) => {
+                    if (response.PaymentSuccess == true) {
+                        location.href = '/OrderSuccessfull'
+                    } else {
+                        alert('payment failed')
+                    }
+                }
+            })
+        }
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!--================End Checkout Area =================-->
+    {{!-- <form action="/v" method="post">
+        <div class="row">
+            <div class="col">
+                <p type="text" name="shahinsha" class="form-control" placeholder="First name">kkkkkk</p>
+            </div>
+            <div class="col">
+                <input type="text" name="irshadth" class="form-control" placeholder="Last name">
+            </div>
+        </div>
+        <button type="submit"></button>
+    </form> --}}
+
+    <!-- Load Bootstrap CSS -->
+
+
+    <!--================ start footer Area  =================-->
+
+
+
+
+    <footer class="footer-area section_gap" style="     height: 470px;  ">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-2 col-md-6 single-footer-widget">
+                    <h4>Top Products</h4>
+                    <ul>
+                        <li><a href="#">Managed Website</a></li>
+                        <li><a href="#">Manage Reputation</a></li>
+                        <li><a href="#">Power Tools</a></li>
+                        <li><a href="#">Marketing Service</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-6 single-footer-widget">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#">Jobs</a></li>
+                        <li><a href="#">Brand Assets</a></li>
+                        <li><a href="#">Investor Relations</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-6 single-footer-widget">
+                    <h4>Features</h4>
+                    <ul>
+                        <li><a href="#">Jobs</a></li>
+                        <li><a href="#">Brand Assets</a></li>
+                        <li><a href="#">Investor Relations</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-6 single-footer-widget">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="#">Guides</a></li>
+                        <li><a href="#">Research</a></li>
+                        <li><a href="#">Experts</a></li>
+                        <li><a href="#">Agencies</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 col-md-6 single-footer-widget">
+                    <h4>Newsletter</h4>
+                    <p>You can trust us. we only send promo offers,</p>
+                    <div class="form-wrap" id="mc_embed_signup">
+                        <form target="_blank"
+                            action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01"
+                            method="get" class="form-inline">
+                            <input class="form-control" name="EMAIL" placeholder="Your Email Address"
+                                onfocus="this.placeholder = ''" onblur="this.placeholder = 'Your Email Address '"
+                                required="" type="email">
+                            <button class="click-btn btn btn-default">Subscribe</button>
+                            <div style="position: absolute; left: -5000px;">
+                                <input name="b_36c4fd991d266f23781ded980_aefe40901a" tabindex="-1" value="" type="text">
+                            </div>
+
+                            <div class="info"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom row align-items-center">
+                <p class="footer-text m-0 col-lg-8 col-md-12">
+                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    Copyright &copy;
+                    <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is
+                    made
+                    with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com"
+                        target="_blank">eiser</a>
+                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                </p>
+                <div class="col-lg-4 col-md-12 footer-social">
+                    <a href="#"><i class="fa fa-facebook"></i></a>
+                    <a href="#"><i class="fa fa-twitter"></i></a>
+                    <a href="#"><i class="fa fa-dribbble"></i></a>
+                    <a href="#"><i class="fa fa-behance"></i></a>
+                    <h1>{{message}}</h1>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!--================ End footer Area  =================-->
+
+
+
+    <!--================ don't toch this   popUp model    =================-->
+
+
+    <script src="js/popper.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/stellar.js"></script>
+
+
+    <!--================ don't toch this   popUp model  =================-->
+
+
+
+
+
+
+
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+
+
+
+    <script>
+        function zoom(id) {
+            img = document.getElementById(id).src
+            document.getElementById('imgView').src = img
+
+        }
+    </script>
+
+
+
+
+
+
+
+
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    {{!--
+    <script src="js/jquery-3.2.1.min.js"></script> --}}
+
+
+    {{!--
+    <script src="vendors/lightbox/simpleLightbox.min.js"></script>
+
+    <script src="vendors/nice-select/js/jquery.nice-select.min.js"></script>
+
+    <script src="vendors/isotope/imagesloaded.pkgd.min.js"></script>
+
+    <script src="vendors/isotope/isotope-min.js"></script>
+
+    <script src="vendors/owl-carousel/owl.carousel.min.js"></script>
+
+    <script src="js/jquery.ajaxchimp.min.js"></script>
+    <script src="vendors/counter-up/jquery.waypoints.min.js"></script>
+    <script src="vendors/counter-up/jquery.counterup.js"></script>
+    <script src="js/mail-script.js"></script>
+
+    <script src="js/theme.js"></script> --}}
+    {{!--
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> --}}
+
+    {{!--
+    <script>
+        if ({{ message }}) {
+            swal("Here's the title!", "...and here's the text!");
+            message = null
+        }
+    </script> --}}
+
+
+
+
+
+
+</body>
+
+</html>

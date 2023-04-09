@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="AdminPanel/img/logo/logo.png" rel="icon">
+    <title>RuangAdmin - Dashboard</title>
+    <link href="AdminPanel/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="AdminPanel/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="AdminPanel/css/ruang-admin.min.css" rel="stylesheet">
+</head>
+
+<body id="page-top">
+    <div id="wrapper">
+        <!-- Sidebar -->
+        <ul class="navbar-nav sidebar sidebar-light accordion" style="background-color: #000000 id=" accordionSidebar" ">
+      <a class=" sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <div class="sidebar-brand-icon">
+                <svg width="107" height="27" viewBox="0 0 107 27" fill="none" xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <path d="M0 0H107V27H0V0Z" fill="url(#pattern0)" />
+                    <defs>
+                        <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
+                            <use xlink:href="#image0_110_1977"
+                                transform="matrix(0.00729927 0 0 0.0289267 0 -0.049608)" />
+                        </pattern>
+                        <image id="image0_110_1977" width="137" height="38"
+                            xlink:href="data:image/png;base64,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" />
+                    </defs>
+                </svg>
+
+            </div>
+
+            </a>
+            <li class="nav-item active">
+                <a class="nav-link" href="/adminDashboard">
+                    <i class="fas fa-fw fa-tachometer-alt" href="/adminDashboard"></i>
+                    <span>Dashboard</span></a>
+            </li>
+
+            {{!-- <div class="sidebar-heading">
+                Features
+            </div> --}}
+            <li class="nav-item" href="/product">
+                <a class="nav-link" href="/product" aria-expanded="true" aria-controls="collapseBootstrap">
+                    <i class="far fa-fw fa-window-maximize"></i>
+                    <span>Products</span>
+                </a>
+                <div id="collapseBootstrap" class="collapse" aria-labelledby="headingBootstrap"
+                    data-parent="#accordionSidebar">
+
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="/adminBanners" data-target="#collapseForm"
+                    aria-controls="collapseForm">
+                    <i class="fab fa-fw fa-wpforms"></i>
+                    <span>Banner</span>
+                </a>
+                <div id="collapseForm" class="collapse" aria-labelledby="headingForm" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Forms</h6>
+                        <a class="collapse-item" href="form_basics.html">Form Basics</a>
+                        <a class="collapse-item" href="form_advanceds.html">Form Advanceds</a>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item " href="/Category">
+                <a class="nav-link" href="/Category" aria-expanded="true" aria-controls="collapseTable">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Category</span>
+                </a>
+
+                <!-- deleted -->
+
+                <div id="collapseTable" class="collapse" aria-labelledby="headingTable" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Tables</h6>
+                        <a class="collapse-item" href="simple-tables.html">Simple Tables</a>
+                        <a class="collapse-item" href="datatables.html">DataTables</a>
+                    </div>
+                </div>
+            </li>
+
+
+
+
+
+
+
+            <!-- Deleted -->
+
+            <li class="nav-item" href="/customers">
+                <a class="nav-link" href="/customers">
+                    <i class="fas fa-fw fa-chart-area"></i>
+                    <span>customers</span>
+                </a>
+            </li>
+            <li class="nav-item" href="">
+                <a class="nav-link" href="/adminCheckout">
+                    <i class="fab fa-fw fa-wpforms"></i>
+                    <span>Checkout</span>
+                </a>
+            </li>
+            <li class="nav-item" href="/product">
+                <a class="nav-link" href="/adminCoupon" aria-expanded="true" aria-controls="collapseBootstrap">
+                    <i class="far fa-fw fa-window-maximize"></i>
+                    <span>Coupon</span>
+                </a>
+                <div id="collapseBootstrap" class="collapse" aria-labelledby="headingBootstrap"
+                    data-parent="#accordionSidebar">
+
+            </li>
+            <li class="nav-item" href="/adminSalesReport">
+                <a class="nav-link" href="/adminSalesReport" aria-expanded="true" aria-controls="collapseBootstrap">
+                    <i class="far fa-fw fa-window-maximize"></i>
+                    <span>SalesRport</span>
+                </a>
+                <div id="collapseBootstrap" class="collapse" aria-labelledby="headingBootstrap"
+                    data-parent="#accordionSidebar">
+
+            </li>
+            {{!-- <div class="version" id="version-ruangadmin"></div> --}}
+        </ul>
+        <!-- Sidebar -->
+        <div id="content-wrapper" class="d-flex flex-column">
+            <div id="content">
+                <!-- TopBar -->
+                <nav class="navbar navbar-expand navbar-light bg-navbar topbar mb-4 static-top">
+                    <button id="sidebarToggleTop" class="btn btn-link rounded-circle mr-3">
+                        <i class="fa fa-bars"></i>
+                    </button>
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item dropdown no-arrow">
+                            {{!-- <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-search fa-fw"></i>
+                            </a> --}}
+                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                                aria-labelledby="searchDropdown">
+                                <form class="navbar-search">
+                                    <div class="input-group">
+                                        {{!-- <input type="text" class="form-control bg-light border-1 small"
+                                            placeholder="What do you want to look for?" aria-label="Search"
+                                            aria-describedby="basic-addon2" style="border-color: #3f51b5;"> --}}
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary" type="button">
+                                                {{!-- <i class="fas fa-search fa-sm"></i> --}}
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown no-arrow mx-1">
+
+                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="alertsDropdown">
+
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="mr-3">
+                                        <div class="icon-circle bg-primary">
+                                            {{!-- <i class="fas fa-file-alt text-white"></i> --}}
+                                        </div>
+                                    </div>
+
+                                </a>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="mr-3">
+                                        <div class="icon-circle bg-success">
+                                            {{!-- <i class="fas fa-donate text-white"></i> --}}
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="small text-gray-500">December 7, 2019</div>
+                                        $290.29 has been deposited into your account!
+                                    </div>
+                                </a>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="mr-3">
+                                        <div class="icon-circle bg-warning">
+                                            {{!-- <i class="fas fa-exclamation-triangle text-white"></i> --}}
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="small text-gray-500">December 2, 2019</div>
+                                        Spending Alert: We've noticed unusually high spending for your account.
+                                    </div>
+                                </a>
+                                <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown no-arrow mx-1">
+
+                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="messagesDropdown">
+                                <h6 class="dropdown-header">
+                                    Message Center
+                                </h6>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="dropdown-list-image mr-3">
+
+                                        <div class="status-indicator bg-success"></div>
+                                    </div>
+                                    <div class="font-weight-bold">
+                                        <div class="text-truncate">Hi there! I am wondering if you can help me with a
+                                            problem I've been
+                                            having.</div>
+                                        <div class="small text-gray-500">Udin Cilok · 58m</div>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="dropdown-list-image mr-3">
+
+                                        <div class="status-indicator bg-default"></div>
+                                    </div>
+                                    <div>
+
+                                    </div>
+                                </a>
+                                <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
+                            </div>
+                        </li>
+
+
+
+                        <!--user-->
+                        <!--user-->
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <img class="img-profile rounded-circle" src="AdminPanel/img/boy.png"
+                                    style="max-width: 60px">
+                                <span class="ml-2 d-none d-lg-inline text-white small">Maman Ketoprak</span>
+                            </a>
+
+
+
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="userDropdown">
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Profile
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Settings
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Activity Log
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="javascript:void(0);" data-toggle="modal"
+                                    data-target="#logoutModal">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Logout
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </nav>
+
+                <!--user-->
+                <!-- Topbar -->
+
+                <!-- Container Fluid-->
+                <div class="container-fluid   " id="container-wrapper">
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800   "
+                            style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;  font-size: 2.3rem; text-align: center  ">
+                            Update Prodect</h1>
+
+                    </div>
+
+
+                    {{#getpass}}
+                    <form action="/productupdatedSave/{{_id}}" name="Submission"
+                        onsubmit="return updateProductValidation()" oninput="errorsClearing()" method="post"
+                        enctype="multipart/form-data">
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="inputEmail4">Product Name</label>
+                                <input value="{{ProductName}}" type="text" name="ProductName" class="form-control"
+                                    id="ProductName" placeholder="Product Name">
+                                <p class="text-danger"></p>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="inputPassword4">Price</label>
+                                <input value="{{ProductPrice}}" name="ProductPrice" type="number" class="form-control"
+                                    id="ProductPrice" placeholder="Product Price">
+                                <p class="text-danger"></p>
+                            </div>
+                            {{!-- <div class="form-group col-md-6">
+                                <label for="inputEmail4">Product Category</label>
+                                <input value="{{ProductCategory}}" name="ProductCategory" type="text"
+                                    class="form-control" id="ProductCategory" placeholder="Product Category">
+                                <p class="text-danger"></p>
+                            </div> --}}
+
+
+
+
+                            <div class="form-group col-md-6">
+                                <label for="inputEmail4">stocks </label>
+                                <input value="{{stocks}}" type="number" name="stocks" class="form-control" id="stocks"
+                                    placeholder="stocks ">
+                                <p class="text-danger"></p>
+                            </div>
+
+
+                            <div class="form-group col-md-6">
+                                <label for="inputPassword4">Product Description</label>
+                                <input value="{{ProductDescription}}" name="ProductDescription" type="text"
+                                    class="form-control" id="ProductDescription" placeholder="ProductD escription">
+                                <p class="text-danger"></p>
+                            </div>
+
+                            <div class="form-group col-sm-10">
+                                {{!-- <label for="inputPassword4">Product id</label> --}}
+                                <input value="{{Productid}}" name="Productid" type="hidden" class="form-control"
+                                    id="inputPassword4" placeholder="Product id">
+                                {{!-- <p class="text-danger"></p> --}}
+                            </div>
+                            <div class="input-group mb-3" id="myForm">
+
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text" for="ProductCategory">Product Category</label>
+                                </div>
+                                <select name="ProductCategory" class="custom-select" id="ProductCategory">
+                                    <option selected>{{ProductCategory}}</option>
+                                    {{#each ../categoryadding}}
+                                    <option> {{categoryName}}</option>
+                                    {{/each}}
+                                </select>
+
+                            </div>
+                            <div class="float-left"><br><br>
+                                <p class="text-danger " style="margin-top: 0rem;
+    position: absolute;
+    left: 16rem;"></p>
+                            </div>
+
+                            {{!--
+                            <form>
+                                <div class="form-group">
+                                    <label for="exampleFormControlFile1">Example file input</label>
+                                    <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                                </div>
+                            </form> --}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                            {{!--
+                            <div class="ml-2 col-sm-6" style="margin-top: 3rem;">
+                                <div id="msg"></div>
+
+                                <input multiple value="{{ProductImage}}" type="file" id="ProductImage"
+                                    name="ProductImage" class="file">
+                                <div class="input-group my-3">
+                                    <input type="text" class="form-control" disabled placeholder="Upload File"
+                                        id="file">
+                                    <div class="input-group-append">
+                                        <button type="button" class="browse btn btn-primary">Browse...</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="ml-2 col-sm-6">
+                                <p class="text-danger"></p>
+                                <img src="https://placehold.it/80x80" id="preview" class="img-thumbnail"
+                                    style="    max-width: 40%;">
+                            </div> --}}
+
+
+
+
+
+
+                            <div class="custom-file">
+                                <input type="file" multiple class="custom-file-input" name="ProductImage"
+                                    id="ProductImage">
+                                <label class="custom-file-label" for="ProductImage">Choose file...</label>
+                                <div class="invalid-feedback">File Format Not Supported</div>
+                                <p class="text-danger"></p>
+                            </div>
+
+                            <div id="preview"></div>
+
+                            <script>
+                                document.getElementById("ProductImage").addEventListener("change", function () {
+                                    var preview = document.getElementById("preview");
+                                    var files = this.files;
+                                    if (files) {
+                                        [].forEach.call(files, readAndPreview);
+                                    }
+
+                                    function readAndPreview(file) {
+                                        // Make sure `file.type` matches the desired image file types
+                                        if (/\.(jpe?g|png|gif)$/i.test(file.name)) {
+                                            var reader = new FileReader();
+
+                                            reader.addEventListener("load", function () {
+                                                var image = new Image();
+                                                image.height = 100;
+                                                image.title = file.name;
+                                                image.src = this.result;
+
+                                                // Create a wrapper element for the image
+                                                var wrapper = document.createElement('div');
+                                                wrapper.classList.add('image-wrapper');
+                                                wrapper.appendChild(image);
+
+                                                // Create a remove button for the image
+                                                var removeButton = document.createElement('button');
+                                                removeButton.classList.add('btn', 'btn-danger', 'btn-sm');
+                                                removeButton.textContent = 'Remove';
+                                                removeButton.addEventListener('click', function () {
+                                                    wrapper.remove();
+                                                });
+                                                wrapper.appendChild(removeButton);
+
+                                                // Append the wrapped image to the preview element
+                                                preview.appendChild(wrapper);
+
+                                                // Initialize cropper.js for the image
+                                                var cropper = new Cropper(image, {
+                                                    aspectRatio: 1,
+                                                    crop: function (event) {
+                                                        // Update the preview image with the cropped data
+                                                        var croppedImage = cropper.getCroppedCanvas({
+                                                            width: 100,
+                                                            height: 100
+                                                        });
+                                                        image.src = croppedImage.toDataURL();
+                                                    }
+                                                });
+                                            });
+
+                                            reader.readAsDataURL(file);
+                                        }
+                                    }
+                                });
+                            </script>
+
+
+
+
+
+
+
+
+
+
+
+                            <dir class="rere" style="    margin-top: 1rem;">
+
+
+                                {{#each ProductImage}}
+                                <div class="row" style="float: left;">
+                                    <div class="card" style="width: 10rem; height: 12rem;">
+                                        <div class="card-body">
+
+                                            <img width="100px" height="100px" src="/productsimg/{{[]}}" alt="">
+                                            <img src="/productsimg/{{[]}}" id="preview" style="    max-width: 40%;">
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                                {{/each }}
+                            </dir>
+
+                            <div class="form-group d-flex justify-content-center  " style="    padding-top: 5rem;">
+                                <div class="form-check ">
+
+                                </div>
+                                <div>
+                                    <button type="submit" class="btn btn-primary">Update
+
+                                </div>
+                                </button>
+                            </div>
+
+                            <script src="/FormsjsValidations/updateProduct.js"></script>
+
+
+                            <script>
+                                $(document).on("click", ".browse", function () {
+                                    var file = $(this).parents().find(".file");
+                                    file.trigger("click");
+                                });
+                                $('input[type="file"]').change(function (e) {
+                                    var fileName = e.target.files[0].name;
+                                    $("#file").val(fileName);
+
+                                    var reader = new FileReader();
+                                    reader.onload = function (e) {
+                                        // get loaded data and render thumbnail.
+                                        document.getElementById("preview").src = e.target.result;
+                                    };
+                                    // read the image file as a data URL.
+                                    reader.readAsDataURL(this.files[0]);
+                                });
+                            </script>
+
+
+
+
+
+
+
+                        </div>
+
+
+                </div>
+
+
+
+                </form>
+
+
+                {{/getpass}}
+
+            </div>
+            <div style="background-color: #ffffff; height: 50px;">
+
+            </div>
+        </div>
+
+        <!-- Scroll to top -->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
+
+        <script src="AdminPanel/vendor/jquery/jquery.min.js"></script>
+        <script src="AdminPanel/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="AdminPanel/vendor/jquery-easing/jquery.easing.min.js"></script>
+        <script src="AdminPanel/js/ruang-admin.min.js"></script>
+        <script src="AdminPanel/vendor/chart.js/Chart.min.js"></script>
+        <script src="AdminPanel/js/demo/chart-area-demo.js"></script>
+
+
+
+</body>
+
+</html>
+
+<script>
+    $(document).ready(function () {
+        $('#myTable').DataTable();
+    });
+</script>

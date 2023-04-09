@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+  <!-- Required meta tags -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <link rel="icon" href="img/favicon.png" type="image/png" />
+  <title>Eiser ecommerce</title>
+  <!-- Bootstrap CSS -->
+
+  <link rel="stylesheet" href="css/bootstrap.css" />
+  <link rel="stylesheet" href="vendors/linericon/style.css" />
+  <link rel="stylesheet" href="css/font-awesome.min.css" />
+  <link rel="stylesheet" href="css/themify-icons.css" />
+  <link rel="stylesheet" href="css/flaticon.css" />
+
+  <link rel="stylesheet" href="vendors/owl-carousel/owl.carousel.min.css" />
+  <link rel="stylesheet" href="vendors/lightbox/simpleLightbox.css" />
+  <link rel="stylesheet" href="vendors/nice-select/css/nice-select.css" />
+  <link rel="stylesheet" href="vendors/animate-css/animate.css" />
+  <link rel="stylesheet" href="vendors/jquery-ui/jquery-ui.css" />
+  <!-- main css -->
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+
+  {{!--
+  <link rel="stylesheet" href="cartY/css/style.css" type="text/css"> --}}
+
+
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&display=swap"
+    rel="stylesheet">
+
+  <!-- Css Styles -->
+  <link rel="stylesheet" href="CartTable/css/bootstrap.min.css" type="text/css">
+  <link rel="stylesheet" href="CartTable/css/font-awesome.min.css" type="text/css">
+  <link rel="stylesheet" href="CartTable/css/style.css" type="text/css">
+</head>
+
+<body>
+  <style>
+    .d {
+      background-color: blue;
+    }
+  </style>
+  <!--================Header Menu Area =================-->
+  <header class="header_area">
+    <div class="top_menu">
+      <div class="container" style="    max-width: 1236px;">
+        <div class="row">
+          <div class="col-lg-7">
+            <div class="float-left">
+              <p>Phone: +01 256 25 235</p>
+              <p>email: info@eiser.com</p>
+            </div>
+          </div>
+          <div class="col-lg-5">
+            <div class="float-right">
+              <ul class="right_side">
+                <li>
+                  <a href="cart.html">
+                    gift card
+                  </a>
+                </li>
+                <li>
+                  <a href="tracking.html">
+                    track order
+                  </a>
+                </li>
+                <li>
+                  <a href="contact.html">
+                    Contact Us
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="main_menu">
+      <div class="container" style="    max-width: 1233px;">
+        <nav class="navbar navbar-expand-lg navbar-light w-100">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <a class="navbar-brand logo_h" href="/userHome">
+            <img src="img/logo.png" alt="" style="max-width: 108%;" />
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse offset w-100" id="navbarSupportedContent">
+            <div class="row w-100 mr-0">
+              <div class="col-lg-7 pr-0">
+                <ul class="nav navbar-nav center_nav pull-right">
+                  <li class="nav-item ">
+                    <a class="nav-link" href="/userHome">Home</a>
+                  </li>
+                  <li class="nav-item submenu dropdown">
+                    <a href="/signUpLogInButton" class="nav-link dropdown-toggle">Shop</a>
+                    <ul class="dropdown-menu">
+                      <li class="nav-item">
+
+                      </li>
+
+
+                    </ul>
+                  </li>
+                  <li class="nav-item submenu dropdown">
+
+                    <ul class="dropdown-menu">
+                      <li class="nav-item">
+
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="single-blog.html">Blog Details</a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li class="nav-item submenu dropdown">
+
+                    <ul class="dropdown-menu">
+                      <li class="nav-item">
+                        <a class="nav-link" href="tracking.html">Tracking</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="elements.html">Elements</a>
+                      </li>
+                    </ul>
+                  </li>
+
+                </ul>
+              </div>
+
+              <div class="col-lg-5 pr-0">
+                <ul class="nav navbar-nav navbar-right right_nav pull-right">
+
+
+                  <li class="nav-item">
+                    <a href="/User-CartPage" class="icons">
+                      <i class="ti-shopping-cart active "></i>
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a href="/userProfile" class="icons">
+                      <i class="ti-user" aria-hidden="true"></i>
+                    </a>
+                  </li>
+                 <li class="nav-item">
+                    <a href="/userwishlist" class="icons">
+                      <i class="ti-heart " aria-hidden="true"></i>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+
+                    <div class="dropdown" style="    margin-top: 1.6rem; margin-left: 1rem;">
+                      <p style="color:  #007bff" class=" dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        {{#if homeName}} {{homeName}} {{else}} No Account {{/if}}
+                      </p>
+
+                      <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        {{#if homeName}}
+                        <li style=" border-radius: 100rem;"><a class="dropdown-item" href="/LogoutButton">Logout</a>
+                        </li>
+                        {{else}}
+                        <li style="  border-radius: 100rem;   margin-left: 35px;"><a class="dropdown-item"
+                            href="/LogoutButton">Login</a></li>
+                        {{/if}}
+                      </ul>
+                    </div>
+
+                  </li>
+
+                </ul>
+
+              </div>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </div>
+
+  </header>
+  <!--================Header Menu Area =================-->
+
+
+  <!--================Home Banner Area =================-->
+  <section class="banner_area">
+    <div class="banner_inner d-flex align-items-center">
+      <div class="container">
+        <div class="banner_content d-md-flex justify-content-between align-items-center">
+          <div class="mb-3 mb-md-0">
+            <h2>Cart</h2>
+            <p>Very us move be blessed multiply night</p>
+          </div>
+          <a href="/userorders" role="button" class="btn btn-primary" role="button">
+            <div class="hover-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                class="bi bi-lightning-fill" viewBox="0 0 16 16">
+                <path
+                  d="M5.52.359A.5.5 0 0 1 6 0h4a.5.5 0 0 1 .474.658L8.694 6H12.5a.5.5 0 0 1 .395.807l-7 9a.5.5 0 0 1-.873-.454L6.823 9.5H3.5a.5.5 0 0 1-.48-.641l2.5-8.5z" />
+              </svg>
+              <span>Order Details </span>
+            </div>
+          </a>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+  <!--================End Home Banner Area =================-->
+
+
+
+
+
+
+  <!-- Shopping Cart Section Begin -->
+  <!-- Shopping Cart Section Begin -->
+  <section id="RELOAd" class="shopping-cart spad">
+    <div  class="container">
+      <div class="row">
+        <div class="col-lg-8">
+          <div class="shopping__cart__table">
+            <table  class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Product</th>
+                  <th scope="col">Price</th>
+                  <th scope="col"></th>
+                  <th scope="col">Quantity</th>
+                  <th scope="col">Total</th>
+                  <th scope="col" Remove></th>
+                </tr>
+              </thead>
+              <tbody>
+                {{#usercartAllProducts}}
+                <tr>
+
+                  <th class="row  product__cart__item">
+
+                    <div class="product__cart__item__pic">
+                      <img src="/productsimg/{{Products.ProductImage.[0]}}" style="  width: 100px; height: 100px;"
+                        alt="" />
+
+                    </div>
+                    <div class="product__cart__item__text">
+                      <h6>{{Products.ProductName}}</h6>
+                  </th>
+          </div>
+          <td>
+            <h5>₹{{Products.ProductPrice}}</h5>
+          </td>
+          <td></td>
+          <td>
+
+
+
+        
+
+
+              <div class="quantity" style="margin-left: -1rem">
+                <div class="value-button" id='decrease'
+                  onclick="decreaseValue('{{Products.Productid}}'),changequantity('{{Products.Productid}}',-1)" value="Decrease Value">-</div>
+                {{!-- <input type="number" id="number" value="{{quantity}}" /> --}}
+                <span type="number" id="number-{{Products.Productid}}" value="{{quantity}}">{{quantity}}</span>
+                <div class="value-button" id="increase"
+                  onclick="increaseValue('{{Products.Productid}}'),changequantity('{{Products.Productid}}',1)" value="Increase Value">+</div>
+              </div>
+          </td>
+
+          <td class="cart__price  " id="product-price">{{totalPrice}}</td>
+          <td>
+             {{!-- <button> <a onclick="return confirm('are you want to delete')"
+                href="/RemoveCartDocument/{{_id}}/{{CartProductId}}" class="cart__close"><i class="fa fa-close"></i></a>
+            </button> --}}
+             <button role="button" id="deleteCart" onclick="DeleteProductInCart('{{_id}}','{{CartProductId}}')" type="button"
+              class="btn btn-light"><span id="boot-icon" class="bi bi-x-lg"
+                style="font-size: 14px; -webkit-text-stroke-width: 2px;"></span></button> 
+
+            </td>
+
+          {{/usercartAllProducts}}
+
+          </tbody>
+          </table>
+        </div>
+
+        <div class="row" style="display: flex; justify-content: center;">
+
+
+
+
+
+
+
+
+
+
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.1/dist/sweetalert2.all.min.js"></script>
+      
+      <script src="https://code.jquery.com/jquery-3.6.3.js"
+        integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+
+      <style>
+        .colored-toast.swal2-icon-error {
+          background-color: #f27474 !important;
+        }
+      </style>
+
+      <script>
+        function DeleteProductInCart(_id,CartProductId) {
+          console.log('ddddddd')
+          $.ajax({
+            url: '/RemoveCartDocument/' + _id+'/'+CartProductId,
+            method: 'get',
+            success: (response) => {
+              console.log(response);
+              if (response.status == true) {
+                const Toast = Swal.mixin({
+                  toast: true,
+                  position: 'top-right',
+                  iconColor: 'white',
+                  customClass: {
+                    popup: 'colored-toast'
+                  },
+                  showConfirmButton: false,
+                  timer: 1000,
+                  timerProgressBar: true
+                })
+                Toast.fire({
+                  icon: 'error',
+                  title: 'Deleted'
+                }).then(() => {
+         
+                     $('#RELOAd').load('/User-CartPage #RELOAd')
+                });
+              }
+            },
+            error: (err) => {
+              console.log(err);
+            }
+          });
+        }
+      </script>
+
+
+
+
+
+
+
+
+
+          <div class="col-lg-6 col-md-6 col-sm-6">
+            <div class="continue__btn ">
+              <a href="/shop"><i class="fa fa-spinner main_btn"></i> Continue Shopping</a>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4">
+
+        <div class="continue__btn" style="    padding-bottom: 2rem;">
+          {{#if usercartAllProducts }}
+          <h6>Discount codes</h6>
+
+          <form action="/applyCoupn" name="Submission" onsubmit="return UserCouponValidation()"
+            oninput="CouponerrorsClearing() " method="post" role="form">
+            <input name="CouponCode" class="form-control form-control-lg" type="text" placeholder="Coupon code">
+            {{!-- <button type="submit" class="main_btn">Apply</button> --}}
+            {{!-- <button type="submit" role="button" class="main_btn text-center">Apply</button> --}}
+            <p style="color: red;">{{errorCoupons}}</p>
+
+            <p style="color: red;" id="error-message"></p>
+            <button class="main_btn" type="submit"> Apply </button>
+          </form>
+
+          {{/if}}
+        </div>
+
+
+
+
+        <script src="/FormsjsValidations/userCouponApplayValidation.js"></script>
+
+
+
+
+
+        {{#if usercartAllProducts}}
+        <div class="cart__total">
+
+          <h6>Cart total</h6>
+          <ul>
+            <li>Subtotal <span>₹ {{subTotal}}</span></li>
+            <li>Total <span>₹ {{subTotal}}</span></li>
+          </ul>
+
+          <div class="d-flex justify-content-center">
+            <a class="main_btn text-center" href="/UserCheckout">Proceed to checkout</a>
+          </div>
+          </tr>
+          <div class="ss" style="display: flex; justify-content: center;">
+
+            <p style="color: red;">{{StockError}}</p>
+          </div>
+
+        </div>
+
+        {{else}}
+        <div class="cart__total ">
+
+          <img src="https://www.seekpng.com/png/detail/117-1170538_404-your-cart-is-empty.png" alt="" srcset="">
+
+          <div style="    display: flex;
+    justify-content: center;
+    margin: 1rem;">
+            <a href="/Shop" role="button" class="btn btn-primary" role="button">
+              <div class="hover-btn">
+                <svg class="css-i6dzq1" stroke-linejoin="round" stroke-linecap="round" fill="none" stroke-width="2"
+                  stroke="#ffd300" height="20" width="20" viewBox="0 0 24 24">
+                  <circle r="1" cy="21" cx="9"></circle>
+                  <circle r="1" cy="21" cx="20"></circle>
+                  <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                </svg>
+                <span>Shop Now</span>
+              </div>
+            </a>
+          </div>
+
+
+          {{!-- <a role="button" href="/Shop"></a> --}}
+          {{!-- <ul>
+            <li>Subtotal <span>₹ {{allproductTotal}}</span></li>
+            <li>Total <span>₹ {{allproductTotal}}</span></li>
+          </ul> --}}
+
+          {{!-- <div class="d-flex justify-content-center">
+            <a class="main_btn text-center" href="/UserCheckout">Proceed to checkout</a>
+          </div> --}}
+        </div>
+        {{/if}}
+
+      </div>
+
+    </div>
+
+    </div>
+
+    </div>
+  </section>
+  <style>
+    .quantity {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      max-width: 10rem;
+      margin: 0 auto;
+      font-family: sans-serif;
+      font-size: 1rem;
+      line-height: 1.5;
+      color: #333;
+    }
+
+    .quantity label {
+      margin-right: 1rem;
+    }
+
+    .quantity input[type=number] {
+      text-align: center;
+      width: 3rem;
+      height: 2rem;
+      border: 1px solid #ddd;
+      border-radius: 0.25rem;
+      padding: 0.25rem;
+      -webkit-appearance: none;
+    }
+
+    .quantity input[type=number]:focus {
+      outline: none;
+    }
+
+    .quantity .value-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 2rem;
+      height: 2rem;
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 0.25rem;
+      cursor: pointer;
+    }
+
+    .quantity .value-button:hover {
+      background-color: #f2f2f2;
+    }
+
+    .quantity .value-button:active {
+      background-color: #e6e6e6;
+    }
+
+    .quantity #decrease {
+      border-radius: 0.25rem 0 0 0.25rem;
+    }
+
+    .quantity #increase {
+      border-radius: 0 0.25rem 0.25rem 0;
+    }
+  </style>
+
+
+
+  <!--================ End Inspired Product Area =================-->
+
+  <footer class="footer-area section_gap" style="     height: 470px;  ">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-2 col-md-6 single-footer-widget">
+          <h4>Top Products</h4>
+          <ul>
+            <li><a href="#">Managed Website</a></li>
+            <li><a href="#">Manage Reputation</a></li>
+            <li><a href="#">Power Tools</a></li>
+            <li><a href="#">Marketing Service</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-6 single-footer-widget">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="#">Jobs</a></li>
+            <li><a href="#">Brand Assets</a></li>
+            <li><a href="#">Investor Relations</a></li>
+            <li><a href="#">Terms of Service</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-6 single-footer-widget">
+          <h4>Features</h4>
+          <ul>
+            <li><a href="#">Jobs</a></li>
+            <li><a href="#">Brand Assets</a></li>
+            <li><a href="#">Investor Relations</a></li>
+            <li><a href="#">Terms of Service</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-6 single-footer-widget">
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="#">Guides</a></li>
+            <li><a href="#">Research</a></li>
+            <li><a href="#">Experts</a></li>
+            <li><a href="#">Agencies</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-4 col-md-6 single-footer-widget">
+          <h4>Newsletter</h4>
+          <p>You can trust us. we only send promo offers,</p>
+          <div class="form-wrap" id="mc_embed_signup">
+            <form target="_blank"
+              action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01"
+              method="get" class="form-inline">
+              <input class="form-control" name="EMAIL" placeholder="Your Email Address" onfocus="this.placeholder = ''"
+                onblur="this.placeholder = 'Your Email Address '" required="" type="email">
+              <button class="click-btn btn btn-default">Subscribe</button>
+              <div style="position: absolute; left: -5000px;">
+                <input name="b_36c4fd991d266f23781ded980_aefe40901a" tabindex="-1" value="" type="text">
+              </div>
+
+              <div class="info"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom row align-items-center">
+        <p class="footer-text m-0 col-lg-8 col-md-12">
+          <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+          Copyright &copy;
+          <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made
+          with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com"
+            target="_blank">eiser</a>
+          <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+        </p>
+        <div class="col-lg-4 col-md-12 footer-social">
+          <a href="#"><i class="fa fa-facebook"></i></a>
+          <a href="#"><i class="fa fa-twitter"></i></a>
+          <a href="#"><i class="fa fa-dribbble"></i></a>
+          <a href="#"><i class="fa fa-behance"></i></a>
+          <h1>{{message}}</h1>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!--================ End footer Area  =================-->
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+  {{!--
+  <script src="js/jquery-3.2.1.min.js"></script>
+  <script src="js/popper.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/stellar.js"></script>
+  <script src="vendors/lightbox/simpleLightbox.min.js"></script>
+  <script src="vendors/nice-select/js/jquery.nice-select.min.js"></script>
+  <script src="vendors/isotope/imagesloaded.pkgd.min.js"></script>
+  <script src="vendors/isotope/isotope-min.js"></script>
+  <script src="vendors/owl-carousel/owl.carousel.min.js"></script>
+  <script src="js/jquery.ajaxchimp.min.js"></script>
+  <script src="vendors/counter-up/jquery.waypoints.min.js"></script>
+  <script src="vendors/counter-up/jquery.counterup.js"></script>
+  <script src="js/mail-script.js"></script>
+  <script src="js/theme.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
+
+
+
+
+  <script src="CartTable/js/jquery-3.3.1.min.js"></script>
+  <script src="CartTable/js/bootstrap.min.js"></script>
+  <script src="CartTable/js/jquery.nice-select.min.js"></script>
+  <script src="CartTable/js/jquery.nicescroll.min.js"></script>
+  <script src="CartTable/js/jquery.magnific-popup.min.js"></script>
+  <script src="CartTable/js/jquery.countdown.min.js"></script>
+  <script src="CartTable/js/jquery.slicknav.js"></script>
+  <script src="CartTable/js/mixitup.min.js"></script>
+  <script src="CartTable/js/owl.carousel.min.js"></script>
+  <script src="CartTable/js/main.js"></script> --}}
+
+
+
+
+  <script>
+    function increaseValue(proId) {
+      var value = parseInt(document.getElementById(`number-${proId}`).value, 10);
+      value = isNaN(value) ? 0 : value;
+      value++;
+      document.getElementById(`number-${proId}`).value = value;
+    }
+
+    function decreaseValue(proId) {
+      var value = parseInt(document.getElementById(`number-${proId}`).value, 10);
+      value = isNaN(value) ? 0 : value;
+      value < 1 ? value = 1 : '';
+
+      value--;
+
+      document.getElementById(`number-${proId}`).value = value;
+    }
+  </script>
+
+
+
+
+
+
+
+
+
+
+  <script>
+
+
+
+
+    function changequantity(proId, count) {
+
+      var value = parseInt(document.getElementById(`number-${proId}`).innerText, 10);
+      if ((count + value) < 1) {
+        return
+      }
+
+      $.ajax({
+        url: '/changeProdctquantity',
+        data: {
+
+          products: proId,
+          count: count
+
+
+        },
+        method: 'post',
+        success: (response) => {
+
+                $('#RELOAd').load('/User-CartPage #RELOAd')
+
+
+        }
+
+      })
+    }
+  </script>
+
+  {{!-- location.href='/user-CartPage' --}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  

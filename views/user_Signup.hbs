@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+	<meta charset="utf-8">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!-- LINEARICONS -->fonts/linearicons/style.css
+	<link rel="stylesheet" href="signup/fonts/linearicons/style.css">
+
+	<!-- MATERIAL DESIGN ICONIC FONT -->
+	<link rel="stylesheet" href="signup/fonts/material-design-iconic-font/css/material-design-iconic-font.min.css">
+
+	<!-- DATE-PICKER -->
+	<link rel="stylesheet" href="signup/vendor/date-picker/css/datepicker.min.css">
+
+	<!-- STYLE CSS -->
+	<link rel="stylesheet" href="signup/css/style.css">
+</head>
+
+<body>
+
+	<div class="wrapper"><img src="img/logo.png" alt="" />
+
+		<div class="inner"><img src="" alt="" />
+			<form  name="Submission" onsubmit="return validateform()" oninput="refresh()"  action="/signup/home" method="post"  role="form">
+				<h3>Sign UP</h3>
+				<div class="form-row">
+					<div class="form-wrapper">
+						<label for="">Full Name *</label>
+						<input type="text" id="name" name="name" class="form-control" placeholder="Your username">
+					<p  class="text-danger"id="error"  ></p>
+					</div>
+					<div class="form-wrapper">
+						<label for="">UserName *</label>
+						<input type="text" id="username" name="username" class="form-control" placeholder="User Name">
+						<p  class="text-danger" style="color: rgb(220, 9, 9);" id="error" ></p>
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="form-wrapper">
+						<label for="">Password *</label>
+						<input type="password" id="password" name="password" class="form-control"
+							placeholder="password">
+					<p style="color: rgb(220, 9, 9);" id="error" class="text-danger" ></p>
+					</div>
+					<div class="form-wrapper">
+						<label for="">confirm password *</label>
+						<input type="password" id="confirmPassword" name="confirmPassword" class="form-control"
+							placeholder="confirm password">
+				<p style="color: rgb(220, 9, 9);" id="error" class="text-danger" ></p>
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="form-wrapper">
+						<label for="">Email *</label>
+						<input type="email" class="form-control"  id="email" name="email" placeholder="Your Email">
+					<p style="color: rgb(220, 9, 9);" id="error" class="text-danger" ></p>
+					</div>
+					{{!-- <button  type="button"  class="btn btn-success" style=" width: 7rem;">Send OTP</button> --}}
+
+				</div>
+			
+				
+				<div class="row">
+
+
+
+					<div class="col-sm">
+						<button href="" id="submit" name="submit" type="submit" >
+						Signup
+					</div>
+					OR
+					<div class="col-sm">
+
+						<a style=" background-color: #3e91f7;   width: 173px; height: 42px;  margin-top: 30px;"
+							data-text="Please LogIn" class="btn btn-primary" href="/userLogin"
+							role="button">LogIn</a>
+
+					
+					</div>
+					<p style="color: darkred;" >{{error}}</p>	
+
+
+					
+				</div>
+			</form>
+
+		
+		</div>
+	</div>
+
+
+
+	<script src="/js/validation.js"></script>
+
+
+	 <!-- DATE-PICKER -->
+	<script src="signup/vendor/date-picker/js/datepicker.js"></script>
+	<script src="signup/vendor/date-picker/js/datepicker.en.js"></script> 
+
+
+</body>
+
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>RegistrationForm_v9 by Colorlib</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!-- LINEARICONS -->fonts/linearicons/style.css
+	<link rel="stylesheet" href="signup/fonts/linearicons/style.css">
+
+	<!-- MATERIAL DESIGN ICONIC FONT -->
+	<link rel="stylesheet" href="signup/fonts/material-design-iconic-font/css/material-design-iconic-font.min.css">
+
+	<!-- DATE-PICKER -->
+	<link rel="stylesheet" href="signup/vendor/date-picker/css/datepicker.min.css">
+
+	<!-- STYLE CSS -->
+	<link rel="stylesheet" href="signup/css/style.css">
+</head>
+
+<body>
+
+
+
+
+
+
+
+	<div class="wrapper">
+		<img src="img/logo.png" alt="" />
+		<div class="inner"><img src="img/logo.png" alt="" />
+
+
+			<form action="/EmailOTPLogin" name="Submission" onsubmit="return Emailvalidateform()" method="post">
+				<h3>LogIn gggggggggggOTP</h3>
+
+				<div class="form-row">
+					<div class="form-wrapper">
+						<label for="">Email *</label>
+						<input type="email" class="form-control" id="email" name="email" placeholder="Your Email">
+						<p style="color: rgb(220, 9, 9);">{{errmessage}}</p>
+						<p style="color: rgb(220, 9, 9);" id="error"></p>
+					</div>
+				</div>
+
+				<div class="row">
+
+					<div class="col-sm">
+						<button class="btn btn-warning" href="" style="color: rgb(0, 0, 0);"  id="submit" name="submit" type="submit" >
+							<span>Send OTP</span>
+						</button>
+							
+					</div> 
+<p  style="color: brown;" ><br>Don't have an account? <a href="/userSignup" class="link-info">Register here</a></p>
+				</div>
+			</form>
+
+
+
+		</div>
+	</div>
+
+	<script src="/js/Emailvalidateform.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link href="AdminPanel/img/logo/logo.png" rel="icon">
+  <title>RuangAdmin - Dashboard</title>
+  <link href="AdminPanel/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="AdminPanel/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+  <link href="AdminPanel/css/ruang-admin.min.css" rel="stylesheet">
+</head>
+
+<body id="page-top">
+  <div id="wrapper">
+    <!-- Sidebar -->
+    <ul class="navbar-nav sidebar sidebar-light accordion" style="background-color: #000000 id=" accordionSidebar" ">
+      <a class=" sidebar-brand d-flex align-items-center justify-content-center" href=" ">
+      <div class="sidebar-brand-icon">
+        <svg width="107" height="27" viewBox="0 0 107 27" fill="none" xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink">
+          <path d="M0 0H107V27H0V0Z" fill="url(#pattern0)" />
+          <defs>
+            <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
+              <use xlink:href="#image0_110_1977" transform="matrix(0.00729927 0 0 0.0289267 0 -0.049608)" />
+            </pattern>
+            <image id="image0_110_1977" width="137" height="38"
+              xlink:href="data:image/png;base64,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" />
+          </defs>
+        </svg>
+
+      </div>
+
+      </a>
+      <li class="nav-item active">
+        <a class="nav-link" href="/adminDashboard">
+          <i class="fas fa-fw fa-tachometer-alt" href="/adminDashboard"></i>
+          <span>Dashboard</span></a>
+      </li>
+
+      {{!-- <div class="sidebar-heading">
+        Features
+      </div> --}}
+      <li class="nav-item" href="/product">
+        <a class="nav-link" href="/product" aria-expanded="true" aria-controls="collapseBootstrap">
+          <i class="far fa-fw fa-window-maximize"></i>
+          <span>Products</span>
+        </a>
+        <div id="collapseBootstrap" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
+
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="/adminBanners" data-target="#collapseForm" aria-controls="collapseForm">
+          <i class="fab fa-fw fa-wpforms"></i>
+          <span>Banner</span>
+        </a>
+        <div id="collapseForm" class="collapse" aria-labelledby="headingForm" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Forms</h6>
+            <a class="collapse-item" href="form_basics.html">Form Basics</a>
+            <a class="collapse-item" href="form_advanceds.html">Form Advanceds</a>
+          </div>
+        </div>
+      </li>
+      <li class="nav-item " href="/Category">
+        <a class="nav-link" href="/Category" aria-expanded="true" aria-controls="collapseTable">
+          <i class="fas fa-fw fa-table"></i>
+          <span>Category</span>
+        </a>
+
+        <!-- deleted -->
+
+        <div id="collapseTable" class="collapse" aria-labelledby="headingTable" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Tables</h6>
+            <a class="collapse-item" href="simple-tables.html">Simple Tables</a>
+            <a class="collapse-item" href="datatables.html">DataTables</a>
+          </div>
+        </div>
+      </li>
+
+
+
+
+
+
+
+      <!-- Deleted -->
+
+      <li class="nav-item" href="/customers">
+        <a class="nav-link" href="/customers">
+          <i class="fas fa-fw fa-chart-area"></i>
+          <span>customers</span>
+        </a>
+      </li>
+      <li class="nav-item" href="">
+        <a class="nav-link" href="/adminCheckout">
+          <i class="fab fa-fw fa-wpforms"></i>
+          <span>Checkout</span>
+        </a>
+      </li>
+
+      <li class="nav-item" href="/product">
+        <a class="nav-link" href="/adminCoupon" aria-expanded="true" aria-controls="collapseBootstrap">
+          <i class="far fa-fw fa-window-maximize"></i>
+          <span>Coupon</span>
+        </a>
+        <div id="collapseBootstrap" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
+
+      </li>
+      <li class="nav-item" href="/adminSalesReport">
+                <a class="nav-link" href="/adminSalesReport" aria-expanded="true" aria-controls="collapseBootstrap">
+                    <i class="far fa-fw fa-window-maximize"></i>
+                    <span>SalesRport</span>
+                </a>
+                <div id="collapseBootstrap" class="collapse" aria-labelledby="headingBootstrap"
+                    data-parent="#accordionSidebar">
+
+            </li>
+    </ul>
+    <!-- Sidebar -->
+    <div id="content-wrapper" class="d-flex flex-column">
+      <div id="content">
+        <!-- TopBar -->
+
+        <nav class="navbar navbar-expand navbar-light bg-navbar topbar mb-4 static-top">
+          <button id="sidebarToggleTop" class="btn btn-link rounded-circle mr-3">
+            <i class="fa fa-bars"></i>
+          </button>
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item dropdown no-arrow">
+
+              <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                aria-labelledby="searchDropdown">
+                <form class="navbar-search">
+                  <div class="input-group">
+
+                    <div class="input-group-append">
+                      <button class="btn btn-primary" type="button">
+                        {{!-- <i class="fas fa-search fa-sm"></i> --}}
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </li>
+            <li class="nav-item dropdown no-arrow mx-1">
+
+              <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                aria-labelledby="alertsDropdown">
+                {{!-- <h6 class="dropdown-header">
+                  Alerts Center
+                </h6> --}}
+                <a class="dropdown-item d-flex align-items-center" href="#">
+                  <div class="mr-3">
+                    <div class="icon-circle bg-primary">
+                      {{!-- <i class="fas fa-file-alt text-white"></i> --}}
+                    </div>
+                  </div>
+                  {{!-- <div>
+                    <div class="small text-gray-500">December 12, 2019</div>
+                    <span class="font-weight-bold">A new monthly report is ready to download!</span>
+                  </div> --}}
+                </a>
+                <a class="dropdown-item d-flex align-items-center" href="#">
+                  <div class="mr-3">
+                    <div class="icon-circle bg-success">
+                      {{!-- <i class="fas fa-donate text-white"></i> --}}
+                    </div>
+                  </div>
+                  <div>
+                    <div class="small text-gray-500">December 7, 2019</div>
+                    $290.29 has been deposited into your account!
+                  </div>
+                </a>
+                <a class="dropdown-item d-flex align-items-center" href="#">
+                  <div class="mr-3">
+                    <div class="icon-circle bg-warning">
+                      {{!-- <i class="fas fa-exclamation-triangle text-white"></i> --}}
+                    </div>
+                  </div>
+                  <div>
+                    <div class="small text-gray-500">December 2, 2019</div>
+                    Spending Alert: We've noticed unusually high spending for your account.
+                  </div>
+                </a>
+                <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+              </div>
+            </li>
+            <li class="nav-item dropdown no-arrow mx-1">
+              {{!-- <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> --}}
+                {{!-- <i class="fas fa-envelope fa-fw"></i> --}}
+                {{!-- <span class="badge badge-warning badge-counter">2</span>
+              </a> --}}
+              <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                aria-labelledby="messagesDropdown">
+                <h6 class="dropdown-header">
+                  Message Center
+                </h6>
+                <a class="dropdown-item d-flex align-items-center" href="#">
+                  <div class="dropdown-list-image mr-3">
+                    {{!-- <img class="rounded-circle" src="img/man.png" style="max-width: 60px" alt=""> --}}
+                    <div class="status-indicator bg-success"></div>
+                  </div>
+                  <div class="font-weight-bold">
+                    <div class="text-truncate">Hi there! I am wondering if you can help me with a
+                      problem I've been
+                      having.</div>
+                    <div class="small text-gray-500">Udin Cilok · 58m</div>
+                  </div>
+                </a>
+                <a class="dropdown-item d-flex align-items-center" href="#">
+                  <div class="dropdown-list-image mr-3">
+                    {{!-- <img class="rounded-circle" src="img/girl.png" style="max-width: 60px" alt=""> --}}
+                    <div class="status-indicator bg-default"></div>
+                  </div>
+                  <div>
+                    {{!-- <div class="text-truncate">Am I a good boy? The reason I ask is because
+                      someone told me that people
+                      say this to all dogs, even if they aren't good...</div>
+                    <div class="small text-gray-500">Jaenab · 2w</div> --}}
+                  </div>
+                </a>
+                <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
+              </div>
+            </li>
+
+            <li class="nav-item dropdown no-arrow">
+              <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                <img class="img-profile rounded-circle" src="AdminPanel/img/boy.png" style="max-width: 60px">
+                <span class="ml-2 d-none d-lg-inline text-white small">Maman Ketoprak</span>
+              </a>
+
+
+
+              <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                <a class="dropdown-item" href="#">
+                  <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                  Profile
+                </a>
+                <a class="dropdown-item" href="#">
+                  <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                  Settings
+                </a>
+                <a class="dropdown-item" href="#">
+                  <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                  Activity Log
+                </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="javascript:void(0);" data-toggle="modal" data-target="#logoutModal">
+                  <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                  Logout
+                </a>
+              </div>
+            </li>
+          </ul>
+        </nav>
+
+        <!--user-->
+
+        <!-- Container Fluid-->
+        <div class="container-fluid" id="container-wrapper">
+          <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800   " style="text-align: center"> Customers</h1>
+
+          </div>
+
+          <div class="row mb-3">
+
+            <!-- Topbar -->
+            <table id="dtBasicExample" class="table table-striped table-bordered" cellspacing="0" width="100%">
+              <thead>
+                <tr>
+                  <th class="th-sm">Number
+                  </th>
+                  <th class="th-sm">UserName
+                  </th>
+                  <th class="th-sm">FullName
+                  </th>
+                  <th class="th-sm">Email
+                  </th>
+            
+                  <th class="th-sm">Status
+                  </th>
+                  <th class="th-sm">Action
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {{#each everyuserrr}}
+                <tr>
+                  <td> {{@index}}</td>
+                  <td>{{username}}</td>
+                  <td>{{name}}</td>
+                  <td>{{email}}</td>
+                
+                  {{!-- <td>{{status}}</td> --}}
+                  <td> {{#if status}}
+                    Active
+                  <td> <a href="/blockUser/{{_id}}" class="btn btn-sm btn-primary" style="width: 4.36rem;">Block</a>
+                  </td>
+                  {{else}}
+                  InActive
+                  <td><a href="/unBlockUser/{{_id}}" class="btn btn-sm btn-primary">UnBlock</a></td>
+
+                  {{/if}}
+                  </td>
+                </tr>
+                {{/each}}
+              </tbody>
+            </table>
+          </div>
+
+
+<!-- this code ajax jquery   !--><!-- this code ajax jquery   !--><!-- this code ajax jquery   !-->
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
+<!-- this code ajax jquery   !--><!-- this code ajax jquery   !--><!-- this code ajax jquery   !-->
+
+
+
+
+          <script>
+            $(document).ready(function () {
+              $('#dtBasicExample tbody tr').each(function (index) {
+                $(this).find('td:first').text(index + 1);
+              });
+            });
+
+          </script>
+
+          <script src="AdminPanel/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+          <script src="AdminPanel/vendor/jquery-easing/jquery.easing.min.js"></script>
+          <script src="AdminPanel/js/ruang-admin.min.js"></script>
+          <script src="AdminPanel/vendor/chart.js/Chart.min.js"></script>
+          <script src="AdminPanel/js/demo/chart-area-demo.js"></script>
+
+
+
+</body>
+
+</html>
+
+
+<script>
+
+  $(document).ready(function () {
+    $('#dtBasicExample').DataTable();
+    $('.dataTables_length').addClass('bs-select');
+  });
+</script>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>RegistrationForm_v9 by Colorlib</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!-- LINEARICONS -->fonts/linearicons/style.css
+	<link rel="stylesheet" href="signup/fonts/linearicons/style.css">
+
+	<!-- MATERIAL DESIGN ICONIC FONT -->
+	<link rel="stylesheet" href="signup/fonts/material-design-iconic-font/css/material-design-iconic-font.min.css">
+
+	<!-- DATE-PICKER -->
+	<link rel="stylesheet" href="signup/vendor/date-picker/css/datepicker.min.css">
+
+	<!-- STYLE CSS -->
+	<link rel="stylesheet" href="signup/css/style.css">
+</head>
+
+<body>
+
+
+
+
+
+	<div class="wrapper">
+		<img src="img/logo.png" alt="" />
+		<div class="inner">
+
+
+
+			<form action="/LoginOTPPost" name="Submission" onsubmit="return OTPvalidateform()" method="post">
+				<h3>EMAIL LOGIN</h3>
+
+				<div class="form-row">
+					<div class="form-wrapper">
+						<label for="">OTP *</label>
+						<input type="tel" class="form-control" name="otp" id="otp" placeholder="Your OTP">
+						<p style="color: rgb(220, 9, 9);">{{OTPerrmessage}}</p>
+						<p style="color: rgb(220, 9, 9);" id="error"></p>
+						<div class="ee" style="    margin-top: 1rem;    display: flex; justify-content: end;   ">
+						</div>
+					</div>
+
+				</div>
+
+
+
+				<div class="col-sm">							
+
+					<button type="submit" id="submit" name="submit">
+						Login
+					</button>
+
+				</div>
+
+
+			</form>
+{{!-- <a href="/ee"  role="button" type="submit" style=" color: #a00098;  font-size: 1rem; ">Resend OTP</a > --}}
+
+
+		</div>
+	</div>
+
+	<script src="/FormsjsValidations/OTPVerification.js"></script>
+
+	<script src="signup/js/jquery-3.3.1.min.js"></script>
+
+	<!-- DATE-PICKER -->
+	<script src="signup/vendor/date-picker/js/datepicker.js"></script>
+	<script src="signup/vendor/date-picker/js/datepicker.en.js"></script>
+
+	<script src="signup/js/main.js"></script>
+</body>
+
+</html>
