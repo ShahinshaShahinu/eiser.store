@@ -39,6 +39,10 @@ const Productchema = new mongoose.Schema({
     status: {
         type: Boolean,
         require: true
+    },
+    OutOfStocks:{
+        type: String,
+        require: true,
     }
 
 

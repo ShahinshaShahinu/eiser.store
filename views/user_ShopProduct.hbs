@@ -128,6 +128,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
+                    
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse offset w-100" id="navbarSupportedContent">
                         <div class="row w-100 mr-0">
@@ -253,50 +254,79 @@
 
     </header>
     <!--================Header Menu Area =================-->
+    
+   
+    
 
- <i id="show-form-btn" aria-hidden="true" class="ti-search btn "></i>
-
-    <div class="container">
-        <div class="rrr" style="    display: flex;
-    justify-content: center;">
-
-            <form id="my-form" style="display:none; ">
-                {{!-- width: 109rem --}}
-
-                <div class="col-md-12 input-group rounded dds "
-                    style="    display: flex; justify-content: center;     ">
-                    <input onkeyup="sendData(this)" type="search" class=" form-control rounded " id="search-box"
+    <form id="my-form" >
+     <section class="header-main border-bottom bg-white">
+            <div class="container-fluid">
+                <div class="row p-2 pt-3 pb-3 d-flex align-items-center ">
+                    <div class="col-md-2">
+                        {{!-- <img class="d-none d-md-flex" src="https://i.imgur.com/R8QhGhk.png" width="100"> --}}
+                    </div>
+                    <div class="col-md-4">
+                        <div class="d-flex form-inputs">
+                           <input onkeyup="sendData(this)" type="search" class=" form-control rounded " id="search-box"
                         placeholder="Search" aria-label="search" aria-describedby="search-addon"
-                        style="  width: 49rem;" />
+                         />
+                            <i class="bx bx-search"></i>
+                        </div>
+          
 
-                    <span class="input-group-text border-0" id="search-addon">
-
-                        <a href="#" class="icons">
-                            <i class="ti-search" aria-hidden="true"></i>
-                        </a>
-                    </span>
+       <div class="my-div" style="position: absolute ;    width: inherit;
+    left: 0rem; background-color: antiquewhite; z-index: 1;  ">   
+        <sectio  id="searchresults"></section>   
+         </div>
+        </div>                
+                
                 </div>
-
-                <div class="col-md-8 container ww"
-                    style="     width: 53rem; border-radius: 1rem;   background-color: #f7f7f7; position: absolute; z-index: 1; ">
-
-
-                    <section id="searchresults"></section>
+            </div>
+        </section>
+</form>
 
 
-                </div>
-            </form>
-        </div>
-    </div>
+
+
+
+<style>
+    .my-div {
+  width: calc(100% + 525px); /* Add 525 pixels to the current width of the div */
+}
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     <style>
         @media screen and (max-width: 768px) {
 
             /* Styles applied when the viewport width is 768px or less */
             .ww {
-                width: 14rem;
+                 
                 display: flex;
-                justify-content: start;
+                    flex-wrap: wrap;
+                justify-content: start; 
+                   width: 14rem;
+
             }
 
             .dds {
@@ -308,9 +338,9 @@
     </style>
 
     <!-- Load jQuery and Bootstrap JS -->
-    {{!--
+  
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script> --}}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         $(document).ready(function () {
             $("#show-form-btn").click(function () {
@@ -558,7 +588,7 @@
 
 
         <nav aria-label="Page navigation example">
-            <ul class="pagination">
+            <ul class="pagination"> 
                 <li class="page-item">
                     <a class="page-link" href="/" aria-label="Previous">
                         <span aria-hidden="true">&laquo;</span>
@@ -681,7 +711,7 @@
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    {{!-- <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/jquery-3.2.1.min.js"></script>
     <script src="js/popper.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/stellar.js"></script>
@@ -694,21 +724,7 @@
     <script src="vendors/counter-up/jquery.waypoints.min.js"></script>
     <script src="vendors/counter-up/jquery.counterup.js"></script>
     <script src="js/mail-script.js"></script>
-    <script src="js/theme.js"></script> --}}
-
-{{!-- 
-
-    <script src="/singleeee/js/jquery-3.3.1.min.js"></script>
-    <script src="/singleeee/js/bootstrap.min.js"></script>
-    <script src="/singleeee/js/jquery.magnific-popup.min.js"></script>
-    <script src="/singleeee/js/jquery-ui.min.js"></script>
-    <script src="/singleeee/js/mixitup.min.js"></script>
-    <script src="/singleeee/js/jquery.countdown.min.js"></script>
-    <script src="/singleeee/js/jquery.slicknav.js"></script>
-    <script src="/singleeee/js/owl.carousel.min.js"></script>
-    <script src="/singleeee/js/jquery.nicescroll.min.js"></script>
-    <script src="/singleeee/js/main.js"></script> --}}
-
+    <script src="js/theme.js"></script>
 
 
 
@@ -743,24 +759,24 @@
                     if (index > 2) return;
                     if (index > 0) searchresults.innerHTML += '<br><br>';
 
-                    searchresults.innerHTML += `<div style='height:3.5rem; ' onclick="window.location.href='/user-ShowProduct/${item._id}'"class="d-flex"><img src='/productsimg/${item.ProductImage[0]}' width='50rem'><p>${item.ProductName}</p> </div><div><p>₹${item.ProductPrice}</p></div>`
+                    searchresults.innerHTML += `<div style='height:3.5rem;    left: 1rem; position: relative; ' onclick="window.location.href='/user-ShowProduct/${item._id}'"class="d-flex"><img src='/productsimg/${item.ProductImage[0]}' width='50rem'><p>${item.ProductName}</p> </div><div><p>₹${item.ProductPrice}</p></div>`
 
                 })
 
 
                 return;
             })
+            
             searchresults.innerHTML = '';
         }
 
     </script>
 
 
-{{!-- 
+
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.1/dist/sweetalert2.all.min.js"></script>
-    
     <script src="https://code.jquery.com/jquery-3.6.3.js"
-        integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script> --}}
+        integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
 
     <style>
         .colored-toast.swal2-icon-success {
@@ -792,7 +808,7 @@
                             icon: 'success',
                             title: 'Added to wishlist'
                         }).then(() => {
-                            $('#ddd').load('/.#ddd');
+                            $('#ddd').load('/Shop.#ddd');
                         });
                     }
                 },

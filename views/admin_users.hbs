@@ -112,14 +112,13 @@
 
       </li>
       <li class="nav-item" href="/adminSalesReport">
-                <a class="nav-link" href="/adminSalesReport" aria-expanded="true" aria-controls="collapseBootstrap">
-                    <i class="far fa-fw fa-window-maximize"></i>
-                    <span>SalesRport</span>
-                </a>
-                <div id="collapseBootstrap" class="collapse" aria-labelledby="headingBootstrap"
-                    data-parent="#accordionSidebar">
+        <a class="nav-link" href="/adminSalesReport" aria-expanded="true" aria-controls="collapseBootstrap">
+          <i class="far fa-fw fa-window-maximize"></i>
+          <span>SalesRport</span>
+        </a>
+        <div id="collapseBootstrap" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
 
-            </li>
+      </li>
     </ul>
     <!-- Sidebar -->
     <div id="content-wrapper" class="d-flex flex-column">
@@ -263,6 +262,8 @@
 
         <!--user-->
 
+
+
         <!-- Container Fluid-->
         <div class="container-fluid" id="container-wrapper">
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -270,79 +271,90 @@
 
           </div>
 
-          <div class="row mb-3">
 
-            <!-- Topbar -->
-            <table id="dtBasicExample" class="table table-striped table-bordered" cellspacing="0" width="100%">
-              <thead>
-                <tr>
-                  <th class="th-sm">Number
-                  </th>
-                  <th class="th-sm">UserName
-                  </th>
-                  <th class="th-sm">FullName
-                  </th>
-                  <th class="th-sm">Email
-                  </th>
-            
-                  <th class="th-sm">Status
-                  </th>
-                  <th class="th-sm">Action
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {{#each everyuserrr}}
-                <tr>
-                  <td> {{@index}}</td>
-                  <td>{{username}}</td>
-                  <td>{{name}}</td>
-                  <td>{{email}}</td>
-                
-                  {{!-- <td>{{status}}</td> --}}
-                  <td> {{#if status}}
-                    Active
-                  <td> <a href="/blockUser/{{_id}}" class="btn btn-sm btn-primary" style="width: 4.36rem;">Block</a>
-                  </td>
-                  {{else}}
-                  InActive
-                  <td><a href="/unBlockUser/{{_id}}" class="btn btn-sm btn-primary">UnBlock</a></td>
 
-                  {{/if}}
-                  </td>
-                </tr>
-                {{/each}}
-              </tbody>
-            </table>
+          <!-- Topbar -->
+          <div class="card-body">
+            <div class="table-responsive">
+              <table id="dtBasicExample" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                <thead class="thead-light">
+                  <tr>
+                    <th class="th-sm">Number
+                    </th>
+                    <th class="th-sm">UserName
+                    </th>
+                    <th class="th-sm">FullName
+                    </th>
+                    <th class="th-sm">Email
+                    </th>
+
+                    <th class="th-sm">Status
+                    </th>
+                    <th class="th-sm">Action
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {{#each everyuserrr}}
+                  <tr>
+                    <td> {{@index}}</td>
+                    <td>{{username}}</td>
+                    <td>{{name}}</td>
+                    <td>{{email}}</td>
+
+                    {{!-- <td>{{status}}</td> --}}
+                    <td> {{#if status}}
+                      Active
+                    <td> <a href="/blockUser/{{_id}}" class="btn btn-sm btn-primary" style="width: 4.36rem;">Block</a>
+                    </td>
+                    {{else}}
+                    InActive
+                    <td><a href="/unBlockUser/{{_id}}" class="btn btn-sm btn-primary">UnBlock</a></td>
+
+                    {{/if}}
+                    </td>
+                  </tr>
+                  {{/each}}
+                </tbody>
+              </table>
+            </div>
+
           </div>
 
+        </div>
+      </div>
+    </div>
 
-<!-- this code ajax jquery   !--><!-- this code ajax jquery   !--><!-- this code ajax jquery   !-->
-
-
-
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-
-<!-- this code ajax jquery   !--><!-- this code ajax jquery   !--><!-- this code ajax jquery   !-->
+    <!-- this code ajax jquery   !--><!-- this code ajax jquery   !--><!-- this code ajax jquery   !-->
 
 
 
 
-          <script>
-            $(document).ready(function () {
-              $('#dtBasicExample tbody tr').each(function (index) {
-                $(this).find('td:first').text(index + 1);
-              });
-            });
 
-          </script>
+    <!-- this code ajax jquery   !--><!-- this code ajax jquery   !--><!-- this code ajax jquery   !-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-          <script src="AdminPanel/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-          <script src="AdminPanel/vendor/jquery-easing/jquery.easing.min.js"></script>
-          <script src="AdminPanel/js/ruang-admin.min.js"></script>
-          <script src="AdminPanel/vendor/chart.js/Chart.min.js"></script>
-          <script src="AdminPanel/js/demo/chart-area-demo.js"></script>
+
+
+<script src="https://code.jquery.com/jquery-3.6.3.js"
+            integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script> 
+
+
+
+    <script>
+      $(document).ready(function () {
+        $('#dtBasicExample tbody tr').each(function (index) {
+          $(this).find('td:first').text(index + 1);
+        });
+      });
+
+    </script>
+
+    <script src="AdminPanel/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="AdminPanel/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="AdminPanel/js/ruang-admin.min.js"></script>
+    <script src="AdminPanel/vendor/chart.js/Chart.min.js"></script>
+    <script src="AdminPanel/js/demo/chart-area-demo.js"></script>
 
 
 

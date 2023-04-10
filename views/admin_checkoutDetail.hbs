@@ -2,24 +2,23 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
-  <link href="AdminPanel/img/logo/logo.png" rel="icon">
-  <title>RuangAdmin - Dashboard</title>
-  <link href="AdminPanel/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-  <link href="AdminPanel/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-  <link href="AdminPanel/css/ruang-admin.min.css" rel="stylesheet">
-
- <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="AdminPanel/img/logo/logo.png" rel="icon">
+    <title>RuangAdmin - Dashboard</title>
+    <link href="AdminPanel/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="AdminPanel/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="AdminPanel/css/ruang-admin.min.css" rel="stylesheet">
 </head>
 
 <body id="page-top">
     <div id="wrapper">
+        <!-- Sidebar -->
         <ul class="navbar-nav sidebar sidebar-light accordion" style="background-color: #000000 id=" accordionSidebar" ">
-      <a class=" sidebar-brand d-flex align-items-center justify-content-center" href="">
+      <a class=" sidebar-brand d-flex align-items-center justify-content-center" href=" ">
             <div class="sidebar-brand-icon">
                 <svg width="107" height="27" viewBox="0 0 107 27" fill="none" xmlns="http://www.w3.org/2000/svg"
                     xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -43,7 +42,9 @@
                     <span>Dashboard</span></a>
             </li>
 
-
+            {{!-- <div class="sidebar-heading">
+                Features
+            </div> --}}
             <li class="nav-item" href="/product">
                 <a class="nav-link" href="/product" aria-expanded="true" aria-controls="collapseBootstrap">
                     <i class="far fa-fw fa-window-maximize"></i>
@@ -86,6 +87,10 @@
 
 
 
+
+
+
+
             <!-- Deleted -->
 
             <li class="nav-item" href="/customers">
@@ -100,6 +105,7 @@
                     <span>Checkout</span>
                 </a>
             </li>
+
             <li class="nav-item" href="/product">
                 <a class="nav-link" href="/adminCoupon" aria-expanded="true" aria-controls="collapseBootstrap">
                     <i class="far fa-fw fa-window-maximize"></i>
@@ -123,6 +129,7 @@
         <div id="content-wrapper" class="d-flex flex-column">
             <div id="content">
                 <!-- TopBar -->
+
                 <nav class="navbar navbar-expand navbar-light bg-navbar topbar mb-4 static-top">
                     <button id="sidebarToggleTop" class="btn btn-link rounded-circle mr-3">
                         <i class="fa fa-bars"></i>
@@ -148,14 +155,19 @@
 
                             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="alertsDropdown">
-
+                                {{!-- <h6 class="dropdown-header">
+                                    Alerts Center
+                                </h6> --}}
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="mr-3">
                                         <div class="icon-circle bg-primary">
                                             {{!-- <i class="fas fa-file-alt text-white"></i> --}}
                                         </div>
                                     </div>
-
+                                    {{!-- <div>
+                                        <div class="small text-gray-500">December 12, 2019</div>
+                                        <span class="font-weight-bold">A new monthly report is ready to download!</span>
+                                    </div> --}}
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="mr-3">
@@ -183,7 +195,11 @@
                             </div>
                         </li>
                         <li class="nav-item dropdown no-arrow mx-1">
-
+                            {{!-- <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> --}}
+                                {{!-- <i class="fas fa-envelope fa-fw"></i> --}}
+                                {{!-- <span class="badge badge-warning badge-counter">2</span>
+                            </a> --}}
                             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="messagesDropdown">
                                 <h6 class="dropdown-header">
@@ -209,18 +225,16 @@
                                         <div class="status-indicator bg-default"></div>
                                     </div>
                                     <div>
-
+                                        {{!-- <div class="text-truncate">Am I a good boy? The reason I ask is because
+                                            someone told me that people
+                                            say this to all dogs, even if they aren't good...</div>
+                                        <div class="small text-gray-500">Jaenab · 2w</div> --}}
                                     </div>
                                 </a>
                                 <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
                             </div>
                         </li>
 
-
-
-
-                        <!--user-->
-                        <!--user-->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -233,7 +247,7 @@
 
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                {{!-- <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="#">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
                                 </a>
@@ -244,139 +258,121 @@
                                 <a class="dropdown-item" href="#">
                                     <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Activity Log
-                                </a> --}}
+                                </a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="" data-toggle="modal" data-target="#logoutModal">
-                                    <a href="/admonLogoutButton"> Logout</a>
+                                <a class="dropdown-item" href="javascript:void(0);" data-toggle="modal"
+                                    data-target="#logoutModal">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Logout
                                 </a>
                             </div>
                         </li>
                     </ul>
                 </nav>
-
+                <!--user-->
                 <!-- Container Fluid-->
 
+
+
                 <div class="container-fluid" id="container-wrapper">
-
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-
-                        <h1 class="h3 mb-0 text-gray-800   " style="text-align: center"> OrderDetails
-                        </h1>
-                        {{!-- <a class="page-link" href="/adminCheckout" aria-label="Previous" style="  left: 26rem;">
-                            <span aria-hidden="true">&laquo;</span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="page-link" href="#" aria-label="Next" style="    left:-4rem;">
-                            <span aria-hidden="true">&raquo;</span>
-                            <span class="sr-only">Next</span>
-                        </a> --}}
+                        <h1 class="h3 mb-0 text-gray-800   " style="text-align: center"> OrderDetails</h1>
 
                     </div>
-
-                    <div class="row mb-3">
-                        <!-- Invoice Example -->
+                    <!-- Invoice Example -->
 
 
 
 
-                        <div id="ddd" class="card-body">
-                            <div class="table-responsive">
-                                <table id="dtBasicExample"
-                                    class="table align-items-center table table-striped table-flush  ">
-                                    <thead class="thead-light">
-                                        <tr>
-                                            <th>Number</th>
-                                            <th>Products</th>
-                                            <th>Product Id</th>
-                                            <th>Order Address</th>
-                                            <th>ProductPrice</th>
-                                            <th>Payment Id</th>
+                    <div id="ddd" class="card-body">
+                        <div class="table-responsive">
 
-                                            <th>
+                            <table id="dtBasicExample" class="table table-striped table-bordered" cellspacing="0"
+                                width="100%">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>Number</th>
+                                    <th>Products</th>
+                                    <th>Product Id</th>
+                                    <th>Order Address</th>
+                                    <th>ProductPrice</th>
+                                    <th>Payment Id</th>
 
+                                    <th>
 
+                                        <div class="dropdown">
+                                            {{#if orderprodectAddressId}}
+                                            <button role="" class="btn btn-secondary dropdown-toggle" type="button"
+                                                id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true"
+                                                aria-expanded="false">
+                                                Order
+                                            </button>
 
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
 
-                                                {{!-- &option2=Shipping&option3=Pending&option4=Processing --}}
+                                                <a href="/Delivered/{{orderprodectAddressId}}" name="Delivered"
+                                                    class="dropdown-item" type="submit">
+                                                    Delivered</a>
 
-
-                                                <div class="dropdown">
-                                                    {{#if orderprodectAddressId}}
-                                                    <button role="" class="btn btn-secondary dropdown-toggle"
-                                                        type="button" id="dropdownMenu2" data-toggle="dropdown"
-                                                        aria-haspopup="true" aria-expanded="false">
-                                                        Order
-                                                    </button>
-
-                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-
-                                                        <a href="/Delivered/{{orderprodectAddressId}}" name="Delivered"
-                                                            class="dropdown-item" type="submit">
-                                                            Delivered</a>
-
-                                                        <a href="/Shipping/{{orderprodectAddressId}}"
-                                                            class="dropdown-item "> Shipping</a>
+                                                <a href="/Shipping/{{orderprodectAddressId}}" class="dropdown-item ">
+                                                    Shipping</a>
 
 
-                                                        <a name="Pending" href="/Pending/{{orderprodectAddressId}}"
-                                                            class="dropdown-item" type="submit">
-                                                            Pending</a>
-                                                        <a name="Pending" href="/Cancel/{{orderprodectAddressId}}"
-                                                            class="dropdown-item" type="submit">
-                                                            Cancel</a>
+                                                <a name="Pending" href="/Pending/{{orderprodectAddressId}}"
+                                                    class="dropdown-item" type="submit">
+                                                    Pending</a>
+                                                <a name="Pending" href="/Cancel/{{orderprodectAddressId}}"
+                                                    class="dropdown-item" type="submit">
+                                                    Cancel</a>
 
-                                                    </div>
-                                                    {{/if}}
+                                            </div>
+                                            {{/if}}
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
 
+                                {{#each userOrderProducts}}
+                                <tr>
+                                    <td><a> {{@index}}</a></td>
+                                    <td>
+                                        <img src="/productsimg/{{Orderproducts.ProductImage.[0]}}"
+                                            class="rounded-circle " style="  width: 100px; height: 100px;"
+                                            alt=""><br>{{Orderproducts.ProductName}}
+                                    </td>
+                                    <td>{{Orderproducts.Productid}}</td>
+                                    <td>{{deliveryAddress.city}} ,{{deliveryAddress.district}} ,
+                                        {{deliveryAddress.state}}
+                                        ,<br>+91{{deliveryAddress.phone}},<br>{{deliveryAddress.country}},
+                                        {{deliveryAddress.pincode}} </td>
+                                    <td>₹{{Orderproducts.ProductPrice}}</td>
+                                    <td>{{deliveryAddress.paymentid}}</td>
 
-
-
-
-
-
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-
-                                        {{#each userOrderProducts}}
-                                        <tr>
-                                            <td><a> {{@index}}</a></td>
-                                            <td>
-                                                <img src="/productsimg/{{Orderproducts.ProductImage.[0]}}"
-                                                    class="rounded-circle " style="  width: 100px; height: 100px;"
-                                                    alt=""><br>{{Orderproducts.ProductName}}
-                                            </td>
-                                            <td>{{Orderproducts.Productid}}</td>
-                                            <td>{{deliveryAddress.city}} ,{{deliveryAddress.district}} ,
-                                                {{deliveryAddress.state}}
-                                                ,<br>+91{{deliveryAddress.phone}},<br>{{deliveryAddress.country}},
-                                                {{deliveryAddress.pincode}} </td>
-                                            <td>₹{{Orderproducts.ProductPrice}}</td>
-                                            <td>{{deliveryAddress.paymentid}}</td>
-
-                                            <td>  
-                                      
-                                                
-                                                {{Delivered}}   
-                                                {{status}}
-
-                                            </td>
+                                    <td>
 
 
-                                            
-                                        </tr>
+                                        {{Delivered}}
+                                        {{status}}
 
-                                        {{/each}}
-                                    </tbody>
-                                </table>
-                            </div>
+                                    </td>
+
+
+
+                                </tr>
+
+                                {{/each}}
+                            </tbody>
+                            </table>
                         </div>
-                    </div>
-                </div>
 
-  <script src="https://code.jquery.com/jquery-3.6.3.js"
-        integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>   
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.6.3.js"
+            integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
 
 </body>
 
@@ -401,153 +397,34 @@
 </script>
 
 
-                <script>
-                    $(document).ready(function () {
-                        $('#dtBasicExample tbody tr').each(function (index) {
-                            $(this).find('td:first').text(index + 1);
-                        });
-                    });
-
-                </script>
-                <!-- Topbar -->
-
-                {{!-- onclick="return confirm('Are you want to disable')">Disable</a> --}}
-
-                <!-- Invoice Example -->
-                <div class="card-footer"></div>
-            </div>
-
-        </div>
-    </div>
-
-
-    <script>
-
-        $(document).ready(function () {
-            $('#dtBasicExample').DataTable();
-            $('.dataTables_length').addClass('bs-select');
-        });
-    </script>
-
-
-
-
-
-    
-
-<style>
-    user = req.session.user
-  cartitems = req.body
-
-  cartitems.count = parseInt(cartitems.count)
-  let cartData = await usercartdata.findOneAndUpdate({ $and: [{ user: user }, { 'products.items': cartitems.product }] },
-    { $inc: { 'products.$.quantity': cartitems.count } })
-  let products = cartData.products
-  let productObjs = []
-  for (i = 0; i < products.length; i++) {
-    let product = products[i]
-    let dbProduct = await adminAddProduct.findOne({ productid: product.items })
-    let quantity
-    if (product.items == cartitems.product) {
-      quantity = product.quantity + cartitems.count
-      quant = quantity
-    }
-
-    else {
-      quantity = product.quantity
-    }
-    console.log("llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll");
-
-    stock = dbProduct.stock
-    console.log(stock);
-    req.session.productid=product.items
-    req.session.quantity=quantity
-    
-    let productObj = {
-      productId: product.items,
-      quantity: quantity,
-      price: dbProduct.productprice,
-      finalPrice: quantity * dbProduct.productprice
-
-
-    }
-
-    productObjs.push(productObj)
-  }
-  if (quant <= stock) {
-    carterr = null
-  } else {
-    carterr = "OUT OF STOCK"
-  }
-
-  res.json(
-    {
-      status: true,
-      products: productObjs,
-      stock: carterr
-    }
-  )
-  // console.log(cartAllProducts); 
-  // proquant=cartAllProducts[0].products.stock
-  // console.log(proquant);
-  // let quants=cartAllProducts[0].quantity
-  //  console.log(quants);
-
-  console.log("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
-  // res.redirect('/user-shopcart')
-}
-</style>
-
 
 
 <script>
-    <script>
-        function updatequantity(productId, count) {
+    $(document).ready(function () {
+        $('#dtBasicExample tbody tr').each(function (index) {
+            $(this).find('td:first').text(index + 1);
+        });
+    });
 
-            $.ajax({
-                url: '/update-quantity',
-                data: {
-                    product: productId,
-                    count: count
+</script>
 
-                },
-                method: 'post',
-                success: (response) => {
-                    console.log(response)
-                    if (response.stock) {
-                        document.getElementById('cartErr').innerHTML = response.stock
-                        document.getElementById('cart-total-area').innerHTML = `<a  class="primary-btn" id="cartError">${response.stock}</a>`
-                    } else {
-                        document.getElementById('cartErr').innerHTML = ''
-                        document.getElementById('cart-total-area').innerHTML = '<h6>Cart total</h6>' +
-                            '<ul>' +
 
-                            "<li>Subtotal <span id='subtotal'>Rupees:00</span></li>" +
-                            " <li>Shipping Charge <span>Rupees:84.00</span></li>" +
-                            "<li >Total <span id='grandtotal'>Rupees:00</span></li>" +
-                            "</ul>   " +
-                            '<a href="/check-out" class="primary-btn">Proceed to checkout</a>'
-                    }
-                    products = response.products
-                    let grandtotal = 0;
-                    for (let i = 0; i < products.length; i++) {
-                        let product = products[i]
-                        let finalPrice = product.finalPrice
+<script>
 
-                        document.getElementById(`total-price-${productId}`).innerHTML = finalPrice;
-                        grandtotal += finalPrice
-                    }
-                    document.getElementById('subtotal').innerHTML = 'Rupees:' + grandtotal
-                    document.getElementById('grandtotal').innerHTML = grandtotal + 84
-                }
-            })
-        }
-    </script>
+    $(document).ready(function () {
+        $('#dtBasicExample').DataTable();
+        $('.dataTables_length').addClass('bs-select');
+    });
 </script>
 
 
 
 
+<script src="AdminPanel/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="AdminPanel/vendor/jquery-easing/jquery.easing.min.js"></script>
+<script src="AdminPanel/js/ruang-admin.min.js"></script>
+<script src="AdminPanel/vendor/chart.js/Chart.min.js"></script>
+<script src="AdminPanel/js/demo/chart-area-demo.js"></script>
 
 
 
@@ -560,30 +437,6 @@
 
 
 
-
-
-
-
-
-    {{!-- swal("Here's the title!", "...and here's the text!"); --}}
-
-    <!-- Scroll to top -->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
-
-
-
-
-
-
-    
-    <script src="AdminPanel/vendor/jquery/jquery.min.js"></script>
-    <script src="AdminPanel/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="AdminPanel/vendor/jquery-easing/jquery.easing.min.js"></script>
-    <script src="AdminPanel/js/ruang-admin.min.js"></script>
-    <script src="AdminPanel/vendor/chart.js/Chart.min.js"></script>
-    <script src="AdminPanel/js/demo/chart-area-demo.js"></script>
 </body>
 
 </html>

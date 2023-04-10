@@ -2,7 +2,9 @@
 <html lang="en">
 
 <head>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
 
   <!-- Required meta tags -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
@@ -153,7 +155,7 @@
                       <i class="ti-user" aria-hidden="true"></i>
                     </a>
                   </li>
-                 <li class="nav-item">
+                  <li class="nav-item">
                     <a href="/userwishlist" class="icons">
                       <i class="ti-heart " aria-hidden="true"></i>
                     </a>
@@ -227,11 +229,11 @@
   <!-- Shopping Cart Section Begin -->
   <!-- Shopping Cart Section Begin -->
   <section id="RELOAd" class="shopping-cart spad">
-    <div  class="container">
+    <div class="container">
       <div class="row">
         <div class="col-lg-8">
           <div class="shopping__cart__table">
-            <table  class="table">
+            <table class="table">
               <thead>
                 <tr>
                   <th scope="col">Product</th>
@@ -265,35 +267,54 @@
 
 
 
-        
 
 
-              <div class="quantity" style="margin-left: -1rem">
-                <div class="value-button" id='decrease'
-                  onclick="decreaseValue('{{Products.Productid}}'),changequantity('{{Products.Productid}}',-1)" value="Decrease Value">-</div>
-                {{!-- <input type="number" id="number" value="{{quantity}}" /> --}}
-                <span type="number" id="number-{{Products.Productid}}" value="{{quantity}}">{{quantity}}</span>
-                <div class="value-button" id="increase"
-                  onclick="increaseValue('{{Products.Productid}}'),changequantity('{{Products.Productid}}',1)" value="Increase Value">+</div>
-              </div>
+
+            <div class="quantity" style="margin-left: -1rem">
+              <div class="value-button" id='decrease'
+                onclick="decreaseValue('{{Products.Productid}}'),changequantity('{{Products.Productid}}',-1)"
+                value="Decrease Value">-</div>
+              {{!-- <input type="number" id="number" value="{{quantity}}" /> --}}
+              <span type="number" id="number-{{Products.Productid}}" value="{{quantity}}">{{quantity}}</span>
+              <div class="value-button" id="increase"
+                onclick="increaseValue('{{Products.Productid}}'),changequantity('{{Products.Productid}}',1)"
+                value="Increase Value">+</div>
+            </div>
+            <dir></dir>
+
+            <div class="row">
+              <p id="stockChecking" style="color: rgb(245, 6, 6);">{{Products.OutOfStocks}}</p>
+            </div>
+
           </td>
 
           <td class="cart__price  " id="product-price">{{totalPrice}}</td>
+
           <td>
-             {{!-- <button> <a onclick="return confirm('are you want to delete')"
+
+
+            {{!-- <button> <a onclick="return confirm('are you want to delete')"
                 href="/RemoveCartDocument/{{_id}}/{{CartProductId}}" class="cart__close"><i class="fa fa-close"></i></a>
             </button> --}}
-             <button role="button" id="deleteCart" onclick="DeleteProductInCart('{{_id}}','{{CartProductId}}')" type="button"
-              class="btn btn-light"><span id="boot-icon" class="bi bi-x-lg"
-                style="font-size: 14px; -webkit-text-stroke-width: 2px;"></span></button> 
+            <button role="button" id="deleteCart" onclick="DeleteProductInCart('{{_id}}','{{CartProductId}}')"
+              type="button" class="btn btn-light"><span id="boot-icon" class="bi bi-x-lg"
+                style="font-size: 14px; -webkit-text-stroke-width: 2px;"></span></button>
 
-            </td>
+
+          </td>
+
 
           {{/usercartAllProducts}}
 
           </tbody>
           </table>
         </div>
+
+
+
+
+
+
 
         <div class="row" style="display: flex; justify-content: center;">
 
@@ -306,58 +327,52 @@
 
 
 
-      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.1/dist/sweetalert2.all.min.js"></script>
-      
-      <script src="https://code.jquery.com/jquery-3.6.3.js"
-        integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+          <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.1/dist/sweetalert2.all.min.js"></script>
 
-      <style>
-        .colored-toast.swal2-icon-error {
-          background-color: #f27474 !important;
-        }
-      </style>
+          <script src="https://code.jquery.com/jquery-3.6.3.js"
+            integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
 
-      <script>
-        function DeleteProductInCart(_id,CartProductId) {
-          console.log('ddddddd')
-          $.ajax({
-            url: '/RemoveCartDocument/' + _id+'/'+CartProductId,
-            method: 'get',
-            success: (response) => {
-              console.log(response);
-              if (response.status == true) {
-                const Toast = Swal.mixin({
-                  toast: true,
-                  position: 'top-right',
-                  iconColor: 'white',
-                  customClass: {
-                    popup: 'colored-toast'
-                  },
-                  showConfirmButton: false,
-                  timer: 1000,
-                  timerProgressBar: true
-                })
-                Toast.fire({
-                  icon: 'error',
-                  title: 'Deleted'
-                }).then(() => {
-         
-                     $('#RELOAd').load('/User-CartPage #RELOAd')
-                });
-              }
-            },
-            error: (err) => {
-              console.log(err);
+          <style>
+            .colored-toast.swal2-icon-error {
+              background-color: #f27474 !important;
             }
-          });
-        }
-      </script>
+          </style>
 
+          <script>
+            function DeleteProductInCart(_id, CartProductId) {
+              console.log('ddddddd')
+              $.ajax({
+                url: '/RemoveCartDocument/' + _id + '/' + CartProductId,
+                method: 'get',
+                success: (response) => {
+                  console.log(response);
+                  if (response.status == true) {
+                    const Toast = Swal.mixin({
+                      toast: true,
+                      position: 'top-right',
+                      iconColor: 'white',
+                      customClass: {
+                        popup: 'colored-toast'
+                      },
+                      showConfirmButton: false,
+                      timer: 1000,
+                      timerProgressBar: true
+                    })
+                    Toast.fire({
+                      icon: 'error',
+                      title: 'Deleted'
+                    }).then(() => {
 
-
-
-
-
+                      $('#RELOAd').load('/User-CartPage #RELOAd')
+                    });
+                  }
+                },
+                error: (err) => {
+                  console.log(err);
+                }
+              });
+            }
+          </script>
 
 
 
@@ -384,8 +399,12 @@
             <p style="color: red;">{{errorCoupons}}</p>
 
             <p style="color: red;" id="error-message"></p>
+
+
             <button class="main_btn" type="submit"> Apply </button>
+
           </form>
+
 
           {{/if}}
         </div>
@@ -407,10 +426,13 @@
             <li>Subtotal <span>₹ {{subTotal}}</span></li>
             <li>Total <span>₹ {{subTotal}}</span></li>
           </ul>
-
+          {{#if OutOfStocks}}
+          <p style="color: crimson;"> Out Of Stock</p>
+          {{else}}
           <div class="d-flex justify-content-center">
             <a class="main_btn text-center" href="/UserCheckout">Proceed to checkout</a>
           </div>
+          {{/if}}
           </tr>
           <div class="ss" style="display: flex; justify-content: center;">
 
@@ -418,7 +440,6 @@
           </div>
 
         </div>
-
         {{else}}
         <div class="cart__total ">
 
@@ -441,15 +462,7 @@
           </div>
 
 
-          {{!-- <a role="button" href="/Shop"></a> --}}
-          {{!-- <ul>
-            <li>Subtotal <span>₹ {{allproductTotal}}</span></li>
-            <li>Total <span>₹ {{allproductTotal}}</span></li>
-          </ul> --}}
 
-          {{!-- <div class="d-flex justify-content-center">
-            <a class="main_btn text-center" href="/UserCheckout">Proceed to checkout</a>
-          </div> --}}
         </div>
         {{/if}}
 
@@ -461,6 +474,7 @@
 
     </div>
   </section>
+  
   <style>
     .quantity {
       display: flex;
@@ -607,7 +621,7 @@
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 
-  {{!--
+
   <script src="js/jquery-3.2.1.min.js"></script>
   <script src="js/popper.js"></script>
   <script src="js/bootstrap.min.js"></script>
@@ -629,18 +643,6 @@
 
 
 
-  <script src="CartTable/js/jquery-3.3.1.min.js"></script>
-  <script src="CartTable/js/bootstrap.min.js"></script>
-  <script src="CartTable/js/jquery.nice-select.min.js"></script>
-  <script src="CartTable/js/jquery.nicescroll.min.js"></script>
-  <script src="CartTable/js/jquery.magnific-popup.min.js"></script>
-  <script src="CartTable/js/jquery.countdown.min.js"></script>
-  <script src="CartTable/js/jquery.slicknav.js"></script>
-  <script src="CartTable/js/mixitup.min.js"></script>
-  <script src="CartTable/js/owl.carousel.min.js"></script>
-  <script src="CartTable/js/main.js"></script> --}}
-
-
 
 
   <script>
@@ -648,6 +650,7 @@
       var value = parseInt(document.getElementById(`number-${proId}`).value, 10);
       value = isNaN(value) ? 0 : value;
       value++;
+
       document.getElementById(`number-${proId}`).value = value;
     }
 
@@ -695,7 +698,12 @@
         method: 'post',
         success: (response) => {
 
-                $('#RELOAd').load('/User-CartPage #RELOAd')
+if(response.statusresponse==true){
+
+ $('#RELOAd').load('/User-CartPage #RELOAd')
+
+}
+         
 
 
         }
@@ -705,25 +713,3 @@
   </script>
 
   {{!-- location.href='/user-CartPage' --}}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  

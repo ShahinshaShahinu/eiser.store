@@ -21,7 +21,7 @@ require('dotenv').config()
 
 var instance = new Razorpay({
     key_id: process.env.KEY_ID,
-    key_secret: process.env. KEY_SECRET,    
+    key_secret: process.env.KEY_SECRET,
 });
 
 var handlebars = require('handlebars/runtime');
@@ -33,7 +33,7 @@ handlebars.registerHelper('eq', function (a, b) {
 
 const vv = async (req, res) => {
 
-    res.render('admin_ban')
+    res.render('vv', { layout: 'layout' })
 }
 
 
@@ -95,7 +95,7 @@ const search = async (req, res) => {
     let payload = req.body.payload.trim();
 
 
-    let search = await productData.find({ ProductName: { $regex: new RegExp('^' + payload + '.*') } }).exec().lean()
+    let search = await productData.find({ ProductName: { $regex: new RegExp('^' + payload + '.*') } }).exec()
     //Limit search results to 10//
     search = search.slice(0, 10);
     res.send({ payload: search })
@@ -133,8 +133,9 @@ const postSignup = async (req, res, next) => {
             email: req.body.email,
             password: req.body.password,
             name: req.body.name,
+            wallet: 0,
             status: true,
-            wallet: 0
+
         }
 
 
@@ -608,7 +609,7 @@ const addToCart = async (req, res) => {
             $unwind: '$Products'
         }])
     if (CartArry.length >= 1) {
-console.log('ggg');
+        console.log('ggg');
 
         console.log(CartArry);
         let w = CartArry[0].Products.CartProductId
@@ -673,7 +674,7 @@ console.log('ggg');
         }
 
 
-    }else{
+    } else {
         console.log('creee');
         let productObjectId = {
             CartProductId: singleproductId,
@@ -726,11 +727,12 @@ const UserCartPage = async (req, res) => {
                 }
             },
             {
-                $project: { CartProductId: 1, quantity: 1, Products: { $arrayElemAt: ['$Products', 0] } }
+                $project: { CartProductId: 1, quantity: 1, stocks: '$stocks',OutOfStocks:'OutOfStocks', Products: { $arrayElemAt: ['$Products', 0] } }
             }
         ])
 
-
+        // console.log(usercartAllProducts);
+        console.log('ddddd   shahhhhhhhhhhhhhhhhh');
 
         // let quantityValue
         // let prodId = usercartAllProducts[0].CartProductId
@@ -749,19 +751,6 @@ const UserCartPage = async (req, res) => {
 
 
 
-
-
-
-
-
-
-
-        console.log(usercartAllProducts);
-
-
-
-
-
         let totalPrice
 
         for (var i = 0; i < usercartAllProducts.length; i++) {
@@ -775,10 +764,18 @@ const UserCartPage = async (req, res) => {
 
 
         let allproductTotal = 0
+        let StockOut=true
 
 
         for (var i = 0; i < usercartAllProducts.length; i++) {
             allproductTotal += usercartAllProducts[i].totalPrice
+
+            if(usercartAllProducts[i].Products.OutOfStocks=='Out Of Stocks'){
+
+                req.session.OutOfStocks=usercartAllProducts[i].Products.OutOfStocks
+                 StockOut=false
+              
+              }
         }
 
 
@@ -815,8 +812,21 @@ const UserCartPage = async (req, res) => {
 
         }
 
+        
 
-        res.render('user-CartPage', { usercartAllProducts, homeName, subTotal, errorCoupons, StockError, layout: 'layout' })
+
+
+
+
+
+         if (StockOut==true) {
+            req.session.OutOfStocks=null    
+         }
+      
+
+         let OutOfStocks= req.session.OutOfStocks
+
+        res.render('user-CartPage', { usercartAllProducts, homeName, subTotal, errorCoupons,OutOfStocks, StockError, layout: 'layout' })
         errorCoupons = null;
         req.session.coupon = null
 
@@ -830,7 +840,7 @@ const UserCartPage = async (req, res) => {
 
 
     }
-   
+
 
 }
 
@@ -845,67 +855,44 @@ const CartPageIdRedirect = async (req, res) => {
 
 const ChangequantityProduct = async (req, res, next) => {
 
-
+    console.log('ChangequantityProduct'); console.log('ChangequantityProduct'); console.log('ChangequantityProduct'); console.log('ChangequantityProduct');
     let bodyGetData = req.body
 
 
     let getCount = parseInt(req.body.count)
 
-
-    // userOrderProducts = await userorders.aggregate( [ { $unwind:'$Orderproducts'} ] )
-
-    // let getQuantyty =await CartData.aggregate([{$unwind:'$Products'}])
-
-    let d = await CartData.findOne({ 'Products.CartProductId': bodyGetData.products }).lean()
-
-    console.log(d);
-
-    let getQuantyty = await CartData.aggregate([{ $unwind: '$d' }])
+  
 
 
-
-
-
-    let v = await CartData.aggregate([
-        {
-            $unwind: "$Products"
-        },
-        {
-            $match: { "Products.CartProductId": "bcde80e3-2906-4e3f-bbf6-16409f1611e4" }
-        },
-        {
-            $project: { _id: 0, quantity: "$Products.quantity" }
-        }
-    ])
-
-
-
-
-    // console.log(v);
-
-    // k = v.quantity
-    // console.log(k);
-
-    // if (k == 'quantity' - 1 && getCount == -1) {
-    //     console.log('dddddddddddddddddddddddd');
-    // }
-
-
-
-
-
-
-    for (var i = 0; i < usercartAllProducts.length; i++) {
+    let quantityUpdate
+    for (var  i = 0; i < usercartAllProducts.length; i++) {
 
         totalPrice = usercartAllProducts[i].quantity * usercartAllProducts[i].Products.ProductPrice
         usercartAllProducts[i].totalPrice = totalPrice
+        if (usercartAllProducts[i].Products.Productid == bodyGetData.products) {
+            if ((usercartAllProducts[i].quantity + getCount) <= usercartAllProducts[i].Products.stocks) {
+                quantityUpdate = true
+                await productData.updateOne({ Productid: bodyGetData.products }, { $set: { OutOfStocks: '' } });
+             
+            } else {
+         
+                quantityUpdate = false
+               
+                await productData.updateOne({ Productid: bodyGetData.products }, { $set: { OutOfStocks: 'Out Of Stocks' } });
+            }
+        }
     }
 
 
 
-    await CartData.updateOne({ $and: [{ user: user }, { 'Products.CartProductId': bodyGetData.products }] }, { $inc: { 'Products.$.quantity': getCount } });
 
-    res.redirect('/user-CartPage')
+    if (quantityUpdate == true) {
+    
+        await CartData.updateOne({ $and: [{ user: user }, { 'Products.CartProductId': bodyGetData.products }] }, { $inc: { 'Products.$.quantity': getCount } });
+ 
+    }
+
+    res.json({statusresponse:true})
 
 }
 
@@ -927,13 +914,13 @@ const RemoveCartDocument = async (req, res) => {
 
 const ErrorPage = (req, res) => {
 
-    res.render('ErrorPage',{ layout: 'layout'})
+    res.render('ErrorPage', { layout: 'layout' })
 }
 
 
 
 //!--================ End Remove User Cart CHECKING =================--//
-const   userProfile = async (req, res) => {
+const userProfile = async (req, res) => {
 
 
     user = req.session.username
@@ -948,8 +935,8 @@ const   userProfile = async (req, res) => {
 
             Save = true;
 
-            let UserWallet = await userData.findOne({ username: user })
-           let userProfiledatas= req.session.userProfiledatas
+            let UserWallet = await userData.findOne({ username: user }).lean()
+            let userProfiledatas = req.session.userProfiledatas
 
             res.render('user-Profile', { userProfiledatas, homeName, Save, UserWallet, layout: 'layout' })
 
@@ -963,12 +950,9 @@ const   userProfile = async (req, res) => {
             let UserWallet = await userData.findOne({ username: user }).lean()
 
             let userAddress = await UserAddress.findOne({ user: user }).lean()
-            console.log(user);
 
             let AllAddress = userAddress.address
-            console.log(arrayAddress);
-            console.log(AllAddress);
-           let userProfiledatas= req.session.userProfiledatas
+            let userProfiledatas = req.session.userProfiledatas
 
             res.render('user-Profile', { userProfiledatas, homeName, arrayAddress, UserWallet, AllAddress, layout: 'layout' })
         }
@@ -1012,123 +996,117 @@ let currentWallet
 const UserCheckout = async (req, res) => {
 
 
-    console.log('dddddddddddddddddddddd');
+
     try {
-    user = req.session.username
+        user = req.session.username
 
-    if (user) {
-        //    let checkoutAddress =addresfounded.address
+        if (user) {
 
-        let addressCheckout = await UserAddress.findOne({ user: user }).lean()
+            req.session.userWalletamount = await userData.findOne({ username: user }).lean()
 
-        let quantityValue
-        let prodId = usercartAllProducts[0].CartProductId
+            walletPass = req.session.userWalletamount.wallet
 
-        let findStocks = await productData.findOne({ Productid: prodId }).lean()
-        console.log(findStocks);
-        let productName = findStocks.ProductName
-        let checkStocks = findStocks.stocks
-        quantityValue = usercartAllProducts[0].quantity;
+            let addressCheckout = await UserAddress.findOne({ user: user }).lean()
 
-        if (quantityValue <= checkStocks) {
+            let quantityValue
+            let prodId = usercartAllProducts[0].CartProductId
 
-            if (addressCheckout == null) {
+            let findStocks = await productData.findOne({ Productid: prodId }).lean()
+            console.log(findStocks);
+            let productName = findStocks.ProductName
+            let checkStocks = findStocks.stocks
+            quantityValue = usercartAllProducts[0].quantity;
 
-                let addsUser = true
+            if (quantityValue <= checkStocks) {
 
-                res.render('User_Checkout', { usercartAllProducts, homeName, addsUser, layout: 'layout' })
-            } else {
+                if (addressCheckout == null) {
 
+                    let addsUser = true
+                    let grandTotal = subTotal + 100
 
-                let checkoutAddress = addressCheckout.address[0]
-
-                let grandTotal = subTotal + 100
-
-                let AllAddress = addressCheckout.address
-
-
-                if (getCheckedOneddress == null) {
-
-                    let findAddress = checkoutAddress
-
-                    user = req.session.username
-                    let dataCartSuccess = await CartData.findOne({ user: user }).lean()
-
-
-                    if (dataCartSuccess == null) {
-
-                        res.redirect('/Shop')
-                    }
-
-                    let UserWallet = await userData.findOne({ username: user }).lean()
-                    console.log(grandTotal); console.log(grandTotal); console.log(grandTotal);
-                    if (UserWallet.wallet > grandTotal) {
-
-                        walletPass = UserWallet.wallet
-
-                    } else {
-                        walletPass = 0
-                    }
-
-
-                    console.log(walletPass);
-
-                    console.log(walletPass);
-                    console.log(walletPass);
-
-
-
-
-                    console.log('fffffffffffffffffff');
-                    res.render('User_Checkout', { findAddress, usercartAllProducts, subTotal, grandTotal, homeName, AllAddress, addressCheckout, getCheckedOneddress, UserWallet, walletPass, layout: 'layout' })
+                    res.render('User_Checkout', { walletPass, usercartAllProducts, subTotal, grandTotal, usercartAllProducts, homeName, addsUser, layout: 'layout' })
                 } else {
-                    findAddress = getCheckedOneddress
 
 
-                    console.log('shahhhhhhhhh');
+                    let checkoutAddress = addressCheckout.address[0]
 
-                    user = req.session.username
-                    let dataCartSuccess = await CartData.findOne({ user: user }).lean()
+                    let grandTotal = subTotal + 100
+
+                    let AllAddress = addressCheckout.address
 
 
-                    if (dataCartSuccess == null) {
+                    if (getCheckedOneddress == null) {
 
-                        res.redirect('/Shop')
-                    }
+                        let findAddress = checkoutAddress
 
-                    let UserWallet = await userData.findOne({ username: user }).lean()
+                        user = req.session.username
+                        let dataCartSuccess = await CartData.findOne({ user: user }).lean()
 
-                    let walletPass
-                    console.log(UserWallet.wallet); console.log(UserWallet); console.log(UserWallet);
 
-                    if (UserWallet.wallet > grandTotal) {
-                        walletPass = 0
+                        if (dataCartSuccess == null) {
 
+                            res.redirect('/Shop')
+                        }
+
+                        let UserWallet = await userData.findOne({ username: user }).lean()
+
+                        if (UserWallet.wallet > grandTotal) {
+
+                            walletPass = UserWallet.wallet
+
+                        } else {
+                            walletPass = 0
+                        }
+
+
+
+
+
+
+                        console.log('fffffffffffffffffff');
+                        res.render('User_Checkout', { findAddress, usercartAllProducts, subTotal, grandTotal, homeName, AllAddress, addressCheckout, getCheckedOneddress, UserWallet, walletPass, layout: 'layout' })
                     } else {
-                        walletPass = UserWallet.wallet
+                        findAddress = getCheckedOneddress
+
+
+                        console.log('shahhhhhhhhh');
+
+                        user = req.session.username
+                        let dataCartSuccess = await CartData.findOne({ user: user }).lean()
+
+
+                        if (dataCartSuccess == null) {
+
+                            res.redirect('/Shop')
+                        }
+
+                        let UserWallet = await userData.findOne({ username: user }).lean()
+
+                        let walletPass
+
+
+                        if (UserWallet.wallet > grandTotal) {
+                            walletPass = 0
+
+                        } else {
+                            walletPass = UserWallet.wallet
+                        }
+
+                        res.render('User_Checkout', { findAddress, usercartAllProducts, subTotal, grandTotal, homeName, AllAddress, addressCheckout, UserWallet, walletPass, layout: 'layout' })
                     }
 
-
-                    console.log(walletPass);
-
-                    console.log(walletPass);
-                    console.log(walletPass);
-
-                    res.render('User_Checkout', { findAddress, usercartAllProducts, subTotal, grandTotal, homeName, AllAddress, addressCheckout, UserWallet, walletPass, layout: 'layout' })
                 }
 
+            } else {
+                StockError = 'Out Of Stocks ' + productName
+                res.redirect('/user-CartPage')
             }
 
+
+
         } else {
-            StockError = 'Out Of Stocks ' + productName
-            res.redirect('/user-CartPage')
+            res.redirect('/userLogin')
         }
-
-
-
-    } else {
-        res.redirect('/userLogin')
-    }
 
     } catch (error) {
         res.redirect('/ErrorPage')
@@ -1304,7 +1282,7 @@ const allorder = async (req, res) => {
             console.log(grandTotal); console.log(grandTotal);
             console.log('goo');
             instance.orders.create(options, function (err, order) {
-console.log(err);
+                console.log(err);
                 console.log('New order', order);
                 console.log(order);
                 res.json({ status: true, order: order })
@@ -1528,7 +1506,7 @@ const applyCoupn = async (req, res) => {
 
 const OTPLogin = async (req, res) => {
 
-    res.render('LoginEmailOTP', { errmessage })
+    res.render('LoginEmailOTP', { errmessage, layout: 'layout' })
     errmessage = null
 }
 
@@ -1613,7 +1591,7 @@ const LoginOTPPost = async (req, res) => {
 
         let profileAddress = await userData.findOne({ username: req.session.username }).lean()
 
-      req.session.userProfiledatas  = profileAddress
+        req.session.userProfiledatas = profileAddress
 
 
 
@@ -1654,7 +1632,7 @@ const userorderspage = async (req, res) => {
         let Returned = findOrdereds.Returned
         console.log(Returned);
         console.log(findOrdereds);
-        res.render('user_orderPage', {  findOrdereds, homeName, Returned, layout: 'layout' })
+        res.render('user_orderPage', { findOrdereds, homeName, Returned, layout: 'layout' })
     } catch (error) {
         res.redirect('/ErrorPage')
     }
@@ -1680,7 +1658,7 @@ const userordersdetailsPage = async (req, res) => {
 
 
     try {
-        let userOrderProducts = await userorders.aggregate([{ $match: { _id: new ObjectId(userOrderedProduct) } }, { $unwind: '$Orderproducts' }, { $project: { CartProductId: '$Orderproducts.CartProductId', Orderproducts: '$Orderproducts.Products', deliveryAddress: '$deliveryAddress', returnStatus: '$Orderproducts.returnStatus', Productid: '$Productid', returnStatus: '$returnStatus',Delivered:'$Delivered', status: '$status', _id: '$_id' } }])
+        let userOrderProducts = await userorders.aggregate([{ $match: { _id: new ObjectId(userOrderedProduct) } }, { $unwind: '$Orderproducts' }, { $project: { CartProductId: '$Orderproducts.CartProductId', Orderproducts: '$Orderproducts.Products', deliveryAddress: '$deliveryAddress', returnStatus: '$Orderproducts.returnStatus', Productid: '$Productid', returnStatus: '$returnStatus', Delivered: '$Delivered', status: '$status', _id: '$_id' } }])
 
         res.render("user-ordersdetails", { userOrderProducts, homeName, layout: 'layout' })
 
@@ -1836,7 +1814,7 @@ const deleteWhishlist = async (req, res) => {
 
 const ReturnProduct = async (req, res) => {
     console.log('dddddddddddddddd');
-    console.log('dddddddddddddddd');    console.log('dddddddddddddddd');
+    console.log('dddddddddddddddd'); console.log('dddddddddddddddd');
     user = req.session.username
 
     returnStatus = null
@@ -1850,11 +1828,11 @@ const ReturnProduct = async (req, res) => {
 
 
 
-    
+
 
     await userorders.updateOne({ _id: new ObjectId(ReturnProductId) }, { $set: { Delivered: 'Returned Confirm' } })
 
-console.log('sssss');console.log('sssss');console.log('sssss');
+    console.log('sssss'); console.log('sssss'); console.log('sssss');
     await userorders.updateOne({ _id: new ObjectId(ReturnProductId) }, { $set: { status: 'Returned' } })
 
     res.json({ returnStatus: true })
@@ -1873,7 +1851,7 @@ const useraddressProfile = async (req, res) => {
 
 
 
-  let userProfiledatas = req.session.userProfiledatas
+    let userProfiledatas = req.session.userProfiledatas
 
     console.log(userProfiledatas);
 

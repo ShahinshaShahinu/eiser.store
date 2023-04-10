@@ -54,7 +54,8 @@
 
             </li>
             <li class="nav-item">
-                <a class="nav-link collapsed" href="/adminBanners" data-target="#collapseForm" aria-controls="collapseForm">
+                <a class="nav-link collapsed" href="/adminBanners" data-target="#collapseForm"
+                    aria-controls="collapseForm">
                     <i class="fab fa-fw fa-wpforms"></i>
                     <span>Banner</span>
                 </a>
@@ -368,65 +369,63 @@
                         </div>
 
 
-                        <div class="container-fluid" id="container-wrapper">
-                            <div class="row mb-3">
-                                <div class="card-body">
-                                    <div class="table-responsive">
-                                        <table id="dtBasicExample"
-                                            class="table align-items-center table table-striped table-flush  ">
-                                            <thead class="thead-light">
-                                                <tr>
-                                                    <th>Number</th>
-                                                    <th>CouponCode </th>
-                                                    <th>Discount Type</th>
-                                                    <th>Minimum Purchase</th>
-                                                    {{!-- <th>Max-Amount</th> --}}
-                                                    <th>Discount Amount</th>
-                                                    <th>Created Date</th>
-                                                    <th>Expiry date</th>
-                                                    <th>Status</th>
-                                                    <th>Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                {{#each CouponsData}}
 
-                                                <tr>
-                                                    <td><a href="#">{{@index}}</a></td>
-                                                    <td>{{CouponCode}}</td>
-                                                    <td>{{DiscountType}}</td>
-                                                    <td>{{MinimumPurchase}}</td>
-                                                    {{!-- <td>{{MaxAmount}}</td> --}}
-                                                    <td>{{DiscountAmount}}</td>
-                                                    <td>{{CreatedDate}}</td>
-                                                    <td>{{ExpiryDate}}</td>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table id="dtBasicExample"
+                                    class="table align-items-center table table-striped table-flush  ">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th>Number</th>
+                                            <th>CouponCode </th>
+                                            <th>Discount Type</th>
+                                            <th>Minimum Purchase</th>
+                                            {{!-- <th>Max-Amount</th> --}}
+                                            <th>Discount Amount</th>
+                                            <th>Created Date</th>
+                                            <th>Expiry date</th>
+                                            <th>Status</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {{#each CouponsData}}
 
-                                                    <td>{{#if CouponStatus}}
-                                                        Enable
-                                                    <td> <a href="/DsableCoupon/{{_id}}" class="btn btn-sm btn-primary"
-                                                            role="button" aria-pressed="true">Disable</a>
-                                                    </td>
-                                                    {{else}}
-                                                    Disable
-                                                    <td> <a href="/EnableCoupon/{{_id}}" class="btn btn-sm btn-dark"
-                                                            class="btn btn-sm btn-danger" role="button"
-                                                            aria-pressed="true"> Enable </a>
-                                                    </td>
-                                                    {{/if}}
-                                                    </td>
+                                        <tr>
+                                            <td><a href="#">{{@index}}</a></td>
+                                            <td>{{CouponCode}}</td>
+                                            <td>{{DiscountType}}</td>
+                                            <td>{{MinimumPurchase}}</td>
+                                            {{!-- <td>{{MaxAmount}}</td> --}}
+                                            <td>{{DiscountAmount}}</td>
+                                            <td>{{CreatedDate}}</td>
+                                            <td>{{ExpiryDate}}</td>
 
-                                                </tr>
+                                            <td>{{#if CouponStatus}}
+                                                Enable
+                                            <td> <a href="/DsableCoupon/{{_id}}" class="btn btn-sm btn-primary"
+                                                    role="button" aria-pressed="true">Disable</a>
+                                            </td>
+                                            {{else}}
+                                            Disable
+                                            <td> <a href="/EnableCoupon/{{_id}}" class="btn btn-sm btn-dark"
+                                                    class="btn btn-sm btn-danger" role="button" aria-pressed="true">
+                                                    Enable </a>
+                                            </td>
+                                            {{/if}}
+                                            </td>
 
-                                                {{/each}}
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
+                                        </tr>
 
+                                        {{/each}}
+                                    </tbody>
+                                </table>
                             </div>
+
                         </div>
 
                     </div>
+                </div>
 
 
 
@@ -440,33 +439,32 @@
 
 
 
+                <a class="scroll-to-top rounded" href="#page-top">
+                    <i class="fas fa-angle-up"></i>
+                </a>
 
-                    <a class="scroll-to-top rounded" href="#page-top">
-                        <i class="fas fa-angle-up"></i>
-                    </a>
+                <script>
+                    $(document).ready(function () {
+                        $('#dtBasicExample').DataTable();
+                        $('.dataTables_length').addClass('bs-select');
+                    });
+                </script>
 
-                    <script>
-                        $(document).ready(function () {
-                            $('#dtBasicExample').DataTable();
-                            $('.dataTables_length').addClass('bs-select');
+                <script>
+                    $(document).ready(function () {
+                        $('#dtBasicExample tbody tr').each(function (index) {
+                            $(this).find('td:first').text(index + 1);
                         });
-                    </script>
+                    });
 
-                    <script>
-                        $(document).ready(function () {
-                            $('#dtBasicExample tbody tr').each(function (index) {
-                                $(this).find('td:first').text(index + 1);
-                            });
-                        });
+                </script>
 
-                    </script>
-
-                    <script src="/FormsjsValidations/AddCoupnValidation.js"></script>
-                    <script src="AdminPanel/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-                    <script src="AdminPanel/vendor/jquery-easing/jquery.easing.min.js"></script>
-                    <script src="AdminPanel/js/ruang-admin.min.js"></script>
-                    <script src="AdminPanel/vendor/chart.js/Chart.min.js"></script>
-                    <script src="AdminPanel/js/demo/chart-area-demo.js"></script>
+                <script src="/FormsjsValidations/AddCoupnValidation.js"></script>
+                <script src="AdminPanel/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+                <script src="AdminPanel/vendor/jquery-easing/jquery.easing.min.js"></script>
+                <script src="AdminPanel/js/ruang-admin.min.js"></script>
+                <script src="AdminPanel/vendor/chart.js/Chart.min.js"></script>
+                <script src="AdminPanel/js/demo/chart-area-demo.js"></script>
 </body>
 
 </html>

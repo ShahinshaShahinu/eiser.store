@@ -115,7 +115,8 @@
 
             </li>
             <li class="nav-item" href="/adminSalesReport">
-                <a class="nav-link" href="/adminSales/?name=AllSalesReport"  name="Day" role="button" aria-expanded="true" aria-controls="collapseBootstrap">
+                <a class="nav-link" href="/adminSales/?name=AllSalesReport" name="Day" role="button"
+                    aria-expanded="true" aria-controls="collapseBootstrap">
                     <i class="far fa-fw fa-window-maximize"></i>
                     <span>SalesRport</span>
                 </a>
@@ -266,67 +267,70 @@
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800   " style="text-align: center"> SalesRport</h1>
                         <div class="rere" style="display: flex; justify-content: end; ">
-                           <button id="pdfButton"><b>Click here to Generate PDF</b></button> 
+                            <button id="pdfButton"><b>Click here to Generate PDF</b></button>
                         </div>
-                        
-<button onclick="exportSalesReport()">Download Sales Report</button>
+
+                        <button onclick="exportSalesReport()">Download Sales Report</button>
                     </div>
 
-                    <div class="ro" style="    display: flex;    justify-content: end;" >
-                        <a class="btn btn-primary" href="/adminDailySalesReport/?name=Day"  name="Day" role="button">Day</a><dir></dir>
-                        <a class="btn btn-primary" href="/adminDailySalesReport/?name=Month"role="button">Month</a><dir></dir>
-                      
+                    <div class="ro" style="    display: flex;    justify-content: end;">
+                        <a class="btn btn-primary" href="/adminDailySalesReport/?name=Day" name="Day"
+                            role="button">Day</a>
+                        <dir></dir>
+                        <a class="btn btn-primary" href="/adminDailySalesReport/?name=Month" role="button">Month</a>
+                        <dir></dir>
+
 
                     </div>
 
-                    <div class="row mb-3">
+                  
 
 
 
 
-<script>
-    function exportSalesReport() {
-  // Define the sales report data as an array of objects
-  const salesReportData = [
-    { date: "2022-01-01", product: "Product A", revenue: 100 },
-    { date: "2022-01-02", product: "Product B", revenue: 200 },
-    { date: "2022-01-03", product: "Product C", revenue: 300 },
-  ];
+                        <script>
+                            function exportSalesReport() {
+                                // Define the sales report data as an array of objects
+                                const salesReportData = [
+                                    { date: "2022-01-01", product: "Product A", revenue: 100 },
+                                    { date: "2022-01-02", product: "Product B", revenue: 200 },
+                                    { date: "2022-01-03", product: "Product C", revenue: 300 },
+                                ];
 
-  // Convert the sales report data to a worksheet
-  const worksheet = XLSX.utils.json_to_sheet(salesReportData);
+                                // Convert the sales report data to a worksheet
+                                const worksheet = XLSX.utils.json_to_sheet(salesReportData);
 
-  // Create a workbook and add the worksheet to it
-  const workbook = XLSX.utils.book_new();
-  XLSX.utils.book_append_sheet(workbook, worksheet, "Sales Report");
+                                // Create a workbook and add the worksheet to it
+                                const workbook = XLSX.utils.book_new();
+                                XLSX.utils.book_append_sheet(workbook, worksheet, "Sales Report");
 
-  // Convert the workbook to a binary string
-  const workbookBinaryString = XLSX.write(workbook, { type: "binary" });
+                                // Convert the workbook to a binary string
+                                const workbookBinaryString = XLSX.write(workbook, { type: "binary" });
 
-  // Create a Blob object from the binary string
-  const blob = new Blob([s2ab(workbookBinaryString)], {
-    type: "application/octet-stream",
-  });
+                                // Create a Blob object from the binary string
+                                const blob = new Blob([s2ab(workbookBinaryString)], {
+                                    type: "application/octet-stream",
+                                });
 
-  // Create a download link and click it to trigger the download
-  const a = document.createElement("a");
-  a.href = window.URL.createObjectURL(blob);
-  a.download = "sales_report.xlsx";
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-}
+                                // Create a download link and click it to trigger the download
+                                const a = document.createElement("a");
+                                a.href = window.URL.createObjectURL(blob);
+                                a.download = "sales_report.xlsx";
+                                document.body.appendChild(a);
+                                a.click();
+                                document.body.removeChild(a);
+                            }
 
-// Helper function to convert a string to an ArrayBuffer
-function s2ab(s) {
-  const buf = new ArrayBuffer(s.length);
-  const view = new Uint8Array(buf);
-  for (let i = 0; i < s.length; i++) {
-    view[i] = s.charCodeAt(i) & 0xff;
-  }
-  return buf;
-}
-</script>
+                            // Helper function to convert a string to an ArrayBuffer
+                            function s2ab(s) {
+                                const buf = new ArrayBuffer(s.length);
+                                const view = new Uint8Array(buf);
+                                for (let i = 0; i < s.length; i++) {
+                                    view[i] = s.charCodeAt(i) & 0xff;
+                                }
+                                return buf;
+                            }
+                        </script>
 
                         <!-- Invoice Example -->
 
@@ -368,90 +372,92 @@ function s2ab(s) {
                                     </tbody>
                                 </table>
                             </div>
+
                         </div>
-                    </div>
+
                 </div>
-
-                <!-- Scroll to top -->
-                <a class="scroll-to-top rounded" href="#page-top">
-                    <i class="fas fa-angle-up"></i>
-                </a>
-
-
-                <script>
-                    $(document).ready(function () {
-                        $('#dtBasicExample tbody tr').each(function (index) {
-                            $(this).find('td:first').text(index + 1);
-                        });
-                    });
-
-                </script>
+            </div>
 
 
 
 
-                <!DOCTYPE html>
-                <html lang="en">
-
-                <head>
-                    <title>Generate PDF</title>
-                    <style>
-                        .container {
-                            position: fixed;
-                            top: 20%;
-                            left: 28%;
-                            border-radius: 7px;
-                        }
-
-                        .card {
-                            box-sizing: content-box;
-                            width: 300px;
-                            height: 400px;
-                            padding: 30px;
-                            border: 1px solid black;
-                            font-style: sans-serif;
-                            background-color: #f0f0f0;
-                        }
-
-                        h2 {
-                            text-align: center;
-                            color: #24650b;
-                        }
-                    </style>
-                </head>
-
-                <body>
-                    <div class="container">
-                        
-                      
-                    </div>
-                    <script>
-                        var button = document.getElementById("pdfButton");
-                        var makepdf = document.getElementById("generatePDF");
-                        button.addEventListener("click", function () {
-                            var mywindow = window.open("", "PRINT", "height=1000,width=1000");
-                            mywindow.document.write(makepdf.innerHTML);
-                            mywindow.document.close();
-                            mywindow.focus();
-                            mywindow.print();
-                            return true;
-                        });
-                    </script>
-                </body>
-
-                </html>
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.1/xlsx.full.min.js"></script>
+        <!-- Scroll to top -->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
+        <script src="https://code.jquery.com/jquery-3.6.3.js"
+            integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
 
-                
-                <script src="AdminPanel/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-                
-                <script src="AdminPanel/vendor/jquery-easing/jquery.easing.min.js"></script>
-                
-                <script src="AdminPanel/js/ruang-admin.min.js"></script>
-                <script src="AdminPanel/vendor/chart.js/Chart.min.js"></script>
-                <script src="AdminPanel/js/demo/chart-area-demo.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('#dtBasicExample tbody tr').each(function (index) {
+                    $(this).find('td:first').text(index + 1);
+                });
+            });
+
+        </script>
+
+
+
+
+        <!DOCTYPE html>
+        <html lang="en">
+
+        <head>
+            <title>Generate PDF</title>
+            <style>
+                .container {
+                    position: fixed;
+                    top: 20%;
+                    left: 28%;
+                    border-radius: 7px;
+                }
+
+                .card {
+                    box-sizing: content-box;
+                    width: 300px;
+                    height: 400px;
+                    padding: 30px;
+                    border: 1px solid black;
+                    font-style: sans-serif;
+                    background-color: #f0f0f0;
+                }
+
+                h2 {
+                    text-align: center;
+                    color: #24650b;
+                }
+            </style>
+        </head>
+
+        <body>
+            <div class="container">
+
+
+            </div>
+            <script>
+                var button = document.getElementById("pdfButton");
+                var makepdf = document.getElementById("generatePDF");
+                button.addEventListener("click", function () {
+                    var mywindow = window.open("", "PRINT", "height=1000,width=1000");
+                    mywindow.document.write(makepdf.innerHTML);
+                    mywindow.document.close();
+                    mywindow.focus();
+                    mywindow.print();
+                    return true;
+                });
+            </script>
+        </body>
+
+        </html>
+
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.1/xlsx.full.min.js"></script>
+
+
+
 
 
 
@@ -459,129 +465,15 @@ function s2ab(s) {
 </body>
 
 </html>
+<script src="AdminPanel/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+{{!--
+<script src="AdminPanel/vendor/jquery-easing/jquery.easing.min.js"></script> --}}
+<script src="AdminPanel/js/ruang-admin.min.js"></script>
+<script src="AdminPanel/vendor/chart.js/Chart.min.js"></script>
+<script src="AdminPanel/js/demo/chart-area-demo.js"></script>
 
-{{!-- <html>
 
-<head>
-    <title>Export HTML data to excel </title>
-    <h2>US NASDAQ Stocks price list </h2>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-    <script type="text/javascript" src="downloadFile.js"></script>
-    <style>
-        #tblStocks {
-            font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-            border-collapse: collapse;
-            width: 100%;
-        }
 
-        #tblStocks td,
-        #tblStocks th {
-            border: 1px solid #ddd;
-            padding: 8px;
-        }
-
-        #tblStocks tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-
-        #tblStocks tr:hover {
-            background-color: #ddd;
-        }
-
-        #tblStocks th {
-            padding-top: 12px;
-            padding-bottom: 12px;
-            text-align: left;
-            background-color: #bad4e7;
-            ;
-            color: rgb(123, 118, 118);
-        }
-    </style>
-</head>
-
-<body>
-    <table id="dtBasicExample" id="dtBasicExample" cellpadding="0" cellspacing="0">
-        <tr>
-            <th>Company</th>
-            <th>Group</th>
-            <th>Prev Close($)</th>
-            <th>Current Price($)</th>
-            <th>Change(%)</th>
-        </tr>
-        <tr>
-            <td>Life HealthCare INC</td>
-            <td>A</td>
-            <td>35.58</td>
-            <td>38.45</td>
-            <td>+8.06</td>
-        </tr>
-        <tr>
-            <td>Den Networks Ltd</td>
-            <td>A</td>
-            <td>72.55</td>
-            <td>77.60</td>
-            <td>+6.96</td>
-        </tr>
-        <tr>
-            <td>RMG Cements</td>
-            <td>B</td>
-            <td>140</td>
-            <td>135</td>
-            <td>-3.57</td>
-        </tr>
-    </table>
-    <br />
-    <button onclick="exportData()">
-        <span class="glyphicon glyphicon-download"></span>
-        Download list</button>
-</body>
-<script>function exportData() {
-        /* Get the HTML data using Element by Id */
-        var table = document.getElementById("dtBasicExample");
-
-        /* Declaring array variable */
-        var rows = [];
-
-        //iterate through rows of table
-        for (var i = 0, row; row = table.rows[i]; i++) {
-            //rows would be accessed using the "row" variable assigned in the for loop
-            //Get each cell value/column from the row
-            column1 = row.cells[0].innerText;
-            column2 = row.cells[1].innerText;
-            column3 = row.cells[2].innerText;
-            column4 = row.cells[3].innerText;
-            column5 = row.cells[4].innerText;
-
-            /* add a new records in the array */
-            rows.push(
-                [
-                    column1,
-                    column2,
-                    column3,
-                    column4,
-                    column5
-                ]
-            );
-
-        }
-        csvContent = "data:text/csv;charset=utf-8,";
-        /* add the column delimiter as comma(,) and each row splitted by new line character (\n) */
-        rows.forEach(function (rowArray) {
-            row = rowArray.join(",");
-            csvContent += row + "\r\n";
-        });
-
-        /* create a hidden <a> DOM node and set its download attribute */
-        var encodedUri = encodeURI(csvContent);
-        var link = document.createElement("a");
-        link.setAttribute("href", encodedUri);
-        link.setAttribute("download", "Stock_Price_Report.csv");
-        document.body.appendChild(link);
-        /* download the data file named "Stock_Price_Report.csv" */
-        link.click();
-    }</script>
-
-</html> --}}
 
 <script>
 

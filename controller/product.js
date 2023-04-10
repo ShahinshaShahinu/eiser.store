@@ -138,6 +138,7 @@ const adminProduct = async function (req, res, next) {
 
     let getproductdata = await productData.find().lean()
 
+    console.log(getproductdata[0].status);
     admins = req.session.admins
     if (admins) {
 

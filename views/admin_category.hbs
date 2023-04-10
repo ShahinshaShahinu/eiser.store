@@ -142,7 +142,7 @@
 
                                         <div class="input-group-append">
                                             <button class="btn btn-primary" type="button">
-                                                {{!-- <i class="fas fa-search fa-sm"></i> --}}
+                                              
                                             </button>
                                         </div>
                                     </div>
@@ -157,7 +157,7 @@
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="mr-3">
                                         <div class="icon-circle bg-primary">
-                                            {{!-- <i class="fas fa-file-alt text-white"></i> --}}
+            
                                         </div>
                                     </div>
 
@@ -165,7 +165,7 @@
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="mr-3">
                                         <div class="icon-circle bg-success">
-                                            {{!-- <i class="fas fa-donate text-white"></i> --}}
+                                         
                                         </div>
                                     </div>
                                     <div>
@@ -176,7 +176,7 @@
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="mr-3">
                                         <div class="icon-circle bg-warning">
-                                            {{!-- <i class="fas fa-exclamation-triangle text-white"></i> --}}
+                                         
                                         </div>
                                     </div>
                                     <div>
@@ -196,8 +196,7 @@
                                 </h6>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="dropdown-list-image mr-3">
-                                        {{!-- <img class="rounded-circle" src="img/man.png" style="max-width: 60px"
-                                            alt=""> --}}
+                                        
                                         <div class="status-indicator bg-success"></div>
                                     </div>
                                     <div class="font-weight-bold">
@@ -209,8 +208,7 @@
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="dropdown-list-image mr-3">
-                                        {{!-- <img class="rounded-circle" src="img/girl.png" style="max-width: 60px"
-                                            alt=""> --}}
+                                      
                                         <div class="status-indicator bg-default"></div>
                                     </div>
                                     <div>
@@ -238,18 +236,7 @@
 
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                {{!-- <a class="dropdown-item" href="#">
-                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Profile
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Settings
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Activity Log
-                                </a> --}}
+                                
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="" data-toggle="modal" data-target="#logoutModal">
                                     <a href="/admonLogoutButton"> Logout</a>
@@ -289,7 +276,7 @@
                                     <div style="color: red;" id="error-message"></div>
                             <p style="   color: rgb(220, 9, 9);  margin-left: 1rem">{{erormsg}}</p>
                         </div>
-
+                    </div>
                         <!-- Invoice Example -->
 
 
@@ -343,7 +330,11 @@
                     <i class="fas fa-angle-up"></i>
                 </a>
 
+ {{!-- <script type="text/javascript" charset="utf8"
+    src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script> --}}
 
+
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
                 <script>
                     $(document).ready(function () {
                         $('#dtBasicExample tbody tr').each(function (index) {
@@ -352,6 +343,21 @@
                     });
 
                 </script>
+
+
+<script>
+
+    $(document).ready(function () {
+        $('#dtBasicExample').DataTable();
+        $('.dataTables_length').addClass('bs-select');
+    });
+</script>
+
+ 
+
+
+
+
 
 
                 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.1/dist/sweetalert2.all.min.js"></script>
@@ -367,42 +373,6 @@
                 <script src="AdminPanel/js/ruang-admin.min.js"></script>
                 <script src="AdminPanel/vendor/chart.js/Chart.min.js"></script>
                 <script src="AdminPanel/js/demo/chart-area-demo.js"></script>
-
-
-
-                {{!-- swal({
-                title: "Are you sure?",
-                text: "Your will not be able to recover this imaginary file!",
-                type: "warning",
-                showCancelButton: true,
-                confirmButtonClass: "btn-danger",
-                confirmButtonText: "Yes, delete it!",
-                closeOnConfirm: false
-                }),
-                })function hello(willDelete){
-                if (willDelete) {
-                // Code to delete the data goes here
-                swal("Poof! Your data has been deleted!", {
-                icon: "success",
-                });
-                } else {
-                swal("Your data is safe!");
-                }
-                }; --}}
-
-                {{!-- function hello() {
-
-
-
-                swal({
-                title: "Sweet!",
-                text: "Here's a custom image.",
-                imageUrl: 'thumbs-up.jpg'
-                });
-
-
-
-                } --}}
 
 
 
@@ -451,40 +421,11 @@
                 </script>
 
 
-                {{!-- // Add a click event listener to the delete button --}}
-
-                {{!--
-                const deleteButton = document.getElementById('delete-button'); --}}
-
 
 </body>
 
 </html>
 
-{{!-- function hello() {
-
-swal({
-title: "Are you sure?",
-text: "Your will not be able to recover this imaginary file!",
-type: "warning",
-showCancelButton: true,
-confirmButtonClass: "btn-danger",
-confirmButtonText: "Yes, delete it!",
-closeOnConfirm: false
-}).then((value) => {
-swal("Deleted!", "Your imaginary file has been deleted.", "success");
-
-
-});
 
 
 
-}; --}}
-
-<script>
-
-    $(document).ready(function () {
-        $('#dtBasicExample').DataTable();
-        $('.dataTables_length').addClass('bs-select');
-    });
-</script>
