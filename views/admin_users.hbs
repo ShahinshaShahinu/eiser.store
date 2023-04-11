@@ -12,6 +12,25 @@
   <link href="AdminPanel/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="AdminPanel/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
   <link href="AdminPanel/css/ruang-admin.min.css" rel="stylesheet">
+<script src="https://kit.fontawesome.com/8ed73146d8.js" crossorigin="anonymous"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+  <!-- Datatable -->
+
+  {{!--
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> --}}
+
+  <link rel='stylesheet' href='https://cdn.datatables.net/1.13.2/css/dataTables.bootstrap5.min.css' />
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <!-- Datatable -->
+
+
+
+
+
+
 </head>
 
 <body id="page-top">
@@ -268,14 +287,18 @@
         <div class="container-fluid" id="container-wrapper">
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800   " style="text-align: center"> Customers</h1>
+            <div style="  position: relative; left: -1.6em;">
+               <a href="/adminUsers"> <i class="fa-solid fa-magnifying-glass"></i>Search</a>
+            </div>
+           
 
           </div>
 
 
 
           <!-- Topbar -->
-          <div class="card-body">
-            <div class="table-responsive">
+          <div  class="card-body">
+            <div id="reload" class="table-responsive">
               <table id="dtBasicExample" class="table table-striped table-bordered" cellspacing="0" width="100%">
                 <thead class="thead-light">
                   <tr>
@@ -304,12 +327,12 @@
 
                     {{!-- <td>{{status}}</td> --}}
                     <td> {{#if status}}
-                      Active
-                    <td> <a href="/blockUser/{{_id}}" class="btn btn-sm btn-primary" style="width: 4.36rem;">Block</a>
+                      <p style="color: rgb(0, 191, 25);">Active</p>
+                    <td> <button onclick="blockUser('{{_id}}')"  class="btn btn-sm btn-primary" style="width: 4.36rem;">Block</button>
                     </td>
                     {{else}}
-                    InActive
-                    <td><a href="/unBlockUser/{{_id}}" class="btn btn-sm btn-primary">UnBlock</a></td>
+                    <p style="color: crimson;">  InActive</p>
+                    <td><button onclick="unBlockUser('{{_id}}')" class="btn btn-sm btn-primary">UnBlock</button></td>
 
                     {{/if}}
                     </td>
@@ -328,17 +351,65 @@
     <!-- this code ajax jquery   !--><!-- this code ajax jquery   !--><!-- this code ajax jquery   !-->
 
 
+  {{!-- <script src="https://code.jquery.com/jquery-3.6.3.js"
+              integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>  --}}
+
+
+<script>
+    function blockUser(id){
+        $.ajax({
+            url:'/blockUser/'+id,
+            method:'get',
+            success:(response)=>{
+                if(response.blockUserStatus==true){
+                    $('#reload').load('/adminUsers #reload')
+                }else{
+                        console.log(err)
+                }
+            }
+        })
+    }
+
+
+    function unBlockUser(id){
+        $.ajax({
+            url:'/unBlockUser/'+id,
+            method:'get',
+
+            success:(response)=>{
+                if(response.unBlockUserStatus==true){
+             $('#reload').load('/adminUsers #reload')
+                }
+            }
+        })
+    }
+</script>
 
 
 
-    <!-- this code ajax jquery   !--><!-- this code ajax jquery   !--><!-- this code ajax jquery   !-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+
+      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+        crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+        crossorigin="anonymous"></script>
+
+
+      <script src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
+      <script src="https://cdn.datatables.net/1.13.2/js/dataTables.bootstrap5.min.js"></script>
 
 
 
-<script src="https://code.jquery.com/jquery-3.6.3.js"
-            integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script> 
 
+<script>
+
+  $(document).ready(function () {
+    $('#dtBasicExample').DataTable();
+    $('.dataTables_length').addClass('bs-select');
+  });
+</script>
 
 
     <script>
@@ -350,23 +421,18 @@
 
     </script>
 
-    <script src="AdminPanel/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="AdminPanel/vendor/jquery-easing/jquery.easing.min.js"></script>
-    <script src="AdminPanel/js/ruang-admin.min.js"></script>
-    <script src="AdminPanel/vendor/chart.js/Chart.min.js"></script>
-    <script src="AdminPanel/js/demo/chart-area-demo.js"></script>
+
+      <script src="AdminPanel/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+      <script src="AdminPanel/vendor/jquery-easing/jquery.easing.min.js"></script>
+      <script src="AdminPanel/js/ruang-admin.min.js"></script>
+
+      <script src="AdminPanel/vendor/chart.js/Chart.min.js"></script>
+      <script src="AdminPanel/js/demo/chart-area-demo.js"></script>
 
 
 
 </body>
 
 </html>
+ 
 
-
-<script>
-
-  $(document).ready(function () {
-    $('#dtBasicExample').DataTable();
-    $('.dataTables_length').addClass('bs-select');
-  });
-</script>

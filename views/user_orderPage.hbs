@@ -286,11 +286,11 @@
                     <button class="btn btn-primary" onclick="ReturnProduct('{{_id}}')" role="button">Return</button>
 
                     {{/if}}
-                    {{#if (eq Delivered 'Returned Confirm')}}
-                    <p>Return Confirmed</p>
+                    {{#if (eq Delivered 'Returned Requested')}}
+                    <p style="color: crimson;">Return Confirmed</p>
                     {{/if}}
                     {{#if (eq Delivered 'MoneyReturned')}}
-                    <p>successfully returned</p>
+                     <p class="text-success" style="color: rgb(30, 255, 0);" >successfully returned</p>
                     {{/if}}
 
                 </td>

@@ -52,7 +52,7 @@ let navCategory
 
 let errorCoupons
 let username
-let homeName
+
 let navloop
 // let userProfiledatas
 let singleproductId
@@ -65,40 +65,60 @@ var Save = false; // initialize the global variable
 
 // !--================Start User Home Page =================--//
 const getUserHome = async function (req, res, next) {
+    try {
 
-    let offerSmartPhones = await productData.find({ $and: [{ ProductCategory: 'SmartPhones' }, { status: { $nin: false } }] }).limit(5).lean()
-    //Eiser Home page  laptops //
-    let offerLaptops = await productData.findOne({ $and: [{ ProductCategory: 'Laptops' }, { status: { $nin: false } }] }).lean()
+ 
+        let offerSmartPhones = await productData.find({ $and: [{ ProductCategory: 'SmartPhones' }, { status: { $nin: false } }] }).limit(5).lean()
+        //Eiser Home page  laptops //
+        let offerLaptops = await productData.findOne({ $and: [{ ProductCategory: 'Laptops' }, { status: { $nin: false } }] }).lean()
 
-    let someProducts = await productData.find({ status: { $nin: false } }).limit(4).lean()
+        let someProducts = await productData.find({ status: { $nin: false } }).limit(4).lean()
 
 
-    console.log(req.session.username);
+        console.log(req.session.username);
 
-    console.log('ummmaaaaa');
-    if (req.session.username == null) {
-        homeName = null
+        console.log('ummmaaaaa');
+        if (req.session.username == null) {
+
+            req.session.homeName = null
+        }
+        let bannerCarouselSlider = await banners.find({ status: { $nin: false } }).skip(1).lean()
+
+        let defaultImg = await banners.find({ status: { $nin: false } }).lean()
+
+        let MainBanner = defaultImg[0]
+
+
+        let homeName = req.session.homeName
+
+        res.render('user_Home', { MainBanner, bannerCarouselSlider, offerSmartPhones, offerLaptops, someProducts, homeName, layout: 'layout' });
+        req.session.check = false;
+
+
+    } catch (error) {
+      next()
     }
-    let bannerCarouselSlider = await banners.find({ status: { $nin: false } }).skip(1).lean()
 
-    let defaultImg = await banners.find({ status: { $nin: false } }).lean()
-
-    let MainBanner = defaultImg[0]
-
-
-    res.render('user_Home', { MainBanner, bannerCarouselSlider, offerSmartPhones, offerLaptops, someProducts, homeName, layout: 'layout' });
-    req.session.check = false;
 }
 
+
+
+
+
 // !--================End UserHome Page =================--//
-const search = async (req, res) => {
-    let payload = req.body.payload.trim();
+const search = async (req, res, next) => {
+    try {
+          let payload = req.body.payload.trim();
 
 
     let search = await productData.find({ ProductName: { $regex: new RegExp('^' + payload + '.*') } }).exec()
     //Limit search results to 10//
     search = search.slice(0, 10);
     res.send({ payload: search })
+    } catch (error) {
+        next()
+    }
+  
 }
 
 
@@ -106,22 +126,21 @@ const search = async (req, res) => {
 // !--================Start Signup Page Page =================--//
 
 const signupPage = function (req, res, next) {
-    user = req.session.username
-    if (user) {
-        res.redirect('/')
-    } else {
-        res.render('user_Signup', { error, username, layout: 'layout' })
+    try {
+        user = req.session.username
+        if (user) {
+            res.redirect('/')
+        } else {
+            res.render('user_Signup', { error, username, layout: 'layout' })
 
-        error = null;
-
-        // console.log('irshadth');
-        //     setTimeout(function() {
-        //         // code to be executed after 5 seconds
+            error = null;
 
 
-
-        //       }, 3000);
+        }
+    } catch (error) {
+        next()
     }
+
 
 }
 
@@ -152,7 +171,7 @@ const postSignup = async (req, res, next) => {
 
 
 
-            homeName = signupData.username
+            req.session.homeName = signupData.username
 
 
             req.session.userProfiledatas = signupData
@@ -200,20 +219,9 @@ const postSignup = async (req, res, next) => {
         }
 
 
-
-
-
-        // if (already.email==req.body.email) {
-        //     console.log('email');
-
-        //     error = 'Email Already existed '
-        //     res.redirect('/userSignup')
-        // }
-
     } catch (error) {
 
-        res.redirect('/ErrorPage')
-
+        next()
     }
 
 }
@@ -221,7 +229,12 @@ const postSignup = async (req, res, next) => {
 // !--================End Signup Page Page =================--//
 
 const signUpLogInButton = (req, res, next) => {
-    res.redirect('/Shop')
+    try {
+        res.redirect('/Shop')
+    } catch (error) {
+        next()
+    }
+
 }
 
 
@@ -234,71 +247,80 @@ const signUpLogInButton = (req, res, next) => {
 
 
 const Loginpage = async (req, res, next) => {
+    try {
+        user = req.session.username
 
-    user = req.session.username
+        if (user) {
 
-    if (user) {
+            res.redirect('/')
+        } else {
 
-        res.redirect('/')
-    } else {
+            res.render('user_Login', { errorlogin, errorloginPassword, AccountBlocked, layout: 'layout' })
+            errorlogin = null
+            errorloginPassword = null
+            AccountBlocked = null
 
-        res.render('user_Login', { errorlogin, errorloginPassword, AccountBlocked, layout: 'layout' })
-        errorlogin = null
-        errorloginPassword = null
-        AccountBlocked = null
-
+        }
+    } catch (error) {
+        next()
     }
+
 
 }
 
 const postLogin = (req, res, next) => {
-    async function alreadyexist() {
 
-        let userlogin = {
-            username: req.body.username,
-            password: req.body.password
-        }
-        const already = await userData.findOne({ username: userlogin.username }).lean()
+    try {
+        async function alreadyexist() {
 
-
-
-        if (already == null) {
-            errorlogin = 'invalid userName '
-            res.redirect('/userLogin')
-        } else {
-            if (already.status == true) {
-
-                const passwordCheck = await bcrypt.compare(userlogin.password, already.password)
+            let userlogin = {
+                username: req.body.username,
+                password: req.body.password
+            }
+            const already = await userData.findOne({ username: userlogin.username }).lean()
 
 
-                if (passwordCheck == true) {
+
+            if (already == null) {
+                errorlogin = 'invalid userName '
+                res.redirect('/userLogin')
+            } else {
+                if (already.status == true) {
+
+                    const passwordCheck = await bcrypt.compare(userlogin.password, already.password)
 
 
-                    req.session.userProfiledatas = already
-                    // req.session.user = true
+                    if (passwordCheck == true) {
 
 
-                    req.session.username = userlogin.username,
+                        req.session.userProfiledatas = already
+                        // req.session.user = true
 
 
-                        req.session.username = already.username
+                        req.session.username = userlogin.username,
 
-                    let vv = req.session.username
 
-                    homeName = userlogin.username
-                    res.redirect('/')
+                            req.session.username = already.username
+
+
+                        req.session.homeName = userlogin.username
+                        res.redirect('/')
+                    }
+                    else {
+                        errorloginPassword = 'invalid password'
+                        res.redirect('/userLogin')
+                    }
                 }
                 else {
-                    errorloginPassword = 'invalid password'
+                    AccountBlocked = 'The Account Was Blocked '
                     res.redirect('/userLogin')
                 }
             }
-            else {
-                AccountBlocked = 'The Account Was Blocked '
-                res.redirect('/userLogin')
-            }
-        }
-    } alreadyexist()
+        } alreadyexist()
+    } catch (error) {
+        next()
+    }
+
 }
 
 
@@ -310,82 +332,112 @@ const postLogin = (req, res, next) => {
 //!--================ start shopping Area =================--//
 
 
-const shop = async (req, res) => {
-
-    let shopproduct = await productData.find({ status: { $nin: false } }).lean()
-    navCategory = await categoryData.find().lean()
-    navloop = navCategory
-
-    user = req.session.username
-    if (user) {
-
-
-        res.render('user_ShopProduct', { shopproduct, navCategory, navloop, homeName, layout: 'layout' })
-
-
-
-
-    } else {
-        res.redirect('/userLogin')
-    }
-}
-
-const allproduct = (req, res) => {
-    res.redirect('/Shop')
-}
-
-const Navbarcategory = async (req, res) => {
-    categoryDetail = req.params.categoryName
-
-    res.redirect('/Showcategory')
-}
-
-
-const ShowProductCategory = async (req, res) => {
-    mencategory = await productData.find({ $and: [{ ProductCategory: categoryDetail }, { status: true }] }).lean()
-
-    let shopproduct = mencategory
-
-    user = req.session.username
-    if (user) {
-        res.render('user_ShopProduct', { shopproduct, navCategory, navloop, layout: 'layout' })
-    } else {
-        res.redirect('/userLogin')
-    }
-}
-
-
-
-
-const ShowProduct = (req, res) => {
-    ShowSingleproduct = req.params.id
-
-    res.redirect('/ShowSingleProduct')
-}
-
-const SingleProduct = async (req, res) => {
-
-
-    await productData.find({ _id: new ObjectId(ShowSingleproduct) }).lean().then((data) => {
-
-        let shopproduct = []
-        shopproduct = data[0]
-
-
-        // let lengthArra = data.length;
-
-        let ReqBodyData = data
+const shop = async (req, res, next) => {
+    try {
+        let shopproduct = await productData.find({ status: { $nin: false } }).lean()
+        navCategory = await categoryData.find().lean()
+        navloop = navCategory
 
         user = req.session.username
         if (user) {
-            res.render('user-ProductShow', { shopproduct, ReqBodyData, homeName, layout: 'layout' })
+
+            let homeName = req.session.homeName
+            res.render('user_ShopProduct', { shopproduct, navCategory, navloop, homeName, layout: 'layout' })
+
+
+
+
         } else {
             res.redirect('/userLogin')
         }
+    } catch (error) {
+        next()
+    }
+
+}
+
+const allproduct = (req, res, next) => {
+    try {
+        res.redirect('/Shop')
+    } catch (error) {
+        next()
+    }
+
+}
+
+const Navbarcategory = async (req, res, next) => {
+    try {
+        categoryDetail = req.params.categoryName
+
+        res.redirect('/Showcategory')
+    } catch (error) {
+        next()
+    }
+
+}
+
+
+const ShowProductCategory = async (req, res, next) => {
+    try {
+        mencategory = await productData.find({ $and: [{ ProductCategory: categoryDetail }, { status: true }] }).lean()
+
+        let shopproduct = mencategory
+
+        user = req.session.username
+        if (user) {
+            res.render('user_ShopProduct', { shopproduct, navCategory, navloop, layout: 'layout' })
+        } else {
+            res.redirect('/userLogin')
+        }
+    } catch (error) {
+        next()
+    }
+
+}
 
 
 
-    })
+
+const ShowProduct = (req, res, next) => {
+    try {
+        ShowSingleproduct = req.params.id
+
+        res.redirect('/ShowSingleProduct')
+    } catch (error) {
+        next()
+    }
+
+}
+
+const SingleProduct = async (req, res, next) => {
+
+    try {
+        await productData.find({ _id: new ObjectId(ShowSingleproduct) }).lean().then((data) => {
+
+            let shopproduct = []
+            shopproduct = data[0]
+
+
+
+
+            let ReqBodyData = data
+
+            user = req.session.username
+            if (user) {
+
+                let homeName = req.session.homeName
+                res.render('user-ProductShow', { shopproduct, ReqBodyData, homeName, layout: 'layout' })
+            } else {
+                res.redirect('/userLogin')
+            }
+
+
+
+        })
+    } catch (error) {
+        next()
+    }
+
 
 }
 
@@ -394,10 +446,14 @@ const SingleProduct = async (req, res) => {
 //!--================ End shopping Area =================--//
 
 
-const OTPSendChangePassword = (req, res) => {
+const OTPSendChangePassword = (req, res, next) => {
+    try {
+        res.render('OTPChangePassword', { OTPerrmessage, layout: 'layout' })
+        OTPerrmessage = null
+    } catch (error) {
+        next()
+    }
 
-    res.render('OTPChangePassword', { OTPerrmessage, layout: 'layout' })
-    OTPerrmessage = null
 
 }
 
@@ -405,64 +461,77 @@ const OTPSendChangePassword = (req, res) => {
 //!--================ START Email OTP CHECKING =================--//
 
 
-const Emailchangepassword = async (req, res) => {
+const Emailchangepassword = async (req, res, next) => {
 
-    let email = req.body.email
+    try {
+        let email = req.body.email
 
-    userEmail = await userData.findOne({ email: email }).lean()
+        userEmail = await userData.findOne({ email: email }).lean()
 
-    if (userEmail == null) {
-        errmessage = 'invalid Email address'
-        res.redirect('/Forgotpassword')
-    } else {
+        if (userEmail == null) {
+            errmessage = 'invalid Email address'
+            res.redirect('/Forgotpassword')
+        } else {
 
-        otpEmail = userEmail.email
-
-
+            otpEmail = userEmail.email
 
 
-        let OtpCode = Math.floor(100000 + Math.random() * 900000)
-        otpa = OtpCode
-        let mailTransporter = nodemailer.createTransport({
-            service: 'gmail',
-            auth: {
-                user: 'shahinshalocal@gmail.com',
-                pass: 'xqhmeaoypfdinasq'
+
+
+            let OtpCode = Math.floor(100000 + Math.random() * 900000)
+            otpa = OtpCode
+            let mailTransporter = nodemailer.createTransport({
+                service: 'gmail',
+                auth: {
+                    user: 'shahinshalocal@gmail.com',
+                    pass: 'xqhmeaoypfdinasq'
+                }
+            })
+
+            let details = {
+                from: 'shahinshamsb79@gmail.com',
+                to: otpEmail,
+                subject: 'Eiser Verification ',
+                text: OtpCode + 'Eiser Verification Code,Do not share with others'
             }
-        })
+            mailTransporter.sendMail(details, (err) => {
+                if (err) {
+                    console.log(err);
+                }
+            })
 
-        let details = {
-            from: 'shahinshamsb79@gmail.com',
-            to: otpEmail,
-            subject: 'Eiser Verification ',
-            text: OtpCode + 'Eiser Verification Code,Do not share with others'
+
+            res.redirect('/OTPSendChangePassword')
         }
-        mailTransporter.sendMail(details, (err) => {
-            if (err) {
-                console.log(err);
-            }
-        })
-
-
-        res.redirect('/OTPSendChangePassword')
+    } catch (error) {
+        next()
     }
+
 }
 
-const OTPPost = async (req, res) => {
 
 
-    if (req.body.otp == otpa) {
 
-        userEmail = await userData.findOne({ password: userEmail.password }).lean()
+const OTPPost = async (req, res, next) => {
+    try {
 
-        //  await userData.updateOne({password:userEmail.password},{$set:{password:}})
-        res.redirect('/PasswordChange')
-    } else {
+        if (req.body.otp == otpa) {
 
-        OTPerrmessage = 'Invalid OTP'
+            userEmail = await userData.findOne({ password: userEmail.password }).lean()
 
-        res.redirect('/OTPSendChangePassword')
+            //  await userData.updateOne({password:userEmail.password},{$set:{password:}})
+            res.redirect('/PasswordChange')
+        } else {
+
+            OTPerrmessage = 'Invalid OTP'
+
+            res.redirect('/OTPSendChangePassword')
+        }
+    } catch (error) {
+        next()
     }
+
+
 }
 
 
@@ -472,33 +541,45 @@ const OTPPost = async (req, res) => {
 
 //!--================ChangePassword  New Session  =================--//  
 
-const ChangePassword = (req, res) => {
-
-    res.render('PasswordChange')
-}
-
-
-const changepasswordPOST = async (req, res) => {
-
-    let Newpassword = req.body.password
-    Newpassword = await bcrypt.hash(Newpassword, 10)
-
-    let passwordUpdated = await userData.updateOne({ password: userEmail.password }, { $set: { password: Newpassword } })
-    if (passwordUpdated) {
-
-        res.redirect('/userLogin')
-    }
-    else {
-        res.redirect('/PasswordChange')
+const ChangePassword = (req, res, next) => {
+    try {
+        res.render('PasswordChange')
+    } catch (error) {
+        next()
     }
 
 }
 
 
-const EmailOTPChangepassword = (req, res) => {
+const changepasswordPOST = async (req, res, next) => {
+    try {
+        let Newpassword = req.body.password
+        Newpassword = await bcrypt.hash(Newpassword, 10)
 
-    res.render('EmailOTPChangepasswordEmailOTP', { errmessage, layout: 'layout' })
-    errmessage = null
+        let passwordUpdated = await userData.updateOne({ password: userEmail.password }, { $set: { password: Newpassword } })
+        if (passwordUpdated) {
+
+            res.redirect('/userLogin')
+        }
+        else {
+            res.redirect('/PasswordChange')
+        }
+    } catch (error) {
+        next()
+    }
+
+
+}
+
+
+const EmailOTPChangepassword = (req, res, next) => {
+    try {
+        res.render('EmailOTPChangepasswordEmailOTP', { errmessage, layout: 'layout' })
+        errmessage = null
+    } catch (error) {
+        next()
+    }
+
 }
 
 
@@ -506,17 +587,32 @@ const EmailOTPChangepassword = (req, res) => {
 
 
 
-const OTPChangepassword = (req, res) => {
-    res.redirect('/ChangepasswordEmailOTP')
+const OTPChangepassword = (req, res, next) => {
+    try {
+        res.redirect('/ChangepasswordEmailOTP')
+    } catch (error) {
+        next()
+    }
+
 }
 
-const OTPcheck = (req, res) => {
-    res.redirect('/OTPSend')
+const OTPcheck = (req, res, next) => {
+    try {
+        res.redirect('/OTPSend')
+    } catch (error) {
+        next()
+    }
+
 }
 
-const LogoutButton = (req, res) => {
-    req.session.username = null
-    res.redirect('/userLogin')
+const LogoutButton = (req, res, next) => {
+    try {
+        req.session.username = null
+        res.redirect('/userLogin')
+    } catch (error) {
+        next()
+    }
+
 }
 
 
@@ -536,309 +632,301 @@ const LogoutButton = (req, res) => {
 
 
 
-const AddToCart = async (req, res) => {
-    singleproductId = req.params.id
-    quantity = req.body.quantity
+const AddToCart = async (req, res, next) => {
+
+    try {
+        singleproductId = req.params.id
+        quantity = req.body.quantity
 
 
-    let productObjectId = {
-        CartProductId: singleproductId,
-        quantity: 1
-    }
-
-    user = req.session.username
-
-    let UserAddCart = await CartData.findOne({ user: user }).lean()
-
-
-
-    if (UserAddCart == null) {
-        let CartObjectId = {
-            user: user,
-            Products: [productObjectId]
-
-        }
-
-
-
-        await CartData.insertMany([CartObjectId])
-
-    } else {
-
-
-
-        let Productcart = await CartData.find({ $and: [{ user: user }, { "Products.CartProductId": singleproductId }] }).lean()
-
-        if (Productcart != null && Productcart != '') {
-            console.log('already  created');
-            res.redirect('/User-CartPage')
-
-        } else {
-
-            await CartData.updateOne({ user: user }, { $push: { Products: productObjectId } })
-
-            res.redirect('/User-CartPage')
-        }
-
-
-
-
-    }
-
-
-
-}
-
-
-const addToCart = async (req, res) => {
-    user = req.session.username
-    console.log('ddddddddddddddddddd');
-    singleproductId = req.params.Productid
-    quantity = req.body.quantity
-    console.log(singleproductId);
-    console.log(singleproductId); console.log(singleproductId);
-
-    let CartArry = await CartData.aggregate([
-        {
-            $match: {
-                user: user
-
-            },
-        },
-        {
-            $unwind: '$Products'
-        }])
-    if (CartArry.length >= 1) {
-        console.log('ggg');
-
-        console.log(CartArry);
-        let w = CartArry[0].Products.CartProductId
-        console.log(w);
-        console.log(CartArry);
-        console.log(CartArry.length);
-
-        let CartProduct = true
-        for (let i = 0; i < CartArry.length; i++) {
-            console.log('true true cart true');
-            if (CartArry[i].Products.CartProductId == singleproductId) {
-                CartProduct = false
-                console.log('false false false cart false');
-                break;
-            }
-
-        }
-
-        if (CartProduct == true) {
-
-            let productObjectId = {
-                CartProductId: singleproductId,
-                quantity: 1
-            }
-
-            user = req.session.username
-
-            let UserAddCart = await CartData.findOne({ user: user }).lean()
-            if (UserAddCart == null) {
-                let CartObjectId = {
-                    user: user,
-                    Products: [productObjectId]
-                }
-                await CartData.insertMany([CartObjectId])
-
-            } else {
-
-
-
-                let Productcart = await CartData.find({ $and: [{ user: user }, { "Products.CartProductId": singleproductId }] }).lean()
-
-                if (Productcart != null && Productcart != '') {
-                    console.log('already  created');
-                    res.redirect('/User-CartPage')
-
-                } else {
-
-                    await CartData.updateOne({ user: user }, { $push: { Products: productObjectId } })
-
-
-                }
-
-
-
-
-            }
-
-            res.json({ status: true })
-        } else {
-
-            res.json({ status: true })
-        }
-
-
-    } else {
-        console.log('creee');
         let productObjectId = {
             CartProductId: singleproductId,
             quantity: 1
         }
 
-        let CartObjectId = {
-            user: user,
-            Products: [productObjectId]
+        user = req.session.username
+
+        let UserAddCart = await CartData.findOne({ user: user }).lean()
+
+
+
+        if (UserAddCart == null) {
+            let CartObjectId = {
+                user: user,
+                Products: [productObjectId]
+
+            }
+
+
+
+            await CartData.insertMany([CartObjectId])
+
+        } else {
+
+
+
+            let Productcart = await CartData.find({ $and: [{ user: user }, { "Products.CartProductId": singleproductId }] }).lean()
+
+            if (Productcart != null && Productcart != '') {
+                console.log('already  created');
+                res.redirect('/User-CartPage')
+
+            } else {
+
+                await CartData.updateOne({ user: user }, { $push: { Products: productObjectId } })
+
+                res.redirect('/User-CartPage')
+            }
         }
-        await CartData.insertMany([CartObjectId])
-        res.json({ status: true })
+    } catch (error) {
+        next()
     }
+
+
+
+
 }
+
+
+const addToCart = async (req, res, next) => {
+    try {
+        user = req.session.username
+        console.log('ddddddddddddddddddd');
+        singleproductId = req.params.Productid
+        quantity = req.body.quantity
+        console.log(singleproductId);
+        console.log(singleproductId); console.log(singleproductId);
+
+        let CartArry = await CartData.aggregate([
+            {
+                $match: {
+                    user: user
+
+                },
+            },
+            {
+                $unwind: '$Products'
+            }])
+        if (CartArry.length >= 1) {
+            console.log('ggg');
+
+            console.log(CartArry);
+            let w = CartArry[0].Products.CartProductId
+            console.log(w);
+            console.log(CartArry);
+            console.log(CartArry.length);
+
+            let CartProduct = true
+            for (let i = 0; i < CartArry.length; i++) {
+                console.log('true true cart true');
+                if (CartArry[i].Products.CartProductId == singleproductId) {
+                    CartProduct = false
+                    console.log('false false false cart false');
+                    break;
+                }
+
+            }
+
+            if (CartProduct == true) {
+
+                let productObjectId = {
+                    CartProductId: singleproductId,
+                    quantity: 1
+                }
+
+                user = req.session.username
+
+                let UserAddCart = await CartData.findOne({ user: user }).lean()
+                if (UserAddCart == null) {
+                    let CartObjectId = {
+                        user: user,
+                        Products: [productObjectId]
+                    }
+                    await CartData.insertMany([CartObjectId])
+
+                } else {
+
+
+
+                    let Productcart = await CartData.find({ $and: [{ user: user }, { "Products.CartProductId": singleproductId }] }).lean()
+
+                    if (Productcart != null && Productcart != '') {
+                        console.log('already  created');
+                        res.redirect('/User-CartPage')
+
+                    } else {
+
+                        await CartData.updateOne({ user: user }, { $push: { Products: productObjectId } })
+
+
+                    }
+
+                }
+
+                res.json({ status: true })
+            } else {
+
+                res.json({ status: true })
+            }
+
+
+        } else {
+            console.log('creee');
+            let productObjectId = {
+                CartProductId: singleproductId,
+                quantity: 1
+            }
+
+            let CartObjectId = {
+                user: user,
+                Products: [productObjectId]
+            }
+            await CartData.insertMany([CartObjectId])
+            res.json({ status: true })
+        }
+    } catch (error) {
+        next()
+    }
+
+}
+
+
+
 
 
 let discount
 let StockError
 
-const UserCartPage = async (req, res) => {
-    user = req.session.username
+const UserCartPage = async (req, res, next) => {
 
-    if (user) {
+    try {
         user = req.session.username
 
+        if (user) {
+            user = req.session.username
 
 
 
-        let s = await CartData.findOne({ user: user }).lean()
 
-        usercartAllProducts = await CartData.aggregate([
-            {
-                $match: {
-                    user: user
+            let s = await CartData.findOne({ user: user }).lean()
+
+            usercartAllProducts = await CartData.aggregate([
+                {
+                    $match: {
+                        user: user
+                    },
+
                 },
+                {
+                    $unwind: '$Products'
+                },
+                { $project: { CartProductId: "$Products.CartProductId", quantity: "$Products.quantity" } },
 
-            },
-            {
-                $unwind: '$Products'
-            },
-            { $project: { CartProductId: "$Products.CartProductId", quantity: "$Products.quantity" } },
+                {
+                    $lookup: {
+                        from: 'products',
+                        localField: 'CartProductId',
+                        foreignField: 'Productid',
+                        as: 'Products'
 
-            {
-                $lookup: {
-                    from: 'products',
-                    localField: 'CartProductId',
-                    foreignField: 'Productid',
-                    as: 'Products'
+                    }
+                },
+                {
+                    $project: { CartProductId: 1, quantity: 1, stocks: '$stocks', OutOfStocks: 'OutOfStocks', Products: { $arrayElemAt: ['$Products', 0] } }
+                }
+            ])
+
+            // console.log(usercartAllProducts);
+            console.log('ddddd   shahhhhhhhhhhhhhhhhh');
+
+
+
+
+            let totalPrice
+
+            for (var i = 0; i < usercartAllProducts.length; i++) {
+
+                totalPrice = usercartAllProducts[i].quantity * usercartAllProducts[i].Products.ProductPrice
+                usercartAllProducts[i].totalPrice = totalPrice
+
+            }
+
+
+
+
+            let allproductTotal = 0
+            let StockOut = true
+
+
+            for (var i = 0; i < usercartAllProducts.length; i++) {
+                allproductTotal += usercartAllProducts[i].totalPrice
+
+                if (usercartAllProducts[i].Products.OutOfStocks == 'Out Of Stocks') {
+
+                    req.session.OutOfStocks = usercartAllProducts[i].Products.OutOfStocks
+                    StockOut = false
 
                 }
-            },
-            {
-                $project: { CartProductId: 1, quantity: 1, stocks: '$stocks',OutOfStocks:'OutOfStocks', Products: { $arrayElemAt: ['$Products', 0] } }
             }
-        ])
-
-        // console.log(usercartAllProducts);
-        console.log('ddddd   shahhhhhhhhhhhhhhhhh');
-
-        // let quantityValue
-        // let prodId = usercartAllProducts[0].CartProductId
-
-        // let findStocks = await productData.findOne({ Productid: prodId })
-        // let checkStocks = findStocks.stocks
-        // quantityValue = usercartAllProducts[0].quantity;
-
-        // if (quantityValue <= checkStocks) {
-
-
-        // } else {
-        //     StockError = 'Out Of ......'
-        // }
 
 
 
+            let getCoponId = req.session.coupon
 
-        let totalPrice
+            subTotal = allproductTotal
 
-        for (var i = 0; i < usercartAllProducts.length; i++) {
-
-            totalPrice = usercartAllProducts[i].quantity * usercartAllProducts[i].Products.ProductPrice
-            usercartAllProducts[i].totalPrice = totalPrice
-
-        }
+            if (getCoponId) {
 
 
+                let getCouponcode = await Coupons.find({ CouponCode: getCoponId }).lean()
+
+                let minimum = getCouponcode[0].MinimumPurchase
+                if (subTotal < minimum) {
 
 
-        let allproductTotal = 0
-        let StockOut=true
+                    errorCoupons = 'By Up Upto ' + minimum
 
 
-        for (var i = 0; i < usercartAllProducts.length; i++) {
-            allproductTotal += usercartAllProducts[i].totalPrice
-
-            if(usercartAllProducts[i].Products.OutOfStocks=='Out Of Stocks'){
-
-                req.session.OutOfStocks=usercartAllProducts[i].Products.OutOfStocks
-                 StockOut=false
-              
-              }
-        }
+                } else {
 
 
 
-        let getCoponId = req.session.coupon
-
-        subTotal = allproductTotal
-
-        if (getCoponId) {
+                    subTotal -= getCouponcode[0].DiscountAmount
 
 
 
-
-            let getCouponcode = await Coupons.find({ CouponCode: getCoponId }).lean()
-
-            let minimum = getCouponcode[0].MinimumPurchase
-            if (subTotal < minimum) {
-
-
-                errorCoupons = 'By Up Upto ' + minimum
-
-
-            } else {
-
-
-
-                subTotal -= getCouponcode[0].DiscountAmount
+                }
 
 
 
             }
 
+            if (StockOut == true) {
+                req.session.OutOfStocks = null
+            }
+
+
+            let OutOfStocks = req.session.OutOfStocks
+
+            let homeName = req.session.homeName
+
+            res.render('user-CartPage', { usercartAllProducts, homeName, subTotal, errorCoupons, OutOfStocks, StockError, layout: 'layout' })
+            errorCoupons = null;
+            req.session.coupon = null
+
+            StockError = null
+
+
+
+        } else {
+
+            res.redirect('/userLogin')
 
 
         }
 
-        
-
-
-
-
-
-
-         if (StockOut==true) {
-            req.session.OutOfStocks=null    
-         }
-      
-
-         let OutOfStocks= req.session.OutOfStocks
-
-        res.render('user-CartPage', { usercartAllProducts, homeName, subTotal, errorCoupons,OutOfStocks, StockError, layout: 'layout' })
-        errorCoupons = null;
-        req.session.coupon = null
-
-        StockError = null
-
-
-
-    } else {
-
-        res.redirect('/userLogin')
-
-
+    } catch (error) {
+        next()
     }
 
 
@@ -846,154 +934,172 @@ const UserCartPage = async (req, res) => {
 
 
 
-const CartPageIdRedirect = async (req, res) => {
+const CartPageIdRedirect = async (req, res, next) => {
+    try {
+        res.redirect('/User-CartPage')
+    } catch (error) {
+        next()
+    }
 
-    res.redirect('/User-CartPage')
 }
 
 
 
 const ChangequantityProduct = async (req, res, next) => {
-
-    console.log('ChangequantityProduct'); console.log('ChangequantityProduct'); console.log('ChangequantityProduct'); console.log('ChangequantityProduct');
-    let bodyGetData = req.body
-
-
-    let getCount = parseInt(req.body.count)
-
-  
+    try {
+        console.log('ChangequantityProduct'); console.log('ChangequantityProduct'); console.log('ChangequantityProduct'); console.log('ChangequantityProduct');
+        let bodyGetData = req.body
 
 
-    let quantityUpdate
-    for (var  i = 0; i < usercartAllProducts.length; i++) {
+        let getCount = parseInt(req.body.count)
 
-        totalPrice = usercartAllProducts[i].quantity * usercartAllProducts[i].Products.ProductPrice
-        usercartAllProducts[i].totalPrice = totalPrice
-        if (usercartAllProducts[i].Products.Productid == bodyGetData.products) {
-            if ((usercartAllProducts[i].quantity + getCount) <= usercartAllProducts[i].Products.stocks) {
-                quantityUpdate = true
-                await productData.updateOne({ Productid: bodyGetData.products }, { $set: { OutOfStocks: '' } });
-             
-            } else {
-         
-                quantityUpdate = false
-               
-                await productData.updateOne({ Productid: bodyGetData.products }, { $set: { OutOfStocks: 'Out Of Stocks' } });
+
+
+
+        let quantityUpdate
+        for (var i = 0; i < usercartAllProducts.length; i++) {
+
+            totalPrice = usercartAllProducts[i].quantity * usercartAllProducts[i].Products.ProductPrice
+            usercartAllProducts[i].totalPrice = totalPrice
+            if (usercartAllProducts[i].Products.Productid == bodyGetData.products) {
+                if ((usercartAllProducts[i].quantity + getCount) <= usercartAllProducts[i].Products.stocks) {
+                    quantityUpdate = true
+                    await productData.updateOne({ Productid: bodyGetData.products }, { $set: { OutOfStocks: '' } });
+
+                } else {
+
+                    quantityUpdate = false
+
+                    await productData.updateOne({ Productid: bodyGetData.products }, { $set: { OutOfStocks: 'Out Of Stocks' } });
+                }
             }
         }
+
+
+
+
+        if (quantityUpdate == true) {
+
+            await CartData.updateOne({ $and: [{ user: user }, { 'Products.CartProductId': bodyGetData.products }] }, { $inc: { 'Products.$.quantity': getCount } });
+
+        }
+
+        res.json({ statusresponse: true })
+
+    } catch (error) {
+        next()
     }
-
-
-
-
-    if (quantityUpdate == true) {
-    
-        await CartData.updateOne({ $and: [{ user: user }, { 'Products.CartProductId': bodyGetData.products }] }, { $inc: { 'Products.$.quantity': getCount } });
- 
-    }
-
-    res.json({statusresponse:true})
 
 }
 
 
 //!--================ Start Remove User Cart CHECKING =================--//
 
-const RemoveCartDocument = async (req, res) => {
+const RemoveCartDocument = async (req, res, next) => {
 
-    let geRemoveCartId = req.params.id
-    let GetRemoveproductid = req.params.CartProductId
+    try {
+        let geRemoveCartId = req.params.id
+        let GetRemoveproductid = req.params.CartProductId
 
-    await CartData.updateOne({ _id: geRemoveCartId }, { $pull: { Products: { CartProductId: GetRemoveproductid } } })
+        await CartData.updateOne({ _id: geRemoveCartId }, { $pull: { Products: { CartProductId: GetRemoveproductid } } })
 
 
-    res.json({ status: true })
+        res.json({ status: true })
+    } catch (error) {
+        next()
+    }
+
 
 }
 
-
-const ErrorPage = (req, res) => {
-
-    res.render('ErrorPage', { layout: 'layout' })
-}
 
 
 
 //!--================ End Remove User Cart CHECKING =================--//
-const userProfile = async (req, res) => {
+const userProfile = async (req, res, next) => {
+
+    try {
+        user = req.session.username
+        if (user) {
+
+            addresfounded = await UserAddress.findOne({ user: user }).lean()
 
 
-    user = req.session.username
-    if (user) {
-
-        addresfounded = await UserAddress.findOne({ user: user }).lean()
-
-
-        if (addresfounded == null) {
-
-
-
-            Save = true;
-
-            let UserWallet = await userData.findOne({ username: user }).lean()
-            let userProfiledatas = req.session.userProfiledatas
-
-            res.render('user-Profile', { userProfiledatas, homeName, Save, UserWallet, layout: 'layout' })
+            if (addresfounded == null) {
 
 
 
+                Save = true;
+
+                let UserWallet = await userData.findOne({ username: user }).lean()
+                let userProfiledatas = req.session.userProfiledatas
+                let homeName = req.session.homeName
+                res.render('user-Profile', { userProfiledatas, homeName, Save, UserWallet, layout: 'layout' })
+
+
+
+            } else {
+
+                arrayAddress = addresfounded.address[0]
+
+
+                let UserWallet = await userData.findOne({ username: user }).lean()
+
+                let userAddress = await UserAddress.findOne({ user: user }).lean()
+
+                let AllAddress = userAddress.address
+                let userProfiledatas = req.session.userProfiledatas
+                let homeName = req.session.homeName
+                res.render('user-Profile', { userProfiledatas, homeName, arrayAddress, UserWallet, AllAddress, layout: 'layout' })
+            }
         } else {
-
-            arrayAddress = addresfounded.address[0]
-
-
-            let UserWallet = await userData.findOne({ username: user }).lean()
-
-            let userAddress = await UserAddress.findOne({ user: user }).lean()
-
-            let AllAddress = userAddress.address
-            let userProfiledatas = req.session.userProfiledatas
-
-            res.render('user-Profile', { userProfiledatas, homeName, arrayAddress, UserWallet, AllAddress, layout: 'layout' })
+            res.redirect('/userLogin')
         }
-    } else {
-        res.redirect('/userLogin')
+
+    } catch (error) {
+        next()
     }
 
 }
 
-const Addressuser = async (req, res) => {
-    let addresDetails
-    user = req.session.username
-    let updateAddres = await UserAddress.findOne({ user: user }).lean()
+const Addressuser = async (req, res, next) => {
 
-    if (updateAddres == null) {
+    try {
+        let addresDetails
+        user = req.session.username
+        let updateAddres = await UserAddress.findOne({ user: user }).lean()
 
-        addresDetails = {}
-        addresDetails.user = user
-        addresDetails.address = req.body
-        await UserAddress.insertMany([addresDetails])
+        if (updateAddres == null) {
 
-
-        res.redirect('/userProfile')
-
-    } else {
-
-        addresDetails = {}
-        addresDetails.user = user
-        addresDetails.address = req.body
-        address = req.body
-        await UserAddress.updateOne({ user: user }, { $set: { address: address } })
-
-        res.redirect('/userProfile')
+            addresDetails = {}
+            addresDetails.user = user
+            addresDetails.address = req.body
+            await UserAddress.insertMany([addresDetails])
 
 
+            res.redirect('/userProfile')
+
+        } else {
+
+            addresDetails = {}
+            addresDetails.user = user
+            addresDetails.address = req.body
+            address = req.body
+            await UserAddress.updateOne({ user: user }, { $set: { address: address } })
+
+            res.redirect('/userProfile')
+
+
+        }
+    } catch (error) {
+        next()
     }
+
 }
 
 let currentWallet
 
-const UserCheckout = async (req, res) => {
+const UserCheckout = async (req, res, next) => {
 
 
 
@@ -1023,7 +1129,7 @@ const UserCheckout = async (req, res) => {
 
                     let addsUser = true
                     let grandTotal = subTotal + 100
-
+                    let homeName = req.session.homeName
                     res.render('User_Checkout', { walletPass, usercartAllProducts, subTotal, grandTotal, usercartAllProducts, homeName, addsUser, layout: 'layout' })
                 } else {
 
@@ -1058,10 +1164,17 @@ const UserCheckout = async (req, res) => {
                             walletPass = 0
                         }
 
+                        let dataCartSucces = await CartData.findOne({ user: user }).lean()
+
+                        console.log(dataCartSucces);console.log('yyyyyyyyyyyyyyyyyyyyy');
+                                                if (dataCartSucces == null) {
+                        
+                                                    res.redirect('/Shop')
+                                                }
 
 
 
-
+                        let homeName = req.session.homeName
 
                         console.log('fffffffffffffffffff');
                         res.render('User_Checkout', { findAddress, usercartAllProducts, subTotal, grandTotal, homeName, AllAddress, addressCheckout, getCheckedOneddress, UserWallet, walletPass, layout: 'layout' })
@@ -1074,11 +1187,13 @@ const UserCheckout = async (req, res) => {
                         user = req.session.username
                         let dataCartSuccess = await CartData.findOne({ user: user }).lean()
 
-
+console.log(dataCartSuccess);console.log('yyyyyyyyyyyyyyyyyyyyy');
                         if (dataCartSuccess == null) {
 
                             res.redirect('/Shop')
                         }
+
+
 
                         let UserWallet = await userData.findOne({ username: user }).lean()
 
@@ -1091,7 +1206,7 @@ const UserCheckout = async (req, res) => {
                         } else {
                             walletPass = UserWallet.wallet
                         }
-
+                        let homeName = req.session.homeName
                         res.render('User_Checkout', { findAddress, usercartAllProducts, subTotal, grandTotal, homeName, AllAddress, addressCheckout, UserWallet, walletPass, layout: 'layout' })
                     }
 
@@ -1109,7 +1224,7 @@ const UserCheckout = async (req, res) => {
         }
 
     } catch (error) {
-        res.redirect('/ErrorPage')
+        next()
     }
 
 
@@ -1117,31 +1232,37 @@ const UserCheckout = async (req, res) => {
 
 
 
-const AddNewAddress = async (req, res) => {
+const AddNewAddress = async (req, res, next) => {
+    try {
+        user = req.session.username
 
-    user = req.session.username
-
-    let gottedaddress = req.body
-
-
-    await UserAddress.updateOne({ user: user }, { $push: { address: gottedaddress } })
+        let gottedaddress = req.body
 
 
-    res.redirect('/UserCheckout')
+        await UserAddress.updateOne({ user: user }, { $push: { address: gottedaddress } })
+
+
+        res.redirect('/UserCheckout')
+    } catch (error) {
+        next()
+    }
+
 }
 
 
 const addressChoosedAddBtn = async (req, res, next) => {
+    try {
+        let GetIndexAddress = req.params.indexof
 
-    let GetIndexAddress = req.params.indexof
+        let gettedAlladdress = await UserAddress.findOne().lean()
 
-    let gettedAlladdress = await UserAddress.findOne().lean()
+        getCheckedOneddress = gettedAlladdress.address[GetIndexAddress]
 
+        res.redirect('/UserCheckout')
+    } catch (error) {
+        next()
+    }
 
-
-    getCheckedOneddress = gettedAlladdress.address[GetIndexAddress]
-
-    res.redirect('/UserCheckout')
 }
 
 
@@ -1153,71 +1274,73 @@ const addressChoosedAddBtn = async (req, res, next) => {
 let CurrentpasswordErrormsg
 
 const UserPasswordManage = (req, res) => {
+    try {
+        user = req.session.username
+        if (user) {
 
-    user = req.session.username
-    if (user) {
-
-
-        res.render('UserPasswordManage', { CurrentpasswordErrormsg, homeName, layout: 'layout' })
-        CurrentpasswordErrormsg = null;
-    } else {
-        res.redirect('/userLogin')
+            let homeName = req.session.homeName
+            res.render('UserPasswordManage', { CurrentpasswordErrormsg, homeName, layout: 'layout' })
+            CurrentpasswordErrormsg = null;
+        } else {
+            res.redirect('/userLogin')
+        }
+    } catch (error) {
+        next()
     }
+
 }
 
 
-const UserProfilePasswordChange = async (req, res) => {
 
-    let checkCurrenpassword = req.body.Currenpassword
-    let gotNewPasswor = req.body.Newpassword
-
-
-    user = req.session.username
+const UserProfilePasswordChange = async (req, res, next) => {
+    try {
+        let checkCurrenpassword = req.body.Currenpassword
+        let gotNewPasswor = req.body.Newpassword
 
 
-
-    let Checkeduserid = await userData.findOne({ username: user }).lean()
-
-
-    if (Checkeduserid) {
-        const passwordCheck = await bcrypt.compare(checkCurrenpassword, Checkeduserid.password)
-
-        if (passwordCheck == true) {
-
-            NewUpdatePassword = await bcrypt.hash(gotNewPasswor, 10)
+        user = req.session.username
 
 
-            await userData.updateOne({ username: user }, { $set: { password: NewUpdatePassword } })
 
-            res.redirect('/userProfile')
+        let Checkeduserid = await userData.findOne({ username: user }).lean()
+
+
+        if (Checkeduserid) {
+            const passwordCheck = await bcrypt.compare(checkCurrenpassword, Checkeduserid.password)
+
+            if (passwordCheck == true) {
+
+                NewUpdatePassword = await bcrypt.hash(gotNewPasswor, 10)
+
+
+                await userData.updateOne({ username: user }, { $set: { password: NewUpdatePassword } })
+
+                res.redirect('/userProfile')
+
+            } else {
+
+                CurrentpasswordErrormsg = "Invalid Password !!! \n Please Enter Correct Password.";
+
+
+
+                res.redirect('/PasswordManage')
+
+            }
 
         } else {
 
-            CurrentpasswordErrormsg = "Invalid Password !!! \n Please Enter Correct Password.";
 
+            res.redirect('/userProfile')
 
+            console.log('Update Issue');
 
-            res.redirect('/PasswordManage')
 
         }
-
-    } else {
-
-
-        res.redirect('/userProfile')
-
-        console.log('Update Issue');
-
-
+    } catch (error) {
+        next()
     }
+
 }
-
-
-
-
-
-
-
 
 
 
@@ -1229,10 +1352,8 @@ let grandTotal
 let orderId
 
 let methodPayment
-const allorder = async (req, res) => {
-    console.log('allorder');
-    console.log('allorder'); console.log('allorder');
-    console.log(req.body);
+const allorder = async (req, res, next) => {
+
     try {
         user = req.session.username
 
@@ -1334,8 +1455,9 @@ const allorder = async (req, res) => {
             console.log(grandTotal); console.log(grandTotal); console.log(grandTotal); console.log(grandTotal);
             await userData.updateOne({ username: user }, { $inc: { wallet: grandTotal } })
 
-
+console.log('cart delete');console.log('cart delete');console.log('cart delete');
             await CartData.deleteOne({ user: user })
+            console.log('Aftercart delete');   console.log('Aftercart delete');   console.log('Aftercart delete');
             res.json({ status: false })
         }
 
@@ -1343,7 +1465,7 @@ const allorder = async (req, res) => {
         user = req.session.username
 
     } catch (error) {
-        res.redirect('/ErrorPage')
+        next()
     }
 }
 
@@ -1351,7 +1473,7 @@ const allorder = async (req, res) => {
 
 
 
-const OrderSuccessfull = async (req, res) => {
+const OrderSuccessfull = async (req, res, next) => {
     try {
 
         console.log(usercartAllProducts[0].CartProductId);
@@ -1394,14 +1516,14 @@ const OrderSuccessfull = async (req, res) => {
 
 
     } catch (error) {
-        res.redirect('/ErrorPage')
+        next()
     }
 
 }
 
 
 
-const verifyPayment = async (req, res) => {
+const verifyPayment = async (req, res, next) => {
     try {
         user = req.session.username
 
@@ -1445,7 +1567,7 @@ const verifyPayment = async (req, res) => {
         }
 
     } catch (error) {
-        res.redirect('/ErrorPage')
+        next()
     }
 }
 
@@ -1453,47 +1575,40 @@ const verifyPayment = async (req, res) => {
 
 
 
-const applyCoupn = async (req, res) => {
-    user = req.session.username
+const applyCoupn = async (req, res, next) => {
+    try {
+        user = req.session.username
 
-    let CouponCode = req.body.CouponCode
-    console.log(CouponCode); console.log(CouponCode); console.log(CouponCode);
-    let ss = await userData.findOne({ username: req.session.username, usedCoupon: { $elemMatch: { CouponCode } } }).lean()
-
-
-
-    // console.log(ss);console.log(ss);console.log(ss);console.log(ss);
-
-    let foundCoupons = await Coupons.findOne({ CouponCode: CouponCode }).lean()
+        let CouponCode = req.body.CouponCode
+        console.log(CouponCode); console.log(CouponCode); console.log(CouponCode);
+        let ss = await userData.findOne({ username: req.session.username, usedCoupon: { $elemMatch: { CouponCode } } }).lean()
 
 
 
+        let foundCoupons = await Coupons.findOne({ CouponCode: CouponCode }).lean()
 
+        if (foundCoupons != null) {
+            let userdate = new Date().toLocaleString
+            if (userdate > foundCoupons.ExpiryDate && foundCoupons.CouponStatus == true) {
 
+                req.session.coupon = CouponCode
+                res.redirect('/user-CartPage')
+            } else {
+                errorCoupons = 'Invalid CouponCode'
+                res.redirect('/user-CartPage')
 
+            }
 
-
-    if (foundCoupons != null) {
-
-
-
-        let userdate = new Date().toLocaleString
-        if (userdate > foundCoupons.ExpiryDate && foundCoupons.CouponStatus == true) {
-
-            req.session.coupon = CouponCode
-            res.redirect('/user-CartPage')
         } else {
+
             errorCoupons = 'Invalid CouponCode'
             res.redirect('/user-CartPage')
 
         }
-
-    } else {
-
-        errorCoupons = 'Invalid CouponCode'
-        res.redirect('/user-CartPage')
-
+    } catch (error) {
+        next()
     }
+
 }
 
 
@@ -1504,15 +1619,19 @@ const applyCoupn = async (req, res) => {
 
 //!--================OTP Login START Email OTP Login login =================--//
 
-const OTPLogin = async (req, res) => {
+const OTPLogin = async (req, res, next) => {
+    try {
+        res.render('LoginEmailOTP', { errmessage, layout: 'layout' })
+        errmessage = null
+    } catch (error) {
+        next()
+    }
 
-    res.render('LoginEmailOTP', { errmessage, layout: 'layout' })
-    errmessage = null
 }
 
 
 
-const EmailOTPLogin = async (req, res) => {
+const EmailOTPLogin = async (req, res, next) => {
     try {
 
         let email = req.body.email
@@ -1569,41 +1688,48 @@ const EmailOTPLogin = async (req, res) => {
 
 let OTPerrmessage
 
-const LoginOTPCheck = (req, res) => {
+const LoginOTPCheck = (req, res, next) => {
 
+    try {
+        console.log(errmessage); console.log('ggg');
+        res.render('LoginOTPCheck', { OTPerrmessage })
+        OTPerrmessage = null
+    } catch (error) {
+        next()
+    }
 
-    console.log(errmessage); console.log('ggg');
-    res.render('LoginOTPCheck', { OTPerrmessage })
-    OTPerrmessage = null
 }
 
 
 
-const LoginOTPPost = async (req, res) => {
-    if (req.body.otp == otpa) {
+const LoginOTPPost = async (req, res, next) => {
+
+    try {
+        if (req.body.otp == otpa) {
+
+            req.session.username = userEmail.username
+
+            req.session.homeName = userEmail.username
+
+            let profileAddress = await userData.findOne({ username: req.session.username }).lean()
+
+            req.session.userProfiledatas = profileAddress
 
 
 
+            res.redirect('/')
+        } else {
 
-        req.session.username = userEmail.username
 
-        homeName = userEmail.username
-
-        let profileAddress = await userData.findOne({ username: req.session.username }).lean()
-
-        req.session.userProfiledatas = profileAddress
+            OTPerrmessage = 'Invalid OTP'
+            res.redirect('/LoginOTPCheck')
 
 
 
-        res.redirect('/')
-    } else {
+        }
 
-
-        OTPerrmessage = 'Invalid OTP'
-        res.redirect('/LoginOTPCheck')
-
-
-
+    } catch (error) {
+        next()
     }
 
 }
@@ -1616,54 +1742,50 @@ const LoginOTPPost = async (req, res) => {
 
 
 
-const userorderspage = async (req, res) => {
+const userorderspage = async (req, res, next) => {
     try {
         user = req.session.username
         let findOrdereds = await userorders.find({ orderduser: user }).lean()
 
         req.session.returnStatus = false
-        let returnstatus = findOrdereds[0].status
-
-
-        // let www = await userorders.aggregate([{ $match: { orderduser: user } }, { $project: { Returned: '$Returned', } }])
-
-        // console.log(www); console.log(www); console.log(www); console.log(www);
+     
 
         let Returned = findOrdereds.Returned
         console.log(Returned);
-        console.log(findOrdereds);
+        console.log('shah'); console.log('shah'); console.log('shah'); console.log('shah'); console.log('shah');
+        let homeName = req.session.homeName
         res.render('user_orderPage', { findOrdereds, homeName, Returned, layout: 'layout' })
     } catch (error) {
-        res.redirect('/ErrorPage')
+        next()
     }
 }
 
 
 
 let userOrderedProduct
-const userordersdetails = async (req, res) => {
+const userordersdetails = async (req, res, next) => {
     try {
         userOrderedProduct = req.params.id
 
         res.redirect('/userordersdetails')
     } catch (error) {
-        res.redirect('/ErrorPage')
+        next()
     }
 
 
 }
 
 
-const userordersdetailsPage = async (req, res) => {
+const userordersdetailsPage = async (req, res, next) => {
 
 
     try {
         let userOrderProducts = await userorders.aggregate([{ $match: { _id: new ObjectId(userOrderedProduct) } }, { $unwind: '$Orderproducts' }, { $project: { CartProductId: '$Orderproducts.CartProductId', Orderproducts: '$Orderproducts.Products', deliveryAddress: '$deliveryAddress', returnStatus: '$Orderproducts.returnStatus', Productid: '$Productid', returnStatus: '$returnStatus', Delivered: '$Delivered', status: '$status', _id: '$_id' } }])
-
+        let homeName = req.session.homeName
         res.render("user-ordersdetails", { userOrderProducts, homeName, layout: 'layout' })
 
     } catch (error) {
-        res.redirect('/ErrorPage')
+        next()
     }
 
 
@@ -1680,6 +1802,7 @@ const sortTwothousand = async (req, res) => {
     let sortProductTwothousand = await productData.find({ $and: [{ ProductPrice: { $gt: 0, $lte: 20000 } }, { status: { $nin: false } }] }).lean()
     console.log(sortProductTwothousand);
     let shopproduct = sortProductTwothousand
+    let homeName = req.session.homeName
     res.render('user_ShopProduct', { shopproduct, navCategory, navloop, homeName })
 
 }
@@ -1687,11 +1810,13 @@ const sortTwothousand = async (req, res) => {
 const sortFiftynThousand = async (req, res) => {
     let sortProductFiftynThousand = await productData.find({ $and: [{ ProductPrice: { $gt: 20000, $lte: 50000 } }, { status: { $nin: false } }] }).lean()
     let shopproduct = sortProductFiftynThousand
+    let homeName = req.session.homeName
     res.render('user_ShopProduct', { shopproduct, navCategory, navloop, homeName })
 
 }
 
 const sortOneLakh = async (req, res) => {
+    let homeName = req.session.homeName
     let sortProductOneLakh = await productData.find({ $and: [{ ProductPrice: { $gt: 50000, $lte: 100000 } }, { status: { $nin: false } }] }).lean()
     let shopproduct = sortProductOneLakh
 
@@ -1699,6 +1824,7 @@ const sortOneLakh = async (req, res) => {
 }
 
 const SortOneLakhAbove = async (req, res) => {
+    let homeName = req.session.homeName
     let sortProductOneLakhAbove = await productData.find({ $and: [{ ProductPrice: { $gt: 100000 } }, { status: { $nin: false } }] }).lean()
     let shopproduct = sortProductOneLakhAbove
     res.render('user_ShopProduct', { shopproduct, navCategory, navloop, homeName })
@@ -1709,158 +1835,184 @@ const SortOneLakhAbove = async (req, res) => {
 
 
 
-const userwishlist = async (req, res) => {
-    user = req.session.username
-    // let UserWishlist = await wishlistData.find({ user: user })
+const userwishlist = async (req, res, next) => {
 
 
+    try {
+        user = req.session.username
 
 
-    // let UserWishlist = await wishlistData.aggregate([{ $match: { user: user } }, { $unwind: '$wishlist' }, { $project: { ProductImage: '$wishlist.ProductImage', ProductName: '$wishlist.ProductName', ProductPrice: '$wishlist.ProductPrice', _id: '$wishlist._id' } }])
+        let allUserWishlist = await wishlistData.aggregate([
+            {
+                $match: {
+                    user: user
+                }
+            },
+            {
+                $unwind: '$wishlist'
+            },
 
+            {
+                $lookup: {
+                    from: 'products',
+                    localField: 'wishlist.Productid',
+                    foreignField: 'Productid',
+                    as: 'wishlist'
 
-
-    let allUserWishlist = await wishlistData.aggregate([
-        {
-            $match: {
-                user: user
+                }
+            },
+            {
+                $project: { Productid: '$wishlist.Productid', Products: { $arrayElemAt: ['$wishlist', 0] } }
             }
-        },
-        {
-            $unwind: '$wishlist'
-        },
 
-        {
-            $lookup: {
-                from: 'products',
-                localField: 'wishlist.Productid',
-                foreignField: 'Productid',
-                as: 'wishlist'
 
-            }
-        },
-        {
-            $project: { Productid: '$wishlist.Productid', Products: { $arrayElemAt: ['$wishlist', 0] } }
+
+        ])
+
+        let homeName = req.session.homeName
+        let UserWishlist = allUserWishlist
+
+        if (UserWishlist.length > 0) {
+
+            res.render('user_wishlist', { homeName, UserWishlist, layout: 'layout' })
+        } else {
+            let Notwishlist = 11
+            res.render('user_wishlist', { homeName, Notwishlist, layout: 'layout' })
         }
 
-
-
-    ])
-
-
-    let UserWishlist = allUserWishlist
-
-    if (UserWishlist.length > 0) {
-        res.render('user_wishlist', { homeName, UserWishlist, layout: 'layout' })
-    } else {
-        let Notwishlist = 11
-        res.render('user_wishlist', { homeName, Notwishlist, layout: 'layout' })
+    } catch (error) {
+        next()
     }
 
 }
 
 
-const addwishlist = async (req, res) => {
-    let wishlist = req.params.Productid
+const addwishlist = async (req, res, next) => {
+    try {
+        let wishlist = req.params.Productid
 
-    user = req.session.username
+        user = req.session.username
 
-    let alreadyHaveUser = await wishlistData.findOne({ user: user }).lean()
-    if (alreadyHaveUser == null) {
+        let alreadyHaveUser = await wishlistData.findOne({ user: user }).lean()
+        if (alreadyHaveUser == null) {
 
-        let addUser = {
-            user: user,
-        };
-        await wishlistData.insertMany([addUser]);
-    }
-
-    let UserWishlist = await wishlistData.aggregate([{ $match: { user: user } }, { $unwind: '$wishlist' }, { $project: { Productid: '$wishlist.Productid', _id: 0 } }])
-    let Productid
-    let NoAddToWishlist = false
-    for (let i = 0; i < UserWishlist.length; i++) {
-        Productid = UserWishlist[i].Productid
-
-        if (Productid == wishlist) {
-            NoAddToWishlist = true
-            break;
+            let addUser = {
+                user: user,
+            };
+            await wishlistData.insertMany([addUser]);
         }
+
+        let UserWishlist = await wishlistData.aggregate([{ $match: { user: user } }, { $unwind: '$wishlist' }, { $project: { Productid: '$wishlist.Productid', _id: 0 } }])
+        let Productid
+        let NoAddToWishlist = false
+        for (let i = 0; i < UserWishlist.length; i++) {
+            Productid = UserWishlist[i].Productid
+
+            if (Productid == wishlist) {
+                NoAddToWishlist = true
+                break;
+            }
+        }
+
+        if (NoAddToWishlist == false) {
+            await wishlistData.updateOne({ user: req.session.username }, { $push: { wishlist: { Productid: wishlist } } })
+        }
+
+        res.json({ status: true })
+
+    } catch (error) {
+        next()
     }
 
-    if (NoAddToWishlist == false) {
-        await wishlistData.updateOne({ user: req.session.username }, { $push: { wishlist: { Productid: wishlist } } })
+}
+
+
+
+
+const deleteWhishlist = async (req, res, next) => {
+    try {
+        user = req.session.username
+        let whishListId = req.params.Productid
+
+        let gotted = await wishlistData.updateOne(
+            { user: user },
+            { $pull: { wishlist: { Productid: whishListId } } }
+        );
+        res.json({ status: true })
+    } catch (error) {
+        next()
     }
 
-    res.json({ status: true })
-
-}
-
-
-
-
-const deleteWhishlist = async (req, res) => {
-    user = req.session.username
-    let whishListId = req.params.Productid
-
-    let gotted = await wishlistData.updateOne(
-        { user: user },
-        { $pull: { wishlist: { Productid: whishListId } } }
-    );
-    res.json({ status: true })
 }
 
 
 
 
 
-const ReturnProduct = async (req, res) => {
-    console.log('dddddddddddddddd');
-    console.log('dddddddddddddddd'); console.log('dddddddddddddddd');
-    user = req.session.username
+const ReturnProduct = async (req, res, next) => {
 
-    returnStatus = null
+    try {
 
-    let ReturnProductId = req.params._id
-    console.log(ReturnProductId);
+        user = req.session.username
 
-    let rr = req.params.objId
+        returnStatus = null
 
-    console.log(rr);
+        let ReturnProductId = req.params._id
+        console.log(ReturnProductId);
 
+        let rr = req.params.objId
 
-
+        console.log(rr);
 
 
-    await userorders.updateOne({ _id: new ObjectId(ReturnProductId) }, { $set: { Delivered: 'Returned Confirm' } })
 
-    console.log('sssss'); console.log('sssss'); console.log('sssss');
-    await userorders.updateOne({ _id: new ObjectId(ReturnProductId) }, { $set: { status: 'Returned' } })
 
-    res.json({ returnStatus: true })
-    // res.redirect('/userorders')
+
+        await userorders.updateOne({ _id: new ObjectId(ReturnProductId) }, { $set: { Delivered: 'Returned Requested' } })
+
+        console.log('sssss'); console.log('sssss'); console.log('sssss');
+        await userorders.updateOne({ _id: new ObjectId(ReturnProductId) }, { $set: { status: 'Returned' } })
+
+        res.json({ returnStatus: true })
+        // res.redirect('/userorders')
+    } catch (error) {
+        next()
+    }
+
+
 }
 
-const UserProfileAddress = async (req, res) => {
-    let gottedaddress = req.body
+const UserProfileAddress = async (req, res, next) => {
+    try {
+        let gottedaddress = req.body
 
 
-    await UserAddress.updateOne({ user: user }, { $push: { address: gottedaddress } })
-    res.redirect('/userProfile')
+        await UserAddress.updateOne({ user: user }, { $push: { address: gottedaddress } })
+        res.redirect('/userProfile')
+    } catch (error) {
+        next()
+    }
+
 }
 
-const useraddressProfile = async (req, res) => {
+const useraddressProfile = async (req, res, next) => {
 
+    try {
 
+        let userProfiledatas = req.session.userProfiledatas
 
-    let userProfiledatas = req.session.userProfiledatas
+        console.log(userProfiledatas);
 
-    console.log(userProfiledatas);
+        res.render('user-AddressProfile', { userProfiledatas, homeName, layout: 'layout' })
+    } catch (error) {
+        next()
+    }
 
-    res.render('user-AddressProfile', { userProfiledatas, homeName, layout: 'layout' })
 }
 
 
 module.exports = {
-    ErrorPage,
+
     ChangequantityProduct,
     UserProfilePasswordChange,
     getUserHome,

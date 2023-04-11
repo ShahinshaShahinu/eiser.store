@@ -64,11 +64,6 @@
         return false
     }
 
-     
-    if (ProductImage == '') {
-        productCheck[5].innerHTML = 'Please Select Images'
-        return false
-    }
 
 }
 

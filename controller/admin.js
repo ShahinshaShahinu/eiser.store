@@ -33,10 +33,8 @@ const blockeduser = async (req, res,next) => {
 
    let v= await userData.updateOne({ _id: blockeduserid }, { $set: { status: false } })
     
-    // req.session.user=null
-    
-console.log(v);
-    res.redirect('/adminUsers')
+
+   res.json({blockUserStatus:true})
 
 }
 
@@ -45,7 +43,7 @@ const unBlockedUser = async (req, res,next) => {
 
     await userData.updateOne({ _id: Unblockeduserid }, { $set: { status: true } })
 
-    res.redirect('/adminUsers')
+    res.json({unBlockUserStatus:true})
 }
 
 const adminusers = (req, res) => {

@@ -233,6 +233,7 @@
             <table id="dtBasicExample" class="table table-striped container">
                 <thead>
                     <tr>
+                        
                         <th scope="col">Number</th>
                         <th scope="col">Products</th>
                         <th scope="col">Product Name</th>
@@ -264,11 +265,11 @@
                             <button class="btn btn-primary" onclick="ReturnProduct('{{_id}}')" 
                                 role="button">Return</button>   
                             {{/if}}
-                            {{#if (eq Delivered 'Returned Confirm')}}
-                                <p>Return Confirmed</p>
+                            {{#if (eq Delivered 'Returned Requested')}}
+                                <p class="text-success" style="color: crimson;" >Return Confirmed</p>
                             {{/if}}
                             {{#if (eq  Delivered  'MoneyReturned')}}
-                            <p>successfully returned</p>
+                            <p class="text-success" style="color: rgb(30, 255, 0);" >successfully returned</p>
                             {{/if}} </td>
 
                     </tr>

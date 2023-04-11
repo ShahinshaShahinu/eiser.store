@@ -274,11 +274,17 @@ const editproduct = (req, res) => {
 
 const editing = async (req, res) => {
 
+  
+
+
     let getpass = await productData.findOne({ _id: passing }).lean()
     let categoryadding = await categoryData.find().lean()
     admins = req.session.admins
     console.log(getpass);
     if (admins) {
+        let w=getpass.ProductImage[0]
+        console.log(w);
+
         res.render('UpdateProduct', { getpass, categoryadding, layout: 'layout' })
     } else {
         res.redirect('/adminLogin')
@@ -290,6 +296,9 @@ const editing = async (req, res) => {
 // edit Product button  update  POST //
 
 const updatedSave = async (req, res) => {
+
+if(req.files){
+
 
     const postid = req.params.id
 
@@ -307,19 +316,22 @@ const updatedSave = async (req, res) => {
         for (var i = 0; i < image.length; i++) {
             image[i].mv('./public/productsimg/' + bodyDatas.Productid + i + '.jpg')
             image[i] = bodyDatas.Productid + i + '.jpg'
+            console.log('image added');   console.log('image added');   console.log('image added');
         }
 
         bodyDatas.image = image
 
     } else {
-
+        console.log('else else image added');        console.log('else else image added');        console.log('else else image added');
         image.mv('./public/productsimg/' + bodyDatas.Productid + '.jpg')
         bodyDatas.image = bodyDatas.Productid + '.jpg'
 
     }
 
 
-    let k = await productData.updateOne({ _id: postid }, {
+
+
+     await productData.updateOne({ _id: postid }, {
         $set: {
             ProductName: bodyDatas.ProductName,
             ProductPrice: bodyDatas.ProductPrice,
@@ -334,6 +346,36 @@ const updatedSave = async (req, res) => {
 
 
     res.redirect('/adminproduct')
+
+
+}else{
+    const postid = req.params.id
+
+    let bodyDatas = req.body
+
+    let image = []
+
+
+    let images = image.length
+
+
+    await productData.updateOne({ _id: postid }, {
+        $set: {
+            ProductName: bodyDatas.ProductName,
+            ProductPrice: bodyDatas.ProductPrice,
+            Productid: bodyDatas.Productid,
+            ProductImage: bodyDatas.ProductImage,
+            ProductCategory: bodyDatas.ProductCategory,
+            stocks: bodyDatas.stocks,
+            ProductDescription: bodyDatas.ProductDescription,
+            status: true,
+        }
+    })
+
+
+    res.redirect('/adminproduct')
+
+}
 }
 
 // edit Product button  update  POST //
@@ -599,13 +641,13 @@ const DsableCoupon = async (req, res) => {
 
     await Coupons.updateOne({ _id: req.params.id }, { $set: { CouponStatus: false } })
 
-    res.redirect('/adminCoupon')
+    res.json({DsableCouponStatus:true})
 }
 
 const EnableCoupon = async (req, res) => {
 
     await Coupons.updateOne({ _id: req.params.id }, { $set: { CouponStatus: true } })
-    res.redirect('/adminCoupon')
+   res.json({EnableCouponStatus:true})
 }
 
 let getOrderedStatus

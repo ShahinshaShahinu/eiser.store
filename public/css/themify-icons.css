@@ -653,12 +653,12 @@
 .ti-themify-logo:before {
 	content: "\e6d1";
 }
-.ti-themify-favicon:before {
+/* .ti-themify-favicon:before {
 	content: "\e6d2";
 }
 .ti-themify-favicon-alt:before {
 	content: "\e6d3";
-}
+} */
 .ti-support:before {
 	content: "\e6d4";
 }

@@ -35,8 +35,7 @@ router.get('/adminSales',getProduct.adminSales)
 
 
 router.get('/adminDailySalesReport',SessinOfAdmin.adminSession,getProduct.adminDailySalesReport)
-// router.get('/adminMonthlySalesReport',SessinOfAdmin.adminSession,getProduct.adminMonthlySalesReport)
-// router.get('/DailySalereportBtn',SessinOfAdmin.adminSession,getProduct.DailySalereportBtn)
+
 
 
 /* GET Product  */

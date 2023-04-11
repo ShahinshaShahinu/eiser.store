@@ -15,7 +15,7 @@ const sessions=require('../Middleware/session')
 router.get('/',nocache(), gethome.getUserHome);
 router.get('/userSignup',nocache(), gethome.signupPage)
 router.get('/userLogin',nocache(), gethome.Loginpage)
-router.get('/ErrorPage',sessions.sessioncheck,gethome.ErrorPage)
+
 router.get('/signUpLogInButton',nocache(),gethome.signUpLogInButton)
 router.get('/OTPSendChangePassword',nocache(),gethome.OTPSendChangePassword)
 
@@ -54,7 +54,7 @@ router.get('/userordersdetails',sessions.sessioncheck,gethome.userordersdetailsP
 router.get('/userwishlist',sessions.sessioncheck,gethome.userwishlist)
 router.get('/addwishlist/:Productid',sessions.sessioncheck,gethome.addwishlist)
 router.get('/deleteWhishlist/:Productid',gethome.deleteWhishlist)
-router.get('/addToCart/:Productid',gethome.addToCart)  
+router.get('/addToCart/:Productid',sessions.sessioncheck,gethome.addToCart)  
 //!--================ End Start please Check  =================--//
 
 router.get('/UserCheckout',nocache(),gethome.UserCheckout)
