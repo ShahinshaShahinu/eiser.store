@@ -33,7 +33,7 @@ handlebars.registerHelper('eq', function (a, b) {
 
 const vv = async (req, res) => {
 
-    res.render('vv', { layout: 'layout' })
+    res.render('signupForm', { layout: 'layout' })
 }
 
 
@@ -1378,9 +1378,9 @@ const allorder = async (req, res, next) => {
 
         req.session.orders = insertorders
 
-        grandTotal = parseFloat(req.body.grandTotal)
+        req.session.grandTotal= parseFloat(req.body.grandTotal)
 
-
+       let grandTotal=  req.session.grandTotal
         insertorders.Date = new Date().toLocaleString();
         //  new Date()
 
@@ -1426,11 +1426,11 @@ const allorder = async (req, res, next) => {
             console.log('shahinsh');
 
 
-            console.log('shahinsh'); console.log('shahinsh'); console.log('shahinsh');
+            console.log('shahinsh'); 
 
             res.json({ status: false })
 
-
+            console.log('eeee'); console.log('eeee');
 
             await CartData.deleteOne({ user: user })
 
@@ -1449,15 +1449,15 @@ const allorder = async (req, res, next) => {
 
 
 
-            let UserWallet = await userData.findOne({ username: user })
+        
 
             grandTotal = -grandTotal
             console.log(grandTotal); console.log(grandTotal); console.log(grandTotal); console.log(grandTotal);
             await userData.updateOne({ username: user }, { $inc: { wallet: grandTotal } })
 
-console.log('cart delete');console.log('cart delete');console.log('cart delete');
+
             await CartData.deleteOne({ user: user })
-            console.log('Aftercart delete');   console.log('Aftercart delete');   console.log('Aftercart delete');
+         
             res.json({ status: false })
         }
 
@@ -2001,8 +2001,7 @@ const useraddressProfile = async (req, res, next) => {
 
         let userProfiledatas = req.session.userProfiledatas
 
-        console.log(userProfiledatas);
-
+        let homeName = req.session.homeName
         res.render('user-AddressProfile', { userProfiledatas, homeName, layout: 'layout' })
     } catch (error) {
         next()

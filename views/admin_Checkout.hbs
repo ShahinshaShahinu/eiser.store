@@ -125,7 +125,7 @@
       <li class="nav-item" href="/adminSalesReport">
         <a class="nav-link" href="/adminSalesReport" aria-expanded="true" aria-controls="collapseBootstrap">
           <i class="far fa-fw fa-window-maximize"></i>
-          <span>SalesRport</span>
+          <span>Sales Report</span>
         </a>
         <div id="collapseBootstrap" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
 
@@ -316,7 +316,7 @@
 
                       <div></div>
                       <dir></dir>
-                      {{#if (eq Delivered 'Returned Confirm' )}}
+                      {{#if (eq Delivered 'Returned Requested' )}}
                       <button class="btn btn-primary" onclick="AdminCunfirm('{{_id}}')"
                         role="button">MoneyReturn</button>?
                       {{/if}}

@@ -26,7 +26,7 @@ function usercheckoutAddressValidation() {
         return false;
     }
     if (!nameRegex.test(firstname)) {
-        checking[0].innerHTML = 'Name can only contain letters';
+        err.innerHTML = 'Name can only contain letters';
         return false;
     }
     if (lastname == '') {

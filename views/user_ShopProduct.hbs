@@ -81,39 +81,7 @@
     </style>
     <!--================Header Menu Area =================-->
     <header class="header_area">
-        <div class="top_menu">
-            <div class="container" style="    max-width: 1236px;">
-                <div class="row">
-                    <div class="col-lg-7">
-                        <div class="float-left">
-                            <p>Phone: +01 256 25 235</p>
-                            <p>email: info@eiser.com</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-5">
-                        <div class="float-right">
-                            <ul class="right_side">
-                                <li>
-                                    <a href="cart.html">
-                                        gift card
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="tracking.html">
-                                        track order
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="contact.html">
-                                        Contact Us
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        
         <div class="main_menu">
             <div class="container" style="    max-width: 1233px;">
                 <nav class="navbar navbar-expand-lg navbar-light w-100">
@@ -275,7 +243,7 @@
           
 
        <div class="my-div" style="position: absolute ;    width: inherit;
-    left: 0rem; background-color: antiquewhite; z-index: 1;  ">   
+    left: 0rem; background-color: rgb(246, 246, 246); z-index: 1;  ">   
         <sectio  id="searchresults"></section>   
          </div>
         </div>                
@@ -524,13 +492,7 @@
                         {{#shopproduct}}
 
                         <div class="col-lg-4 col-md-6">
-                            <button role="button" id="addToWishlist" onclick="wishProduct('{{Productid}}')"
-                                type="button" class="btn btn-light"><span id="boot-icon" class="bi bi-heart"
-                                    style="font-size: 20px; opacity: 0.6; -webkit-text-stroke-width: 2.5px; color: rgb(86, 86, 239);"></span></button>
-
-                            <button role="button" id="addToWishlist" onclick="addToCart('{{Productid}}')" type="button"
-                                class="btn btn-light"><span id="boot-icon" class="bi bi-cart-plus"
-                                    style="font-size: 20px; opacity: 0.6; -webkit-text-stroke-width: 1.5px; color: rgb(50, 50, 241);"></span></button>
+                   
 
 
                             <div class="single-product">
@@ -538,17 +500,19 @@
                                     <a href="/user-ShowProduct/{{_id}}"><img class="img-fluid w-100"
                                             src="/productsimg/{{ProductImage.[0]}}" style="width: 50px ; height:218px;"
                                             alt="" /> </a>
-                                    <div class="p_icon">
-                                        <a href="/user-ShowProduct/{{_id}}">
-                                            <i class="ti-eye"></i>
-                                        </a>
-                                        {{!-- <a href="#">
-                                            <i class="ti-heart"></i>
-                                        </a> --}}
-                                        <a href="/user-ShowProduct/{{_id}}">
-                                            <i class="ti-shopping-cart"></i>
-                                        </a>
-                                    </div>
+                                   <div class="p_icon">
+                    <a href="/user-ShowProduct/{{_id}}">
+                      <i class="ti-eye"></i>
+                    </a>
+
+                    <a style=" cursor: pointer;" role="button" onclick="wishProduct('{{Productid}}')">
+                      <i class="ti-heart"></i>
+                    </a>
+                    <a style=" cursor: pointer;" role="button" onclick="addToCart('{{Productid}}')">
+                      <i class="ti-shopping-cart"></i>
+                    </a>
+
+                  </div>
                                 </div>
                                 <div class="product-btm">
                                     <a href="#" class="d-block">

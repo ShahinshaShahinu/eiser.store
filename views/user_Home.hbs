@@ -10,10 +10,13 @@
   <!-- Required meta tags -->
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  {{!-- <link  href="https://icons8.com/icon/42809/globe" type="image/png" /> --}}
-    <link rel="shortcut icon" href="https://play-lh.googleusercontent.com/VjxISujD0bP9aJtrHXvCtmknLX_7uFWyDmi6kA97U77k-1Rd2VLtc__9TZ5eYaWimSg" type="image/x-icon">
+  {{!--
+  <link href="https://icons8.com/icon/42809/globe" type="image/png" /> --}}
+  <link rel="shortcut icon"
+    href="https://play-lh.googleusercontent.com/VjxISujD0bP9aJtrHXvCtmknLX_7uFWyDmi6kA97U77k-1Rd2VLtc__9TZ5eYaWimSg"
+    type="image/x-icon">
   <title>Eiser ecommerce</title>
-  
+
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="css/bootstrap.css" />
   <link rel="stylesheet" href="vendors/linericon/style.css" />
@@ -85,39 +88,7 @@
   </style>
   <!--================Header Menu Area =================-->
   <header class="header_area">
-    <div class="top_menu">
-      <div class="container" style="    max-width: 1236px;">
-        <div class="row">
-          <div class="col-lg-7">
-            <div class="float-left">
-              <p>Phone: +01 256 25 235</p>
-              <p>email: info@eiser.com</p>
-            </div>
-          </div>
-          <div class="col-lg-5">
-            <div class="float-right">
-              <ul class="right_side">
-                <li>
-                  <a href="cart.html">
-                    gift card
-                  </a>
-                </li>
-                <li>
-                  <a href="tracking.html">
-                    track order
-                  </a>
-                </li>
-                <li>
-                  <a href="contact.html">
-                    Contact Us
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+
     <div class="main_menu">
       <div class="container" style="    max-width: 1233px;">
         <nav class="navbar navbar-expand-lg navbar-light w-100">
@@ -390,8 +361,8 @@
 
 
 
-            <a role="button" id="addToWishlist" onclick="addToCart('{{Productid}}')" type="button"
-              class="main_btn" style=" color: floralwhite;">Add to cart</a>
+            <a role="button" id="addToWishlist" onclick="addToCart('{{Productid}}')" type="button" class="main_btn"
+              style=" color: floralwhite;">Add to cart</a>
 
             {{/offerLaptops}}
 
@@ -412,18 +383,7 @@
 
             {{#offerSmartPhones}}
             <div id="ddd" class="col-lg-6 col-md-6">
-              <button role="button" id="addToWishlist" onclick="wishProduct('{{Productid}}')" type="button"
-                class="btn btn-light"><span id="boot-icon" class="bi bi-heart"
-                  style="font-size: 20px; opacity: 0.6; -webkit-text-stroke-width: 3.1px; color: rgb(0, 0, 255);"></span></button>
-              <button role="button" id="addToWishlist" onclick="addToCart('{{Productid}}')" type="button"
-                class="btn btn-light"><span id="boot-icon" class="bi bi-cart-plus"
-                  style="font-size: 20px; opacity: 0.6; -webkit-text-stroke-width: 1.5px; color: rgb(50, 50, 241);"></span></button>
               <div class="single-product">
-
-
-
-
-
                 <div class="product-img">
 
                   <a href="/user-ShowProduct/{{_id}}"> <img class="img-fluid w-100"
@@ -433,15 +393,15 @@
                       <i class="ti-eye"></i>
                     </a>
 
-                    <a href="/user-ShowProduct/{{_id}}">
+                    <a style=" cursor: pointer;" role="button" onclick="wishProduct('{{Productid}}')">
+                      <i class="ti-heart"></i>
+                    </a>
+                    <a style=" cursor: pointer;" role="button" onclick="addToCart('{{Productid}}')">
                       <i class="ti-shopping-cart"></i>
                     </a>
+
                   </div>
                 </div>
-                {{!-- <button id="addToWishlist" role="button" onclick="wishProduct('{{productId}}')" href="#">
-                  <i class="ti-heart"></i>
-                </button> --}}
-
 
                 <div class="product-btm">
                   <a href="#" class="d-block">
@@ -454,22 +414,14 @@
                 </div>
               </div>
 
-              {{!-- <button class="btn btn-sm btn-danger" onclick="wishProduct('{{Productid}}')">
-                Remove
-              </button> --}}
-
+          
             </div> {{/offerSmartPhones}}
 
 
 
             <div class="col-lg-6 col-md-6">
               {{#offerLaptops}}
-              <button role="button" id="addToWishlist" onclick="wishProduct('{{Productid}}')" type="button"
-                class="btn btn-light"><span id="boot-icon" class="bi bi-heart"
-                  style="font-size: 20px; opacity: 0.6; -webkit-text-stroke-width: 3.1px; color: rgb(0, 0, 255);"></span></button>
-              <button role="button" id="addToWishlist" onclick="addToCart('{{Productid}}')" type="button"
-                class="btn btn-light"><span id="boot-icon" class="bi bi-cart-plus"
-                  style="font-size: 20px; opacity: 0.6; -webkit-text-stroke-width: 1.5px; color: rgb(50, 50, 241);"></span></button>
+          
               <div class="single-product">
 
 
@@ -483,9 +435,13 @@
                       <i class="ti-eye"></i>
                     </a>
 
-                    <a href="/user-ShowProduct/{{_id}}">
+                    <a style=" cursor: pointer;" role="button" onclick="wishProduct('{{Productid}}')">
+                      <i class="ti-heart"></i>
+                    </a>
+                    <a style=" cursor: pointer;" role="button" onclick="addToCart('{{Productid}}')">
                       <i class="ti-shopping-cart"></i>
                     </a>
+
                   </div>
                 </div>
                 <div class="product-btm">
@@ -537,27 +493,25 @@
       <div class="row">
         {{#each someProducts}}
         <div class="col-lg-3 col-md-6">
-          <button role="button" id="addToWishlist" onclick="wishProduct('{{Productid}}')" type="button"
-            class="btn btn-light"><span id="boot-icon" class="bi bi-heart"
-              style="font-size: 20px; opacity: 0.6; -webkit-text-stroke-width: 3.1px; color: rgb(0, 0, 255);"></span></button>
-          <button role="button" id="addToWishlist" onclick="addToCart('{{Productid}}')" type="button"
-            class="btn btn-light"><span id="boot-icon" class="bi bi-cart-plus"
-              style="font-size: 20px; opacity: 0.6; -webkit-text-stroke-width: 1.5px; color: rgb(50, 50, 241);"></span></button>
+         
           <div class="single-product">
             <div class="product-img">
 
               <a href="/user-ShowProduct/{{_id}}"> <img class="img-fluid w-100" src="/productsimg/{{ProductImage.[0]}}"
                   alt="" /></a>
-              <div class="p_icon">
-                <a href="/user-ShowProduct/{{_id}}">
-                  <i class="ti-eye"></i>
-                </a>
-                <a href="/addwishlist/{{Productid}}">
-                  <i class="ti-heart"></i>
-                </a>
-                <a href="/user-ShowProduct/{{_id}}">
-                  <i class="ti-shopping-cart"></i>
-                </a>
+           
+                 <div class="p_icon">
+                    <a href="/user-ShowProduct/{{_id}}">
+                      <i class="ti-eye"></i>
+                    </a>
+
+                    <a style=" cursor: pointer;" role="button" onclick="wishProduct('{{Productid}}')">
+                      <i class="ti-heart"></i>
+                    </a>
+                    <a style=" cursor: pointer;" role="button" onclick="addToCart('{{Productid}}')">
+                      <i class="ti-shopping-cart"></i>
+                    </a>
+
               </div>
             </div>
             <div class="product-btm">

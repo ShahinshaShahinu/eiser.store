@@ -37,39 +37,7 @@
         </style>
         <!--================Header Menu Area =================-->
         <header class="header_area">
-            <div class="top_menu">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-7">
-                            <div class="float-left">
-                                <p>Phone: +01 256 25 235</p>
-                                <p>email: info@eiser.com</p>
-                            </div>
-                        </div>
-                        <div class="col-lg-5">
-                            <div class="float-right">
-                                <ul class="right_side">
-                                    <li>
-                                        <a href="cart.html">
-                                            gift card
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="tracking.html">
-                                            track order
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="contact.html">
-                                            Contact Us
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            
             <div class="main_menu">
                 <div class="container">
                     <nav class="navbar navbar-expand-lg navbar-light w-100">
@@ -308,11 +276,47 @@
 
 
 
+<style>
+    a {
+  text-decoration: none;
+  display: inline-block;
+  padding: 8px 16px;
+}
+
+a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.previous {
+  background-color: #04AA6D;
+  color: rgb(255, 255, 255);
+}
+
+.next {
+  background-color: #04AA6D;
+  color: white;
+}
+
+.round {
+  border-radius: 50%;
+}
+</style>
+
+
+
+
+
+
 
         <div class="container rounded bg-white mt-5 mb-5">
             <div class="row">
                 <div class="col-md-3 border-right">
+ <div style="display: flex;     justify-content: center;">
 
+       <a href="/userProfile" class="previous round">&#8249;</a>
+<a href="" class="next round">&#8250;</a>     
+          </div>
 {{#userProfiledatas}}
 
                     <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img
