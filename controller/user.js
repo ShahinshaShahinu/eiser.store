@@ -18,7 +18,7 @@ const async = require('hbs/lib/async');
 const { log } = require('console');
 
 require('dotenv').config()
-
+console.log(process.env.KEY_ID);
 var instance = new Razorpay({
     key_id: process.env.KEY_ID,
     key_secret: process.env.KEY_SECRET,
