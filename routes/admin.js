@@ -23,7 +23,7 @@ router.get('/unBlockUser/:id',getadmin.unBlockedUser)
 
 /* POST ADMIN  */
 
-
+// hello
 const postadmin=require('../controller/admin')
 
 router.post('/adminpost',postadmin.postAdminLogin)
